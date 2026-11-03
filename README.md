@@ -1,6 +1,6 @@
 # World trip 2027
 
-A static website for planning our trip. It has the route story with a map and timeline, our insurance research, expenses and tickets, and the Okinawa campervan plan. There's no build step and no server code: just HTML, CSS, JavaScript and data files.
+A static website for planning our trip. It has the route story with a map and timeline, our insurance research, expenses and tickets, the Okinawa campervan plan, and two New Zealand pages: a campervan road trip for four and working holiday jobs around Auckland. There's no build step and no server code: just HTML, CSS, JavaScript and data files.
 
 ## Run it
 
@@ -45,6 +45,15 @@ pages/
     okinawa-page.js
     okinawa-campervan-plan.json               ← edit: loop, overnight spots, rental offers
     okinawa-municipality-outlines-do-not-edit.json   generated map outlines
+  nz_roadtrip/                the New Zealand campervan road trip for four (no tab)
+    nz-roadtrip-page.css
+    nz-roadtrip-page.js
+    nz-roadtrip-plan.json                     ← edit: settings, route, rental offers
+    nz-outlines-do-not-edit.json              generated map outlines
+  nz_jobs/                    working holiday jobs around Auckland (no tab)
+    nz-jobs-page.css
+    nz-jobs-page.js
+    nz-jobs-research.json                     ← edit: wage, tax brackets, visa steps, job types
   storage_box/                the "Storage box" tab: storage boxes in Belgium compared by size
     storage-box-page.css
     storage-box-page.js
@@ -57,12 +66,13 @@ d3 v7 loads from cdnjs. The fonts load from Google Fonts; they're optional, and 
 
 Some things are easy to miss:
 
-- **The Okinawa page has no tab.** You open it from the "Okinawa campervan plan" button in the Japan chapter, and its back button returns to that chapter.
+- **The Okinawa page has no tab.** You open it from the "Okinawa campervan plan" button in the Japan chapter, and its back button returns to that chapter. The two New Zealand pages work the same way from the New Zealand chapter.
 - **The Expenses page uses the Trip data.** The tickets table joins the trip legs (`trip_travel_legs`, calculated in `trip-page.js`) with the Travel expenses. That's why `trip-page.js` is loaded before `expenses-page.js`.
 - **A `#link` opens the right page.** `index.html#okinawa-spots` opens the Okinawa page and scrolls to that heading. This works for any element `id`.
 - **The map projection is defined in two places.** The outline files were projected once, and the JS uses the same constants to place the dots:
   - world: Natural Earth centred on 90°E (`trip-page.js`, "World map");
-  - Okinawa: 127.95°E, 26.5°N (`OKINAWA_PROJECTION` in `okinawa-page.js`).
+  - Okinawa: 127.95°E, 26.5°N (`OKINAWA_PROJECTION` in `okinawa-page.js`);
+  - New Zealand: 172.5°E, 41°S (`NZ_PROJECTION` in `nz-roadtrip-page.js`).
 
   If you regenerate an outline file, keep these in step.
 
@@ -176,6 +186,23 @@ There is one section per table, in page order:
 - `overnight_spots`: every overnight spot we found. A `type` starting with `Paid`, `Free` or `Roadside` sets the marker shape; any other type gets the campsite marker. Coordinates are approximate.
 - `rental_offers`: the rental offers.
 
+### `pages/nz_roadtrip/nz-roadtrip-plan.json`
+
+- `settings` (one row): `start_date` (the pick-up day, `YYYY-MM-DD`), `people`, and the cost assumptions in NZ$: `van_nzd_per_day`, `cover_nzd_per_day`, `fuel_litres_per_100km`, `diesel_nzd_per_litre`, `ferry_nzd`, `food_nzd_per_person_per_day`, plus `eur_per_nzd` for the euro figures.
+- `loop`: the route in order, the same for both versions. Each stop has:
+  - `nights_three_weeks` and `nights_two_weeks` (0 = a stop on the way, no night);
+  - `road_km_in`, the road kilometres from the previous stop, and `day_trip_km` for a return trip from there (counted only when we sleep there);
+  - `fee_nzd_per_adult` per night, used in the cost, and `fee`, the text shown;
+  - `ferry_in: true` for the stop after the Cook Strait ferry (drawn dashed).
+  A `type` starting with `Depot`, `Free` or `DOC` sets the marker; any other type gets the holiday-park marker.
+- `rental_offers`: the rental offers.
+
+### `pages/nz_jobs/nz-jobs-research.json`
+
+- `settings` (one row): `minimum_wage_nzd_per_hour`, `holiday_pay_rate`, `weeks_working` (each), `acc_levy_rate` and `eur_per_nzd`.
+- `tax_brackets`: New Zealand income tax, `up_to_nzd` (`null` for the top bracket) and `rate`.
+- `visa_steps` and `job_types`: the two tables on the page.
+
 ### `pages/storage_box/storage_boxes_belgium.xlsx`: the storage box comparison
 
 Edit the Excel file, then rebuild the page's data:
@@ -200,6 +227,7 @@ If a header is renamed, the script stops and says which one is missing. To chang
 
 - `pages/trip/world-country-outlines-do-not-edit.json`: Natural Earth via world-atlas, pre-projected and centred on 90°E.
 - `pages/okinawa/okinawa-municipality-outlines-do-not-edit.json`: GSI Global Map Japan via jpn-atlas, projected around 127.95°E, 26.5°N.
+- `pages/nz_roadtrip/nz-outlines-do-not-edit.json`: Natural Earth 10m via world-atlas, mainland New Zealand and Stewart Island, projected around 172.5°E, 41°S.
 
 ## What's real and what's a placeholder
 
@@ -209,10 +237,13 @@ If a header is renamed, the script stops and says which one is missing. To chang
   - Okinawa → Kyushu → Kyoto;
   - Melbourne at Mark's;
   - the insurance notes and the expenses;
-  - the Okinawa fees and rental terms from the linked guides.
+  - the Okinawa fees and rental terms from the linked guides;
+  - the New Zealand visa rules, minimum wage, Wilderness prices and the camping and winter-driving rules, from the pages linked on each page (checked November 2026).
 - **Placeholders:**
   - the cities within each country (apart from those above);
   - the exact days;
   - every daily allowance and leg cost;
   - the Okinawa loop;
-  - the Hijet price (assumed ¥9,900/day until Evertrail quotes).
+  - the Hijet price (assumed ¥9,900/day until Evertrail quotes);
+  - the New Zealand road trip: its dates, route, campsite fees marked "estimate", the ferry, diesel and food figures, and the van price (NZ$300/day until Wilderness quotes);
+  - the earnings, which assume the minimum wage and 3 weeks of work each.

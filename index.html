@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="pages/insurance/insurance-page.css">
 <link rel="stylesheet" href="pages/expenses/expenses-page.css">
 <link rel="stylesheet" href="pages/okinawa/okinawa-page.css">
+<link rel="stylesheet" href="pages/nz_roadtrip/nz-roadtrip-page.css">
+<link rel="stylesheet" href="pages/nz_jobs/nz-jobs-page.css">
 <link rel="stylesheet" href="pages/storage_box/storage-box-page.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 </head>
@@ -128,6 +130,14 @@
         <p class="page-kicker">New Zealand · August and September · the finish</p>
         <h2>Two months to end on</h2>
         <p>A <b data-draw="number_value" data-source="trip_travel_legs" data-where="to=Auckland" data-field="km">—</b> km hop across the Tasman to Auckland, then the South Island. <b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=nz" data-field="nights">—</b> nights, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=nz" data-field="budget">—</b> before any working-holiday income.</p>
+        <button type="button" class="page-shortcut-button is-compact" data-page="nz-jobs" id="nz-jobs-shortcut">
+          <span class="page-shortcut-text"><span class="page-shortcut-title">Working holiday jobs around Auckland</span><span class="page-shortcut-subtitle">The PVT visa, first-week paperwork, jobs for August and what we could earn</span></span>
+          <span class="page-shortcut-arrow" aria-hidden="true">→</span>
+        </button>
+        <button type="button" class="page-shortcut-button is-compact" data-page="nz-roadtrip" id="nz-roadtrip-shortcut">
+          <span class="page-shortcut-text"><span class="page-shortcut-title">Campervan road trip for four</span><span class="page-shortcut-subtitle">Auckland to Christchurch in 2 or 3 weeks: map, campsites, vans and costs</span></span>
+          <span class="page-shortcut-arrow" aria-hidden="true">→</span>
+        </button>
         <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="nz"></ol>
       </section>
 
@@ -320,6 +330,157 @@
   <button type="button" class="back-to-trip-button" data-page="trip" data-scroll="chapter-japan">← Back to Japan on the trip</button>
 </section>
 
+<!-- ===== PAGE: New Zealand road trip, no tab: opened from the New Zealand chapter (pages/nz_roadtrip/) ===== -->
+<section class="page content-page nz-roadtrip-page-container" id="nz-roadtrip" hidden>
+  <header class="page-header">
+    <p class="page-kicker">New Zealand · after Auckland, from 31 August</p>
+    <h1 class="page-title">Campervan road trip for four</h1>
+    <p class="page-intro">From Auckland down the North Island, across Cook Strait and round the South Island in a 4-berth motorhome, returning it in Christchurch (Wilderness charges no one-way fee for that). It's late winter: snow in the passes, short days and quiet campsites. The 3-week version has rest days; the 2-week version follows the same route with a drive almost every day. All prices are estimates for the four of us.</p>
+  </header>
+
+  <div class="toggle-button-group" role="group" aria-label="Trip length">
+    <button type="button" data-roadtrip-version="three_weeks" aria-pressed="true">3 weeks</button>
+    <button type="button" data-roadtrip-version="two_weeks" aria-pressed="false">2 weeks</button>
+  </div>
+  <div class="stat-tiles">
+    <div class="stat-tile" id="nz-roadtrip-nights"><p class="stat-tile-label">Nights in the van</p><p class="stat-tile-value"><span data-draw="number_value" data-source="nz_roadtrip_totals" data-where="version=three_weeks" data-field="nights">—</span></p></div>
+    <div class="stat-tile" id="nz-roadtrip-km"><p class="stat-tile-label">Driving, about</p><p class="stat-tile-value"><span data-draw="number_value" data-source="nz_roadtrip_totals" data-where="version=three_weeks" data-field="road_km">—</span> km</p></div>
+    <div class="stat-tile" id="nz-roadtrip-total"><p class="stat-tile-label">Rough cost for four (van, cover, diesel, campsites, ferry, food)</p><p class="stat-tile-value">NZ$<span data-draw="number_value" data-source="nz_roadtrip_totals" data-where="version=three_weeks" data-field="total_nzd">—</span></p></div>
+    <div class="stat-tile" id="nz-roadtrip-per-person"><p class="stat-tile-label">Per person</p><p class="stat-tile-value">€<span data-draw="number_value" data-source="nz_roadtrip_totals" data-where="version=three_weeks" data-field="per_person_eur">—</span></p></div>
+  </div>
+
+  <div class="nz-roadtrip-map-and-loop-grid">
+    <div class="card" id="card-nz-roadtrip-map">
+      <h3>The route and where we sleep</h3>
+      <p class="card-note">Numbers follow the route. Hover a marker for the campsite and its fee. Lines are straight between stops, not the roads; locations are approximate.</p>
+      <div class="nz-roadtrip-map" id="nz-roadtrip-map" data-draw="nz_roadtrip_map" data-source="nz_roadtrip_outlines nz_roadtrip_stays_by_version"></div>
+      <div class="nz-roadtrip-map-legend">
+        <span><svg width="12" height="12" aria-hidden="true"><rect class="nz-roadtrip-legend-swatch-paid" x="1" y="1" width="10" height="10" rx="2"></rect></svg>Holiday park or paid campground</span>
+        <span><svg width="12" height="12" aria-hidden="true"><path class="nz-roadtrip-legend-swatch-doc" d="M6 1 L11 11 L1 11 Z"></path></svg>DOC campsite</span>
+        <span><svg width="12" height="12" aria-hidden="true"><circle class="nz-roadtrip-legend-swatch-free" cx="6" cy="6" r="5"></circle></svg>Free (self-contained only)</span>
+        <span><svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="4.5" fill="none" stroke="currentColor" stroke-width="1.5"></circle></svg>Van depot, or no night there</span>
+        <span><svg width="22" height="8" aria-hidden="true"><line class="nz-roadtrip-legend-swatch-route" x1="0" y1="4" x2="22" y2="4" stroke-width="2.5" stroke-dasharray="6 5"></line></svg>Ferry</span>
+      </div>
+    </div>
+    <div class="card" id="card-nz-roadtrip-loop">
+      <h3>Day by day</h3>
+      <p class="card-note">Dates count from picking up the van on 31 August (change <code>start_date</code> in the data file). Distances are rough road kilometres from the previous stop.</p>
+      <ol class="nz-roadtrip-loop-list" data-draw="nz_roadtrip_loop_list" data-source="nz_roadtrip_stays_by_version"></ol>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="nz-roadtrip-costs">What it costs</h2>
+  <div class="card" id="card-nz-roadtrip-costs">
+    <p class="card-note">For the four of us, from the settings at the top of the data file. Hire days are nights + 1. Activities (Milford Sound cruise, glowworm caves, hot pools) aren't included.</p>
+    <ul class="nz-roadtrip-cost-list" data-draw="nz_roadtrip_cost_breakdown" data-source="nz_roadtrip_totals nz_roadtrip_settings"></ul>
+  </div>
+
+  <h2 class="section-heading" id="nz-roadtrip-spots">Every campsite on the route</h2>
+  <div class="card" id="card-nz-roadtrip-spots">
+    <p class="card-note">One per stop, for both versions. Fees marked "estimate" are typical prices for that kind of site, not quotes.</p>
+    <div class="table-scroll-container">
+      <table class="data-table is-wide" data-draw="data_table" data-source="nz_roadtrip_loop" data-cols="place|Stop;spot|Where we sleep;type|Type;fee|Fee;nights_three_weeks|Nights (3 weeks);nights_two_weeks|Nights (2 weeks);highlights|What to do"></table>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="nz-roadtrip-van-rental">Renting the van</h2>
+  <div class="card" id="card-nz-roadtrip-van-rental">
+    <p class="card-note">A 4-berth is 7–7.5 m long and nearly 3 m high, with two double beds: fine for two couples. Prices as published; quote the exact dates before booking.</p>
+    <div class="table-scroll-container">
+      <table class="data-table is-wide" data-draw="data_table" data-source="nz_roadtrip_rental_offers" data-cols="offer|Company and van;size|Size and berths;price|Price;depots|Depots;source|Source"></table>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="nz-roadtrip-before-we-go">Before we go</h2>
+  <ul class="nz-roadtrip-tips-list">
+    <li>Freedom camping: since 7 June 2026 only vehicles with a green self-containment warrant (a fixed toilet; portable ones no longer count) can stay at council spots reserved for self-contained vehicles. Ask the rental company to confirm the van's warrant in writing. Holiday parks and DOC campsites take any vehicle.</li>
+    <li>Winter roads: the Desert Road, Haast Pass, Crown Range, Lindis Pass and Milford Road can have snow and ice. On the Milford Road chains must be carried when the signs say so (June to November), with a NZ$750 fine. Wilderness rents chains for NZ$70, or includes them in Full Cover. Check the road status every morning.</li>
+    <li>The Tongariro Alpine Crossing in winter is snow, ice and avalanche terrain, needing crampons and an ice axe: go with a guide or skip it. Shuttles don't run in winter.</li>
+    <li>Ferry: book the Interislander or Bluebridge in advance. A van up to 8 m costs about NZ$505–545 at one reseller, plus passengers; booking through the rental company can be cheaper. Crossings are cancelled in strong wind, so keep a spare day.</li>
+    <li>Diesel jumped in 2026 (up to about NZ$3.50 a litre in April) and was NZ$2.45–2.68 by July–September; the budget uses NZ$2.60. Without Full Cover, road user charges for diesel (about NZ$8.40 per 100 km) are billed after the hire.</li>
+    <li>Driving: on the left, with many one-lane bridges and slow winding roads; plan on about 70 km/h on average. Sunset is around 6 pm: arrive at the campsite before dark.</li>
+    <li>Licence: a French licence works for up to 12 months with an International Driving Permit or an approved English translation.</li>
+  </ul>
+  <ul class="link-list">
+    <li><a href="https://www.wilderness.co.nz/motorhome-hire-nz/pricing" target="_blank" rel="noopener">Wilderness: pricing</a> · <a href="https://www.wilderness.co.nz/motorhome-hire-nz/insurance" target="_blank" rel="noopener">insurance</a></li>
+    <li><a href="https://www.wilderness.co.nz/blog/new-zealand-inter-island-travel" target="_blank" rel="noopener">Wilderness: the Cook Strait ferry with a motorhome</a></li>
+    <li><a href="https://www.aa.co.nz/travel/member-deals/campervan-rental/" target="_blank" rel="noopener">AA: Maui, Britz, Apollo and Mighty deals</a></li>
+    <li><a href="https://www.newzealand.com/nz/plan/business/star-rv-motorhome-rentals-auckland-airport/" target="_blank" rel="noopener">Star RV on newzealand.com</a></li>
+    <li><a href="https://www.wendekreisen.co.nz/new-zealand/ferry-bookings.aspx" target="_blank" rel="noopener">Wendekreisen: Interislander fares</a></li>
+    <li><a href="https://www.doc.govt.nz/freedomcamping" target="_blank" rel="noopener">DOC: freedom camping</a></li>
+    <li><a href="https://www.lonelyplanet.com/articles/new-zealand-camping-laws-update" target="_blank" rel="noopener">Lonely Planet: the new camping rules</a></li>
+    <li><a href="https://www.doc.govt.nz/parks-and-recreation/places-to-go/online-bookings/doc-accommodation-price-changes-2025-2026" target="_blank" rel="noopener">DOC: campsite price changes 2025/26</a></li>
+    <li><a href="https://nzta.govt.nz/projects/sh94-milford-road/faqs/" target="_blank" rel="noopener">NZTA: Milford Road FAQ</a></li>
+    <li><a href="https://doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/things-to-do/tracks/tongariro-alpine-crossing/may-to-october" target="_blank" rel="noopener">DOC: Tongariro Crossing in winter</a></li>
+  </ul>
+
+  <button type="button" class="back-to-trip-button" data-page="trip" data-scroll="chapter-nz">← Back to New Zealand on the trip</button>
+</section>
+
+<!-- ===== PAGE: New Zealand jobs, no tab: opened from the New Zealand chapter (pages/nz_jobs/) ===== -->
+<section class="page content-page" id="nz-jobs" hidden>
+  <header class="page-header">
+    <p class="page-kicker">New Zealand · August 2027 in Auckland</p>
+    <h1 class="page-title">Working holiday jobs around Auckland</h1>
+    <p class="page-intro">With a working holiday visa (PVT) we can take any temporary job for up to 12 months. This page has the visa steps, the first-week paperwork, the jobs that exist around Auckland in August (late winter) and what the minimum wage pays after tax.</p>
+  </header>
+
+  <h2 class="section-heading" id="nz-jobs-earnings">What we could earn</h2>
+  <div class="toggle-button-group" role="group" aria-label="Hours per week">
+    <button type="button" data-jobs-hours="20" aria-pressed="false">20 h a week</button>
+    <button type="button" data-jobs-hours="30" aria-pressed="false">30 h a week</button>
+    <button type="button" data-jobs-hours="40" aria-pressed="true">40 h a week</button>
+  </div>
+  <div class="stat-tiles">
+    <div class="stat-tile" id="nz-jobs-weekly-gross"><p class="stat-tile-label">Each, per week before tax</p><p class="stat-tile-value">NZ$<span data-draw="number_value" data-source="nz_jobs_earnings_by_hours" data-where="hours=40" data-field="weekly_gross_nzd">—</span></p></div>
+    <div class="stat-tile" id="nz-jobs-weekly-net"><p class="stat-tile-label">Each, per week after tax</p><p class="stat-tile-value">NZ$<span data-draw="number_value" data-source="nz_jobs_earnings_by_hours" data-where="hours=40" data-field="weekly_net_nzd">—</span></p></div>
+    <div class="stat-tile" id="nz-jobs-couple-total"><p class="stat-tile-label">The two of us, <span data-draw="number_value" data-source="nz_jobs_earnings_by_hours" data-where="hours=40" data-field="weeks">—</span> weeks of work</p><p class="stat-tile-value">€<span data-draw="number_value" data-source="nz_jobs_earnings_by_hours" data-where="hours=40" data-field="couple_net_eur">—</span></p></div>
+  </div>
+  <p class="card-note">At the adult minimum wage, NZ$23.95/h since 1 April 2026 (it usually rises each April), plus 8% holiday pay. Tax is as for a main job (code M) plus the ACC levy, so the figure is rough. Three weeks of work leaves the first days of August for paperwork.</p>
+
+  <h2 class="section-heading" id="nz-jobs-visa">The visa (PVT)</h2>
+  <div class="card" id="card-nz-jobs-visa">
+    <p class="card-note">France–New Zealand working holiday scheme, from Immigration New Zealand's page.</p>
+    <div class="table-scroll-container">
+      <table class="data-table is-wide" data-draw="data_table" data-source="nz_jobs_visa_steps" data-cols="step|Step;what|What;when|When"></table>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="nz-jobs-first-week">First week in Auckland</h2>
+  <ul class="nz-jobs-checklist">
+    <li>Get a New Zealand SIM: employers, banks and job apps all ask for a local number.</li>
+    <li>Open a bank account (ANZ, ASB, BNZ, Kiwibank or Westpac).</li>
+    <li>Apply online for an IRD (tax) number with our passport and visa application number (on the approval letter, not the visa number). Guides disagree on whether a New Zealand bank account is needed first; if it is, apply with the account, otherwise add it later.</li>
+    <li>Give each employer a tax code form (IR330): M for the main job; a second job uses SB, S or SH depending on income.</li>
+    <li>Casual and short jobs usually add 8% holiday pay to each payslip instead of paid leave.</li>
+    <li>Before leaving the country, file a tax return: a few months of work is taxed as if it lasted a year, so part of the tax usually comes back.</li>
+  </ul>
+
+  <h2 class="section-heading" id="nz-jobs-types">Jobs we could do in August</h2>
+  <div class="card" id="card-nz-jobs-types">
+    <p class="card-note">August is late winter: hospitality is quieter, kiwifruit pruning is ending and the ski season is in full swing in the south. Pay figures come from job listings seen in 2025–2026.</p>
+    <div class="table-scroll-container">
+      <table class="data-table is-wide" data-draw="data_table" data-source="nz_jobs_job_types" data-cols="job|Job;where|Where;season|When;pay|Pay;how|How to find it;note|Good to know"></table>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="nz-jobs-links">Where to look</h2>
+  <ul class="link-list">
+    <li><a href="https://www.immigration.govt.nz/visas/france-working-holiday-visa/" target="_blank" rel="noopener">Immigration NZ: France working holiday visa</a></li>
+    <li><a href="https://www.immigration.govt.nz/formshelp/medical-insurance" target="_blank" rel="noopener">Immigration NZ: medical insurance for the visa</a></li>
+    <li><a href="https://www.employment.govt.nz/news-and-updates/minimum-wage-is-increasing-on-1-april-2026" target="_blank" rel="noopener">Employment NZ: minimum wage from April 2026</a></li>
+    <li><a href="https://pvtistes.net/en/dossiers/whv-new-zealand-ird-number-application" target="_blank" rel="noopener">pvtistes: getting the IRD number</a> · <a href="https://pvtistes.net/en/dossiers/finding-job-nz/6/" target="_blank" rel="noopener">finding a job</a></li>
+    <li><a href="https://www.seek.co.nz/" target="_blank" rel="noopener">Seek</a> · <a href="https://www.trademe.co.nz/a/jobs" target="_blank" rel="noopener">Trade Me Jobs</a></li>
+    <li><a href="https://www.backpackerjobboard.co.nz" target="_blank" rel="noopener">Backpacker Job Board</a> · <a href="https://www.backpackerboard.co.nz/work_jobs/working-holiday/nz-backpackers-jobs-how-to-find/" target="_blank" rel="noopener">Backpacker Board</a></li>
+    <li><a href="https://www.workandincome.govt.nz/work/find-jobs/where-to-look-for-jobs/seasonal-work-calendar" target="_blank" rel="noopener">Work and Income: seasonal work calendar</a></li>
+    <li><a href="https://www.picknz.co.nz/work-opportunities/work-planner/work-and-play-in-waikato/" target="_blank" rel="noopener">Pick NZ: Auckland and Waikato</a> · <a href="https://findajob.msd.govt.nz" target="_blank" rel="noopener">Find a Job (MSD)</a></li>
+    <li><a href="https://sidekicker.com/nz/hospitality" target="_blank" rel="noopener">Sidekicker</a> · <a href="https://help.sidekicker.com/en/articles/2171828-how-is-my-pay-calculated-nz" target="_blank" rel="noopener">how its pay works</a></li>
+    <li><a href="https://wwoof.nz/join/" target="_blank" rel="noopener">WWOOF New Zealand</a></li>
+  </ul>
+
+  <button type="button" class="back-to-trip-button" data-page="trip" data-scroll="chapter-nz">← Back to New Zealand on the trip</button>
+</section>
+
 <!-- ===== PAGE: Expenses (pages/expenses/) ===== -->
 <section class="page content-page" id="expenses" hidden>
   <header class="page-header">
@@ -448,6 +609,8 @@
 <script src="pages/insurance/insurance-page.js"></script>
 <script src="pages/expenses/expenses-page.js"></script>
 <script src="pages/okinawa/okinawa-page.js"></script>
+<script src="pages/nz_roadtrip/nz-roadtrip-page.js"></script>
+<script src="pages/nz_jobs/nz-jobs-page.js"></script>
 <script src="pages/storage_box/storage-box-page.js"></script>
 
 </div>

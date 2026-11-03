@@ -1,0 +1,37 @@
+{
+  "settings": [
+    {
+      "start_date": "2027-08-31",
+      "people": 4,
+      "van_nzd_per_day": 300,
+      "cover_nzd_per_day": 84,
+      "fuel_litres_per_100km": 12,
+      "diesel_nzd_per_litre": 2.6,
+      "ferry_nzd": 800,
+      "food_nzd_per_person_per_day": 30,
+      "eur_per_nzd": 0.51
+    }
+  ],
+  "loop": [
+    {"order": 1, "place": "Auckland", "spot": "Wilderness depot: pick up the van", "type": "Depot", "lat": -36.85, "lon": 174.76, "nights_three_weeks": 0, "nights_two_weeks": 0, "road_km_in": 0, "day_trip_km": 0, "fee_nzd_per_adult": 0, "fee": "", "highlights": "Supermarket run before leaving the city"},
+    {"order": 2, "place": "Waitomo", "spot": "Waitomo Top 10 Holiday Park", "type": "Holiday park", "lat": -38.26, "lon": 175.10, "nights_three_weeks": 1, "nights_two_weeks": 0, "road_km_in": 195, "day_trip_km": 0, "fee_nzd_per_adult": 30, "fee": "About NZ$30 per adult (estimate)", "highlights": "Glowworm caves; in the 2-week version, a stop on the way to Rotorua"},
+    {"order": 3, "place": "Rotorua", "spot": "Rotorua Top 10 Holiday Park", "type": "Holiday park", "lat": -38.14, "lon": 176.25, "nights_three_weeks": 2, "nights_two_weeks": 2, "road_km_in": 155, "day_trip_km": 0, "fee_nzd_per_adult": 30, "fee": "About NZ$30 per adult (estimate)", "highlights": "Geothermal parks, the Redwoods, hot pools"},
+    {"order": 4, "place": "Taupō", "spot": "Reids Farm Recreation Reserve", "type": "Free, certified self-contained vehicles only", "lat": -38.65, "lon": 176.08, "nights_three_weeks": 2, "nights_two_weeks": 1, "road_km_in": 80, "day_trip_km": 0, "fee_nzd_per_adult": 0, "fee": "Free; check the council's current night limit", "highlights": "Huka Falls; Tongariro Crossing only with a guide in winter"},
+    {"order": 5, "place": "Wellington", "spot": "Wellington Waterfront Motorhome Park", "type": "Paid motorhome park", "lat": -41.29, "lon": 174.78, "nights_three_weeks": 2, "nights_two_weeks": 1, "road_km_in": 375, "day_trip_km": 0, "fee_nzd_per_adult": 20, "fee": "Per vehicle, price to confirm (counted as NZ$20 per adult)", "highlights": "Te Papa museum, the cable car; the Desert Road on the way can close in snow"},
+    {"order": 6, "place": "Kaiteriteri (Abel Tasman)", "spot": "Kaiteriteri Beach Camp", "type": "Holiday park", "lat": -41.04, "lon": 173.02, "nights_three_weeks": 2, "nights_two_weeks": 1, "road_km_in": 165, "day_trip_km": 0, "fee_nzd_per_adult": 30, "fee": "About NZ$30 per adult (estimate)", "highlights": "Ferry to Picton first; water taxi and a day on the Abel Tasman coast track", "ferry_in": true},
+    {"order": 7, "place": "Punakaiki", "spot": "Punakaiki Beach Camp", "type": "Holiday park", "lat": -42.11, "lon": 171.33, "nights_three_weeks": 1, "nights_two_weeks": 1, "road_km_in": 245, "day_trip_km": 0, "fee_nzd_per_adult": 25, "fee": "About NZ$25 per adult (estimate)", "highlights": "Pancake Rocks and blowholes at high tide"},
+    {"order": 8, "place": "Franz Josef", "spot": "Franz Josef Top 10 Holiday Park", "type": "Holiday park", "lat": -43.39, "lon": 170.18, "nights_three_weeks": 2, "nights_two_weeks": 1, "road_km_in": 205, "day_trip_km": 0, "fee_nzd_per_adult": 30, "fee": "About NZ$30 per adult (estimate)", "highlights": "Glacier valley walk, hot pools; heli-hike if the weather allows"},
+    {"order": 9, "place": "Wānaka", "spot": "Albert Town Campground", "type": "Council campground", "lat": -44.68, "lon": 169.19, "nights_three_weeks": 2, "nights_two_weeks": 1, "road_km_in": 285, "day_trip_km": 0, "fee_nzd_per_adult": 15, "fee": "About NZ$15 per adult (estimate)", "highlights": "Haast Pass on the way; the lake and Roys Peak"},
+    {"order": 10, "place": "Queenstown", "spot": "Queenstown Lakeview Holiday Park", "type": "Holiday park", "lat": -45.03, "lon": 168.65, "nights_three_weeks": 2, "nights_two_weeks": 2, "road_km_in": 68, "day_trip_km": 0, "fee_nzd_per_adult": 35, "fee": "About NZ$35 per adult (estimate)", "highlights": "Crown Range road in; gondola, Arrowtown, the ski fields"},
+    {"order": 11, "place": "Te Anau (Milford Road)", "spot": "Henry Creek campsite (DOC)", "type": "DOC campsite", "lat": -45.24, "lon": 167.83, "nights_three_weeks": 2, "nights_two_weeks": 2, "road_km_in": 195, "day_trip_km": 190, "fee_nzd_per_adult": 10, "fee": "Most standard DOC campsites charge NZ$10 per adult; check it's open in winter", "highlights": "Day trip to Milford Sound and a cruise; carry chains"},
+    {"order": 12, "place": "Aoraki / Mount Cook", "spot": "White Horse Hill campground (DOC)", "type": "DOC campsite", "lat": -43.72, "lon": 170.09, "nights_three_weeks": 2, "nights_two_weeks": 1, "road_km_in": 455, "day_trip_km": 0, "fee_nzd_per_adult": 18, "fee": "About NZ$18 per adult (DOC, estimate)", "highlights": "Hooker Valley track; the longest drive of the trip, over the Lindis Pass"},
+    {"order": 13, "place": "Lake Tekapo", "spot": "Holiday park by the lake", "type": "Holiday park", "lat": -44.00, "lon": 170.48, "nights_three_weeks": 1, "nights_two_weeks": 1, "road_km_in": 105, "day_trip_km": 0, "fee_nzd_per_adult": 30, "fee": "About NZ$30 per adult (estimate)", "highlights": "Dark-sky stargazing, hot pools"},
+    {"order": 14, "place": "Christchurch", "spot": "Wilderness depot: return the van", "type": "Depot", "lat": -43.49, "lon": 172.55, "nights_three_weeks": 0, "nights_two_weeks": 0, "road_km_in": 225, "day_trip_km": 0, "fee_nzd_per_adult": 0, "fee": "", "highlights": "Then a bus or a one-hour flight back to Queenstown"}
+  ],
+  "rental_offers": [
+    {"offer": "Wilderness · Double for 4 or Twin/King for 4 (our pick)", "size": "7.4 m or 6.9 m long, 2.9 m high; 4 berths; cassette flush toilet and shower; central heating; Fiat Ducato diesel", "price": "About NZ$200–300/day in August and NZ$300–400/day in September (their January 2026 estimates). One-way, extra drivers and public holidays included. Full Cover NZ$84/day: no excess, road user charges, snow chains and LPG included", "depots": "Auckland, Christchurch", "source": "Wilderness pricing and insurance pages"},
+    {"offer": "Maui, Britz, Apollo, Mighty (one group)", "size": "4-berth motorhomes in each brand", "price": "Not checked: quote online for the dates. AA members and SuperGold cardholders get 10% off the daily rate; one-way fee depends on the route", "depots": "Auckland, Christchurch, Queenstown", "source": "AA member deals, SuperGold offer"},
+    {"offer": "Star RV", "size": "Motorhomes", "price": "Low season (March–October) NZ$175–500 per day", "depots": "Auckland, Christchurch and Queenstown airports", "source": "newzealand.com listing"},
+    {"offer": "Euro Campers", "size": "Motorhomes", "price": "Price includes insurance, self-containment certification and transfers; no one-way fee", "depots": "Christchurch", "source": "newzealand.com listing"}
+  ]
+}
