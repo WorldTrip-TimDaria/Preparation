@@ -87,6 +87,11 @@ html, body { margin: 0; background: var(--color-background); color: var(--color-
 .stat-tile-value { font-family: var(--font-serif); font-weight: 400; font-size: calc(var(--font-size-title) * 1.3); font-variant-numeric: tabular-nums; margin: 0; }
 .stat-tile-value.is-ok { color: var(--color-success); }
 
+/* ===== Toggle buttons (one pressed at a time, aria-pressed="true"): insurance profiles, storage box sizes ===== */
+.toggle-button-group { display: inline-flex; flex-wrap: wrap; gap: var(--gap-extra-small); margin-bottom: var(--gap-small); }
+.toggle-button-group button { font: inherit; font-size: var(--font-size-caption); padding: var(--padding-extra-small) var(--padding-small); border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-background); color: var(--color-text-muted); cursor: pointer; }
+.toggle-button-group button[aria-pressed="true"] { color: var(--color-text); border-color: var(--color-text); }
+
 /* ===== Links, back button, chart tooltip, load failure ===== */
 .link-list { columns: 2 16rem; font-size: var(--font-size-body); line-height: 1.8; padding-left: 1.1rem; margin: 0; }
 .link-list a { color: var(--color-text); }

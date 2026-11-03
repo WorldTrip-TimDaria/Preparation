@@ -1,0 +1,37 @@
+/* Storage box page. Buttons use the shared .toggle-button-group; tiles, cards and tables are shared too. */
+
+/* ===== Measure and size-range buttons ===== */
+.storage-box-size-controls { display: flex; flex-direction: column; gap: var(--gap-small); margin: var(--gap-large) 0 0; }
+.storage-box-size-controls .toggle-button-group { margin-bottom: 0; align-items: center; }
+.storage-box-control-label { font-size: var(--font-size-caption); color: var(--color-text-muted); min-width: 4.5rem; }
+.storage-box-size-range-buttons { display: inline-flex; flex-wrap: wrap; gap: var(--gap-extra-small); }
+
+/* ===== Best-value tiles ===== */
+.storage-box-tile-details { font-size: var(--font-size-caption); color: var(--color-text-muted); margin: var(--gap-extra-small) 0 0; line-height: 1.45; }
+.storage-box-brand-dot { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: var(--gap-extra-small); vertical-align: 0; }
+
+/* ===== Cost chart ===== */
+.storage-box-cost-chart { position: relative; height: 360px; }
+.storage-box-cost-chart svg { display: block; overflow: visible; }
+.storage-box-chart-selected-range { fill: var(--color-chart-muted); fill-opacity: .15; }
+.storage-box-chart-axis text { font-size: var(--font-size-caption); fill: var(--color-text-muted); font-family: var(--font-sans); }
+.storage-box-chart-axis path, .storage-box-chart-axis line { stroke: var(--color-chart-axis); }
+.storage-box-chart-axis-title { font-size: var(--font-size-caption); fill: var(--color-text-muted); }
+.storage-box-chart-brand-line { fill: none; stroke-width: 1.5; }
+.storage-box-chart-dot { stroke: var(--color-panel); stroke-width: 1.5; }
+.storage-box-brand-legend { display: flex; flex-wrap: wrap; gap: var(--gap-small) var(--gap-medium); font-size: var(--font-size-caption); color: var(--color-text-muted); margin-top: var(--gap-small); }
+.storage-box-missing-size-note { margin: var(--gap-small) 0 0; }
+.storage-box-missing-size-note:empty { display: none; }
+
+/* ===== Comparison table ===== */
+.storage-box-sort-button { font: inherit; color: inherit; font-weight: inherit; background: none; border: 0; padding: 0; cursor: pointer; white-space: nowrap; }
+.storage-box-sort-button:hover, .storage-box-sort-button:focus-visible { color: var(--color-text); }
+.storage-box-notes-cell { min-width: 16rem; }
+.storage-box-notes-cell summary { cursor: pointer; color: var(--color-text-muted); }
+.storage-box-notes-cell p { margin: var(--gap-extra-small) 0; }
+.storage-box-notes-cell a { color: var(--color-text); }
+
+/* ===== How the prices are counted ===== */
+.storage-box-read-me-list { margin: 0; padding-left: 1.1rem; font-size: var(--font-size-body); line-height: 1.6; max-width: 52rem; }
+
+@media (max-width: 560px) { .storage-box-cost-chart { height: 280px; } }
