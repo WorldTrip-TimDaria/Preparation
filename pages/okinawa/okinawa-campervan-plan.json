@@ -1,0 +1,303 @@
+{
+  "loop": [
+    {
+      "order": 1,
+      "place": "Okinawa City (Evertrail office)",
+      "spot": "Bus from Naha airport (111/117, about 1 h), pick up the Hijet",
+      "arrive": "2027-02-15",
+      "depart": "2027-02-15",
+      "lat": 26.334,
+      "lon": 127.805,
+      "daily_eur": 0,
+      "parking_jpy": 0
+    },
+    {
+      "order": 2,
+      "place": "Okinawa City",
+      "spot": "Okinawa Sports Park auto-camp",
+      "arrive": "2027-02-15",
+      "depart": "2027-02-18",
+      "lat": 26.311,
+      "lon": 127.821,
+      "daily_eur": 127,
+      "parking_jpy": 2760
+    },
+    {
+      "order": 3,
+      "place": "Aha (Kunigami)",
+      "spot": "Aha river mouth: free, no facilities",
+      "arrive": "2027-02-18",
+      "depart": "2027-02-19",
+      "lat": 26.716,
+      "lon": 128.294,
+      "daily_eur": 111,
+      "parking_jpy": 0
+    },
+    {
+      "order": 4,
+      "place": "Northern tip (Kunigami)",
+      "spot": "Toubaru beach: free, toilets, cold shower",
+      "arrive": "2027-02-19",
+      "depart": "2027-02-20",
+      "lat": 26.77,
+      "lon": 128.195,
+      "daily_eur": 111,
+      "parking_jpy": 0
+    },
+    {
+      "order": 5,
+      "place": "Nakijin",
+      "spot": "RV Park Nakijin campsite",
+      "arrive": "2027-02-20",
+      "depart": "2027-02-26",
+      "lat": 26.68,
+      "lon": 127.941,
+      "daily_eur": 131,
+      "parking_jpy": 3500
+    },
+    {
+      "order": 6,
+      "place": "Yomitan",
+      "spot": "Sera no Mori park: free, toilets",
+      "arrive": "2027-02-26",
+      "depart": "2027-02-27",
+      "lat": 26.395,
+      "lon": 127.744,
+      "daily_eur": 111,
+      "parking_jpy": 0
+    },
+    {
+      "order": 7,
+      "place": "Okinawa City",
+      "spot": "Okinawa Sports Park auto-camp",
+      "arrive": "2027-02-27",
+      "depart": "2027-03-01",
+      "lat": 26.311,
+      "lon": 127.821,
+      "daily_eur": 127,
+      "parking_jpy": 2760
+    },
+    {
+      "order": 8,
+      "place": "Okinawa City (Evertrail office)",
+      "spot": "Return the Hijet, bus back to the airport",
+      "arrive": "2027-03-01",
+      "depart": "2027-03-01",
+      "lat": 26.334,
+      "lon": 127.805,
+      "daily_eur": 0,
+      "parking_jpy": 0
+    }
+  ],
+  "overnight_spots": [
+    {
+      "name": "RV Park Nakijin campsite",
+      "type": "Paid RV park",
+      "town": "Nakijin",
+      "lat": 26.68,
+      "lon": 127.941,
+      "fee_jpy": 3500,
+      "fee": "¥3,500 per vehicle per night",
+      "facilities": "Power, toilets, bath, Wi-Fi",
+      "source": "Jackery Japan van-life guide"
+    },
+    {
+      "name": "RV Park Genka (\"lone house\" campsite)",
+      "type": "Paid RV park",
+      "town": "Nago",
+      "lat": 26.642,
+      "lon": 128.035,
+      "fee_jpy": 11000,
+      "fee": "¥11,000–19,800 per vehicle",
+      "facilities": "Power, toilets, bath and showers, kitchen",
+      "source": "Jackery Japan van-life guide"
+    },
+    {
+      "name": "Okinawa Sports Park auto-camp",
+      "type": "Paid campsite",
+      "town": "Okinawa City",
+      "lat": 26.311,
+      "lon": 127.821,
+      "fee_jpy": 2760,
+      "fee": "From ¥2,760",
+      "facilities": "Flush toilets, hot showers, kitchen area",
+      "source": "Jackery Japan van-life guide"
+    },
+    {
+      "name": "Yagaji beach",
+      "type": "Campsite",
+      "town": "Nago (Yagaji island)",
+      "lat": 26.66,
+      "lon": 128.025,
+      "fee_jpy": null,
+      "fee": "Fee not given",
+      "facilities": "Listed as a campsite",
+      "source": "nap-camp Okinawa camper guide"
+    },
+    {
+      "name": "Kouri island camp garden",
+      "type": "Campsite",
+      "town": "Nakijin (Kouri island)",
+      "lat": 26.7,
+      "lon": 128.022,
+      "fee_jpy": null,
+      "fee": "Fee not given",
+      "facilities": "Listed as a campsite",
+      "source": "nap-camp Okinawa camper guide"
+    },
+    {
+      "name": "Kunigami forest park campsite",
+      "type": "Campsite",
+      "town": "Kunigami",
+      "lat": 26.746,
+      "lon": 128.172,
+      "fee_jpy": null,
+      "fee": "Fee not given",
+      "facilities": "Listed as a campsite",
+      "source": "nap-camp Okinawa camper guide"
+    },
+    {
+      "name": "Michi-no-eki Itoman",
+      "type": "Roadside station (daytime only)",
+      "town": "Itoman",
+      "lat": 26.128,
+      "lon": 127.666,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Toilets; busy at night; for breaks, not overnight stays (Tabiiro)",
+      "source": "Jackery Japan van-life guide; Tabiiro campervan guide"
+    },
+    {
+      "name": "Michi-no-eki Toyosaki",
+      "type": "Roadside station (daytime only)",
+      "town": "Tomigusuku",
+      "lat": 26.159,
+      "lon": 127.653,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Toilets; for breaks, not overnight stays (Tabiiro)",
+      "source": "Jackery Japan van-life guide; Tabiiro campervan guide"
+    },
+    {
+      "name": "Umi-no-eki Ayahashi-kan",
+      "type": "Roadside station (daytime only)",
+      "town": "Uruma",
+      "lat": 26.364,
+      "lon": 127.897,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Shower room; for breaks, not overnight stays (Tabiiro)",
+      "source": "Jackery Japan van-life guide; Tabiiro campervan guide"
+    },
+    {
+      "name": "Sera no Mori park",
+      "type": "Free park",
+      "town": "Yomitan",
+      "lat": 26.395,
+      "lon": 127.744,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Toilets",
+      "source": "Jackery Japan van-life guide"
+    },
+    {
+      "name": "Michi-no-eki Kyoda",
+      "type": "Roadside station (daytime only)",
+      "town": "Nago",
+      "lat": 26.547,
+      "lon": 127.962,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Overnight spot used in the guide's itinerary; for breaks, not overnight stays (Tabiiro)",
+      "source": "nap-camp Okinawa camper guide; Tabiiro campervan guide"
+    },
+    {
+      "name": "Michi-no-eki Ogimi",
+      "type": "Roadside station (daytime only)",
+      "town": "Ogimi",
+      "lat": 26.683,
+      "lon": 128.109,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Toilets; popular stop; for breaks, not overnight stays (Tabiiro)",
+      "source": "Jackery Japan van-life guide; Tabiiro campervan guide"
+    },
+    {
+      "name": "Michi-no-eki Yui Yui Kunigami",
+      "type": "Roadside station (daytime only)",
+      "town": "Kunigami",
+      "lat": 26.736,
+      "lon": 128.161,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Toilets; for breaks, not overnight stays (Tabiiro)",
+      "source": "Jackery Japan van-life guide; Tabiiro campervan guide"
+    },
+    {
+      "name": "Toubaru beach",
+      "type": "Free beach",
+      "town": "Kunigami",
+      "lat": 26.77,
+      "lon": 128.195,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "Toilets, cold-water shower",
+      "source": "Jackery Japan van-life guide"
+    },
+    {
+      "name": "Aha river mouth",
+      "type": "Free wild spot",
+      "town": "Kunigami (Aha)",
+      "lat": 26.716,
+      "lon": 128.294,
+      "fee_jpy": 0,
+      "fee": "Free",
+      "facilities": "No toilets or showers; narrow bumpy track; busy at weekends; arrive before dark",
+      "source": "Evertrail Okinawa"
+    }
+  ],
+  "rental_offers": [
+    {
+      "offer": "Evertrail Okinawa · Daihatsu Hijet camper (our pick)",
+      "size": "Kei van, sleeps 2; air conditioning that runs with the engine off; small shower system, no toilet",
+      "price": "Not published: ask (evertrailokinawa@gmail.com, 080 9104 3373). Budget assumes about ¥9,900/day like other kei campers",
+      "source": "Evertrail Okinawa"
+    },
+    {
+      "offer": "Okinawa C.R.C. · kei camper \"Tentomushi\"",
+      "size": "Sleeps 2",
+      "price": "From ¥9,900/day incl. tax (weekdays)",
+      "source": "nap-camp"
+    },
+    {
+      "offer": "Tsukishiro Kotsu · kei camper \"Tentomushi\"",
+      "size": "3.39 × 1.47 × 1.99 m, petrol, sleeps 2, portable fridge",
+      "price": "Not listed: ask",
+      "source": "Tabiiro campervan guide"
+    },
+    {
+      "offer": "Tommy Up · Nissan Caravan \"Premium GX\"",
+      "size": "Sleeps 2",
+      "price": "From ¥16,500/night incl. tax",
+      "source": "nap-camp"
+    },
+    {
+      "offer": "Okinawa Vanlife · Toyota Hiace",
+      "size": "Sleeps 2",
+      "price": "¥27,000 for 1 night/2 days, +¥11,000 per extra day, insurance included",
+      "source": "nap-camp"
+    },
+    {
+      "offer": "Tsukishiro Kotsu · Toyota Camroad cab-over",
+      "size": "5.35 × 2.00 × 2.80 m, diesel, sleeps 6, shower",
+      "price": "Weekdays ¥23,100 first 24 h then ¥20,900/day; weekends ¥28,600 then ¥26,400/day",
+      "source": "Tabiiro campervan guide"
+    },
+    {
+      "offer": "A family's 6-berth cab-over (company not named)",
+      "size": "Sleeps 6",
+      "price": "About ¥130,000 for 6 nights (about ¥21,700/day)",
+      "source": "Sora no Note"
+    }
+  ]
+}

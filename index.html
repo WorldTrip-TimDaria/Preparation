@@ -6,356 +6,167 @@
 <title>World trip 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:wght@400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --font-anthropic-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --font-anthropic-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-    --cds-font-size-caption: 0.8125rem; --cds-font-size-body: 0.9375rem; --cds-font-size-heading: 1.0625rem; --cds-font-size-title: 1.5rem;
-    --cds-font-weight-medium: 600;
-    --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 16px; --cds-gap-lg: 24px; --cds-gap-xl: 40px;
-    --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 20px;
-    --cds-radius: 8px; --cds-dur-slow: 300ms; --cds-ease-out: cubic-bezier(.2,.8,.2,1);
-    --color-fg: #1f1e1c; --color-fg-muted: #6b6862; --color-bg: #faf9f6; --color-panel: #ffffff; --color-border-line: #e4e1da;
-    --color-ok: #2e7d4f; --color-warn: #b26a00; --color-bad: #c0392b;
-    --cds-chart-muted: #a9a59c; --cds-chart-axis: #c9c5bc;
-    --cds-text-secondary: #6b6862; --cds-surface-popover: #ffffff; --cds-border: #e4e1da; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.12);
-    --series-1: #2f6fdb; --series-2: #d9822b; --series-3: #8a5cd1; --series-4: #c2477a; --series-5: #2a9d8f; --series-6: #b5892c; --series-7: #5b7a99; --series-8: #7d8b3a;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --color-fg: #ecebe7; --color-fg-muted: #a19e97; --color-bg: #161614; --color-panel: #201f1d; --color-border-line: #34322e;
-      --color-ok: #5cc28a; --color-warn: #e0a347; --color-bad: #ef6b5b;
-      --cds-chart-muted: #6d6a64; --cds-chart-axis: #4a4843;
-      --cds-text-secondary: #a19e97; --cds-surface-popover: #26251f; --cds-border: #3a3833; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.5);
-      --series-1: #6ea0f2; --series-2: #f0a35e; --series-3: #b292ec; --series-4: #e07aa4; --series-5: #5cc0b3; --series-6: #d8b25a; --series-7: #8ca7c2; --series-8: #a9b765;
-    }
-  }
-  html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); }
-  #dash-root { max-width: 1400px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; }
-  #dash-root *, #dash-root *::before, #dash-root *::after { box-sizing: border-box; }
-  #dash-root b { font-weight: 700; }
-  .dash-skeleton { background: linear-gradient(90deg, var(--color-border-line), transparent, var(--color-border-line)); background-size: 200% 100%; animation: sk 1.4s linear infinite; border-radius: var(--cds-radius); }
-  @keyframes sk { to { background-position: -200% 0; } }
-</style>
+<!-- Shared styles first, then one stylesheet per page. -->
+<link rel="stylesheet" href="shared/shared-styles.css">
+<link rel="stylesheet" href="pages/trip/trip-page.css">
+<link rel="stylesheet" href="pages/insurance/insurance-page.css">
+<link rel="stylesheet" href="pages/expenses/expenses-page.css">
+<link rel="stylesheet" href="pages/okinawa/okinawa-page.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-<script src="js/dash.js"></script>
 </head>
 <body>
-<div id="dash-root">
-<style>
-  .rt { container-type: inline-size; font-family: var(--font-anthropic-sans); }
-  .rt-head { margin-bottom: var(--cds-gap-lg); }
-  .rt-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-title) * 1.4); line-height: 1.15; margin: 0 0 var(--cds-gap-sm); }
-  .rt-lede { font-size: var(--cds-font-size-body); color: var(--color-fg-muted); max-width: 44rem; margin: 0; line-height: 1.55; }
-  .rt-lede b, .rt-step b { color: var(--color-fg); font-variant-numeric: tabular-nums; }
+<div id="site-root">
 
-  .rt-story { display: grid; grid-template-columns: 7.5rem minmax(0, 0.85fr) minmax(0, 1.3fr); gap: var(--cds-gap-lg); align-items: start; }
-  .rt-tlwrap { grid-column: 1; grid-row: 1; position: sticky; top: var(--cds-gap-md); }
-  .rt-timeline { position: relative; height: min(72vh, 640px); min-height: 320px; }
-  .rt-timeline svg { display: block; overflow: visible; }
-  .rt-timeline-h { display: none; position: relative; height: 46px; margin-top: var(--cds-gap-xs); }
-  .rt-tl-seg { cursor: pointer; }
-  .rt-tl-name { font-size: var(--cds-font-size-caption); fill: var(--color-fg-muted); }
-  .rt-tl-name.is-on { fill: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
-  .rt-tl-date { font-size: 11px; fill: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
-  .rt-tl-axis { stroke: var(--cds-chart-axis); stroke-width: 1; }
-  .rt-steps { grid-column: 2; grid-row: 1; padding-bottom: 35vh; }
-  .rt-chartwrap { grid-column: 3; grid-row: 1; position: sticky; top: var(--cds-gap-md); }
-  .rt-chart { position: relative; height: min(72vh, 640px); min-height: 320px; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-panel); overflow: hidden; }
-  .rt-chart svg { display: block; }
-  .rt-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); margin-top: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-  .rt-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
-  .rt-legend line { stroke-width: 2; }
-
-  .rt-step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; opacity: .35; transition: opacity var(--cds-dur-slow) var(--cds-ease-out); }
-  .rt-step.is-active { opacity: 1; }
-  .rt-kicker { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-xs); }
-  .rt-step h2 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-sm); line-height: 1.2; }
-  .rt-step p { font-size: var(--cds-font-size-body); line-height: 1.6; margin: 0 0 var(--cds-gap-sm); }
-
-  .rt-stops { list-style: none; margin: var(--cds-gap-sm) 0 0; padding: 0; border-top: 1px solid var(--color-border-line); }
-  .rt-stops li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cds-gap-xs) var(--cds-gap-sm); padding: var(--cds-gap-xs) 0; border-bottom: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); }
-  .rt-stops .rt-city { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
-  .rt-stops .rt-when { color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
-  .rt-stops .rt-tag { margin-left: auto; padding: 0 var(--cds-pad-xs); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); color: var(--color-fg-muted); }
-  .rt-stops .rt-tag.is-given { color: var(--color-ok); }
-  .rt-stops .rt-note-line { flex-basis: 100%; color: var(--color-fg-muted); font-style: italic; }
-  .rt-stops .rt-tag.is-from-notes { color: var(--color-fg); }
-  .rt-stops .rt-tag.is-optional { color: var(--color-warn); }
-
-  .rt-ocean { fill: var(--color-bg); stroke: var(--color-border-line); vector-effect: non-scaling-stroke; }
-  .rt-land { fill: var(--cds-chart-muted); fill-opacity: .3; stroke: var(--color-panel); stroke-width: .5; vector-effect: non-scaling-stroke; }
-  .rt-land.is-visited { fill-opacity: .3; }
-  .rt-land.is-focus { fill-opacity: .55; }
-  .rt-leg { fill: none; stroke: var(--cds-chart-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .rt-leg.is-flight { stroke-dasharray: 6 5; stroke-linecap: butt; }
-  .rt-leg.is-off { opacity: .4; }
-  .rt-leg.is-optional { stroke-dasharray: 1 5; stroke-linecap: round; stroke-width: 2.5; }
-  .rt-dot.is-optional { stroke-dasharray: 2 2; }
-  .rt-dot { fill: var(--color-panel); stroke: var(--cds-chart-muted); stroke-width: 2; }
-  .rt-hit { fill: transparent; cursor: default; }
-  .rt-label { font-size: var(--cds-font-size-caption); fill: var(--color-fg); paint-order: stroke; stroke: var(--color-panel); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
-  .rt-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; }
-  .rt-tip .rt-tip-sub { color: var(--cds-text-secondary); }
-  .rt-fail { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
-  .rt-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
-
-  .rt-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 44rem; line-height: 1.5; margin: var(--cds-gap-lg) 0 0; }
-  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
-  [data-dash-source-state=empty] { color: transparent; }
-
-  @container (max-width: 760px) {
-    .rt-story { grid-template-columns: minmax(0, 1fr); gap: 0; }
-    .rt-chartwrap { grid-column: 1; grid-row: 1; top: 0; z-index: 2; background: var(--color-bg); padding: var(--cds-gap-xs) 0 var(--cds-gap-sm); }
-    .rt-chart { height: 42vh; min-height: 240px; }
-    .rt-steps { grid-column: 1; grid-row: 2; }
-    .rt-tlwrap { display: none; }
-    .rt-timeline-h { display: block; }
-    .rt-step { min-height: 62vh; }
-  }
-
-  .pg-tabs { display: flex; gap: var(--cds-gap-xs); margin-bottom: var(--cds-gap-lg); border-bottom: 1px solid var(--color-border-line); }
-  .pg-tabs button { font: inherit; font-size: var(--cds-font-size-body); background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-xs) var(--cds-pad-sm); margin-bottom: -1px; color: var(--color-fg-muted); cursor: pointer; }
-  .pg-tabs button[aria-pressed="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); }
-  .rt-shortcut + .rt-shortcut { margin-top: var(--cds-gap-sm); }
-  .rt-shortcut.rt-sub { margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); padding: var(--cds-pad-sm) var(--cds-pad-md); }
-  .rt-shortcut { display: flex; align-items: center; gap: var(--cds-gap-md); width: 100%; max-width: 30rem; margin-top: var(--cds-gap-md); text-align: left; font: inherit; color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); cursor: pointer; transition: border-color var(--cds-dur-slow); }
-  .rt-shortcut:hover, .rt-shortcut:focus-visible { border-color: var(--color-fg-muted); }
-  .rt-sc-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-  .rt-sc-title { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
-  .rt-sc-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-  .rt-sc-arrow { font-size: var(--cds-font-size-heading); color: var(--color-fg-muted); }
-
-  .ins { font-family: var(--font-anthropic-sans); }
-  .ins-h2 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: var(--cds-gap-xl) 0 var(--cds-gap-sm); }
-  .ins-intro { font-size: var(--cds-font-size-body); line-height: 1.6; max-width: 44rem; margin: 0 0 var(--cds-gap-md); }
-  .ins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: var(--cds-gap-md); }
-  .ins-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
-  .ins-card h3 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 2px; }
-  .ins-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-sm); line-height: 1.5; }
-  .ins-needs { list-style: none; margin: 0; padding: 0; }
-  .ins-needs li { padding: var(--cds-gap-xs) 0; border-top: 1px solid var(--color-border-line); font-size: var(--cds-font-size-body); line-height: 1.4; }
-  .ins-needs .ins-min { display: block; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
-  .ins-card.is-must { border-top: 3px solid var(--color-ok); }
-  .ins-callout { border-left: 3px solid var(--color-warn); background: var(--color-panel); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); margin: var(--cds-gap-md) 0; max-width: 52rem; }
-  .ins-callout h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
-  .ins-callout ul { margin: 0; padding-left: 1.1rem; font-size: var(--cds-font-size-body); line-height: 1.55; }
-  .ins-scroll { overflow: auto; max-height: 75vh; }
-  .ins-table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: var(--cds-font-size-caption); line-height: 1.45; }
-  .ins-table th, .ins-table td { text-align: left; vertical-align: top; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
-  .ins-table thead th { position: sticky; top: 0; z-index: 2; background: var(--color-panel); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); white-space: nowrap; }
-  .ins-table tbody td:first-child, .ins-table thead th:first-child { position: sticky; left: 0; background: var(--color-panel); font-weight: var(--cds-font-weight-medium); min-width: 9rem; }
-  .ins-table thead th:first-child { z-index: 3; }
-  .ins-table.is-wide td { min-width: 11rem; }
-  .ins-table.is-wide td:first-child { min-width: 9rem; }
-  .ins-table td.is-Confirmed { color: var(--color-ok); }
-  .ins-table td.is-Uncertain, .ins-table td.is-To-check { color: var(--color-warn); }
-  .ins-table td.is-Fails, .ins-table td.is-Ruled-out { color: var(--color-bad); }
-  .ins-seg { display: inline-flex; flex-wrap: wrap; gap: var(--cds-gap-xs); margin-bottom: var(--cds-gap-sm); }
-  .ins-seg button { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg-muted); cursor: pointer; }
-  .ins-seg button[aria-pressed="true"] { color: var(--color-fg); border-color: var(--color-fg); }
-  .ins-chart { position: relative; min-height: 320px; }
-  .ins-chart svg { display: block; }
-  .ins-chart .ins-name { font-size: var(--cds-font-size-caption); fill: var(--color-fg); }
-  .ins-chart .ins-val { font-size: var(--cds-font-size-caption); fill: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
-  .ins-legend { display: flex; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: var(--cds-gap-sm); }
-  .ins-legend i { display: inline-block; width: .7rem; height: .7rem; border-radius: 2px; margin-right: var(--cds-gap-xs); vertical-align: -1px; }
-  .ins-quote { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-heading); line-height: 1.5; margin: var(--cds-gap-sm) 0 var(--cds-gap-md); padding-left: var(--cds-pad-lg); border-left: 3px solid var(--color-border-line); max-width: 44rem; }
-  .ins-links { columns: 2 16rem; font-size: var(--cds-font-size-body); line-height: 1.8; padding-left: 1.1rem; margin: 0; }
-  .ins-links a { color: var(--color-fg); }
-  .ins-back { font: inherit; font-size: var(--cds-font-size-body); margin: var(--cds-gap-xl) 0 var(--cds-gap-md); background: none; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-md); color: var(--color-fg); cursor: pointer; }
-
-  .exp-cardhead { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--cds-gap-sm); }
-  .exp-csv { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
-  .exp-csv:hover, .exp-csv:focus-visible { border-color: var(--color-fg-muted); }
-  .exp-csvwrap { display: flex; flex-direction: column; align-items: flex-end; gap: var(--cds-gap-xs); max-width: 18rem; }
-  .exp-msg { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-align: right; }
-  .exp-csv:disabled { opacity: .5; cursor: default; }
-  .exp-big.is-ok { color: var(--color-ok); }
-  .ins-table tr.is-Bought td { color: var(--color-ok); background: color-mix(in srgb, var(--color-ok) 12%, var(--color-panel)); }
-  .ins-table tr.is-Bought td:first-child { box-shadow: inset 3px 0 0 var(--color-ok); }
-  .ins-table tr.is-Optional td { color: var(--color-fg-muted); font-style: italic; }
-  .exp-actions { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); margin-top: var(--cds-gap-md); }
-  .exp-open { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-body); color: var(--color-fg); text-decoration: none; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-md); }
-  .exp-open:hover, .exp-open:focus-visible { border-color: var(--color-fg-muted); }
-  .exp-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--cds-gap-md); margin: var(--cds-gap-lg) 0; }
-  .exp-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); }
-  .exp-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-xs); }
-  .exp-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-title) * 1.3); font-variant-numeric: tabular-nums; margin: 0; }
-  .exp-list { list-style: none; margin: 0; padding: 0; }
-  .exp-list li { display: flex; justify-content: space-between; gap: var(--cds-gap-sm); padding: var(--cds-gap-xs) 0; border-top: 1px solid var(--color-border-line); font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
-  .exp-list li:first-child { border-top: 0; }
-  .ins-table td.is-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-
-  .oki-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--cds-gap-lg); align-items: start; }
-  @container (max-width: 760px) { .oki-grid { grid-template-columns: minmax(0, 1fr); } }
-  .oki-wrap { container-type: inline-size; }
-  .oki-map { position: relative; height: min(80vh, 720px); min-height: 420px; }
-  .oki-map svg { display: block; }
-  .oki-land { fill: var(--cds-chart-muted); fill-opacity: .3; stroke: var(--color-panel); stroke-width: 1; vector-effect: non-scaling-stroke; }
-  .oki-sea { fill: var(--color-bg); }
-  .oki-route { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
-  .oki-spot { stroke: var(--color-panel); stroke-width: 1.5; }
-  .oki-badge-text { font-size: 11px; font-weight: var(--cds-font-weight-medium); fill: var(--color-bg); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
-  .oki-label { font-size: var(--cds-font-size-caption); fill: var(--color-fg); paint-order: stroke; stroke: var(--color-panel); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
-  .oki-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: var(--cds-gap-sm); }
-  .oki-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
-  .oki-loop { list-style: none; margin: 0; padding: 0; }
-  .oki-loop li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 2px var(--cds-gap-sm); padding: var(--cds-gap-sm) 0; border-top: 1px solid var(--color-border-line); }
-  .oki-loop li:first-child { border-top: 0; }
-  .oki-num { grid-row: span 2; width: 1.4rem; height: 1.4rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); color: var(--color-bg); }
-  .oki-place { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
-  .oki-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
-  .oki-tips { margin: 0; padding-left: 1.1rem; font-size: var(--cds-font-size-body); line-height: 1.6; }
-</style>
-
-<nav class="pg-tabs" aria-label="Pages">
+<!-- ===== Tabs: data-page="<id of a <section class=page>>" ===== -->
+<nav class="page-tabs" aria-label="Pages">
   <button type="button" data-page="trip" aria-pressed="true">Trip</button>
   <button type="button" data-page="insurance" aria-pressed="false">Insurance</button>
   <button type="button" data-page="expenses" aria-pressed="false">Expenses</button>
 </nav>
 
-<section class="pg" id="trip">
-<div class="rt">
-  <header class="rt-head">
-    <h1 class="rt-title" id="top">World trip 2027</h1>
-    <p class="rt-lede">A first draft: <b data-draw="num" data-source="totals" data-row="0" data-field="days">—</b> days, <b data-draw="num" data-source="totals" data-row="0" data-field="countries">—</b> countries, about <b data-draw="num" data-source="totals" data-row="0" data-field="km">—</b> km and roughly €<b data-draw="num" data-source="totals" data-row="0" data-field="budget">—</b> for the two of you. Our timing: Taiwan from 14 January to mid-February, Japan to the end of March, then a month each in Thailand, Laos, Vietnam and Australia, and New Zealand through August and September. Cities within each country and all costs are placeholders.</p>
-    <button type="button" class="rt-shortcut" data-page="insurance" id="insurance-shortcut">
-      <span class="rt-sc-text"><span class="rt-sc-title">Travel insurance</span><span class="rt-sc-sub">What we need covered, insurers compared, prices and who still has to answer</span></span>
-      <span class="rt-sc-arrow" aria-hidden="true">→</span>
+<!-- ===== PAGE: Trip (pages/trip/) ===== -->
+<section class="page" id="trip">
+<div class="trip-page-content">
+  <header class="page-header">
+    <h1 class="page-title" id="top">World trip 2027</h1>
+    <p class="page-intro">A first draft: <b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="days">—</b> days, <b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="countries">—</b> countries, about <b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="km">—</b> km and roughly €<b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="budget">—</b> for the two of you. Our timing: Taiwan from 14 January to mid-February, Japan to the end of March, then a month each in Thailand, Laos, Vietnam and Australia, and New Zealand through August and September. Cities within each country and all costs are placeholders.</p>
+    <button type="button" class="page-shortcut-button" data-page="insurance" id="insurance-shortcut">
+      <span class="page-shortcut-text"><span class="page-shortcut-title">Travel insurance</span><span class="page-shortcut-subtitle">What we need covered, insurers compared, prices and who still has to answer</span></span>
+      <span class="page-shortcut-arrow" aria-hidden="true">→</span>
     </button>
-    <button type="button" class="rt-shortcut" data-page="expenses" id="expenses-shortcut">
-      <span class="rt-sc-text"><span class="rt-sc-title">Expenses</span><span class="rt-sc-sub">What we've spent so far and who paid, with a link to our Notion table</span></span>
-      <span class="rt-sc-arrow" aria-hidden="true">→</span>
+    <button type="button" class="page-shortcut-button" data-page="expenses" id="expenses-shortcut">
+      <span class="page-shortcut-text"><span class="page-shortcut-title">Expenses</span><span class="page-shortcut-subtitle">What we've spent so far and who paid, with a link to our Notion table</span></span>
+      <span class="page-shortcut-arrow" aria-hidden="true">→</span>
     </button>
   </header>
 
-  <div class="rt-story">
-    <div class="rt-tlwrap">
-      <div class="rt-timeline" id="trip-timeline" data-draw="timeline" data-source="stays" aria-label="Trip timeline"></div>
+  <div class="trip-story-layout">
+    <div class="trip-timeline-container">
+      <div class="trip-timeline-vertical" id="trip-timeline-vertical" data-draw="trip_timeline" data-source="trip_stays_with_nights" aria-label="Trip timeline"></div>
     </div>
-    <div class="rt-chartwrap">
-      <div class="rt-chart" id="route-map" data-draw="map" data-source="countries stays legs"></div>
-      <div class="rt-timeline-h" id="trip-timeline-h" data-draw="timeline" data-source="stays" data-orient="h" aria-label="Trip timeline"></div>
-      <div class="rt-legend">
-        <span><svg width="22" height="8" aria-hidden="true"><line class="rt-sw-flight" x1="0" y1="4" x2="22" y2="4" stroke-dasharray="6 5"></line></svg>Flight</span>
-        <span><svg width="22" height="8" aria-hidden="true"><line class="rt-sw-train" x1="0" y1="4" x2="22" y2="4" stroke-linecap="round"></line></svg>Train or bus</span>
-        <span><svg width="22" height="8" aria-hidden="true"><line class="rt-sw-opt" x1="1" y1="4" x2="21" y2="4" stroke-dasharray="1 5" stroke-linecap="round"></line></svg>Optional detour</span>
+    <div class="trip-map-container">
+      <div class="trip-map" id="trip-world-map" data-draw="trip_world_map" data-source="world_country_outlines trip_stays_with_nights trip_travel_legs"></div>
+      <div class="trip-timeline-horizontal" id="trip-timeline-horizontal" data-draw="trip_timeline" data-source="trip_stays_with_nights" data-orient="h" aria-label="Trip timeline"></div>
+      <div class="trip-map-legend">
+        <span><svg width="22" height="8" aria-hidden="true"><line class="trip-legend-swatch-flight" x1="0" y1="4" x2="22" y2="4" stroke-dasharray="6 5"></line></svg>Flight</span>
+        <span><svg width="22" height="8" aria-hidden="true"><line class="trip-legend-swatch-train-or-bus" x1="0" y1="4" x2="22" y2="4" stroke-linecap="round"></line></svg>Train or bus</span>
+        <span><svg width="22" height="8" aria-hidden="true"><line class="trip-legend-swatch-optional-detour" x1="1" y1="4" x2="21" y2="4" stroke-dasharray="1 5" stroke-linecap="round"></line></svg>Optional detour</span>
         <span>Shaded: countries on the route</span>
       </div>
     </div>
 
-    <div class="rt-steps" data-read>
-      <section class="rt-step is-active" data-read-step data-chapter="all" id="ch-loop">
-        <p class="rt-kicker">The route</p>
+    <div class="trip-chapters">
+      <section class="trip-chapter is-active" data-chapter="all" id="chapter-route-overview">
+        <p class="page-kicker">The route</p>
         <h2>Brussels to New Zealand, through Asia</h2>
         <p>Fly out of Brussels Zaventem, land in Taipei on 14 January, then Japan, maybe two weeks in Seoul, Thailand, Laos, Vietnam and Australia, and finish with two months in New Zealand.</p>
         <p>Scroll to follow it leg by leg. Hover a dot on the map for its dates.</p>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="taiwan" id="ch-taiwan">
-        <p class="rt-kicker">Taiwan · 14 January to mid-February</p>
+      <section class="trip-chapter" data-chapter="taiwan" id="chapter-taiwan">
+        <p class="page-kicker">Taiwan · 14 January to mid-February</p>
         <h2>A loop round the island</h2>
-        <p><b data-draw="num" data-source="by_chapter" data-where="chapter=taiwan" data-field="nights">—</b> nights following our circuit: Taipei, Taroko from Hualien, Taichung, Sun Moon Lake and Alishan, Tainan, Kaohsiung and Kenting, then up the east coast. About €<b data-draw="num" data-source="by_chapter" data-where="chapter=taiwan" data-field="budget">—</b> including the flight in.</p>
-        <p>The flight from Brussels is <b data-draw="num" data-source="legs" data-where="to=Taipei" data-field="km">—</b> km. Lunar New Year (6 February 2027) falls in the second half, so trains and rooms around then need booking early.</p>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="taiwan"></ol>
+        <p><b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=taiwan" data-field="nights">—</b> nights following our circuit: Taipei, Taroko from Hualien, Taichung, Sun Moon Lake and Alishan, Tainan, Kaohsiung and Kenting, then up the east coast. About €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=taiwan" data-field="budget">—</b> including the flight in.</p>
+        <p>The flight from Brussels is <b data-draw="number_value" data-source="trip_travel_legs" data-where="to=Taipei" data-field="km">—</b> km. Lunar New Year (6 February 2027) falls in the second half, so trains and rooms around then need booking early.</p>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="taiwan"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="japan" id="ch-japan">
-        <p class="rt-kicker">Japan · mid-February to end of March</p>
+      <section class="trip-chapter" data-chapter="japan" id="chapter-japan">
+        <p class="page-kicker">Japan · mid-February to end of March</p>
         <h2>Okinawa, Kyushu, then Kyoto</h2>
-        <p><b data-draw="num" data-source="by_chapter" data-where="chapter=japan" data-field="nights">—</b> nights, about €<b data-draw="num" data-source="by_chapter" data-where="chapter=japan" data-field="budget">—</b>: two weeks round Okinawa in a small campervan, then up through Kyushu, and Kyoto last before leaving Japan.</p>
-        <button type="button" class="rt-shortcut rt-sub" data-page="okinawa" id="okinawa-shortcut">
-          <span class="rt-sc-text"><span class="rt-sc-title">Okinawa campervan plan</span><span class="rt-sc-sub">Island map, RV parks and free overnight spots, the loop and van prices</span></span>
-          <span class="rt-sc-arrow" aria-hidden="true">→</span>
+        <p><b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=japan" data-field="nights">—</b> nights, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=japan" data-field="budget">—</b>: two weeks round Okinawa in a small campervan, then up through Kyushu, and Kyoto last before leaving Japan.</p>
+        <button type="button" class="page-shortcut-button is-compact" data-page="okinawa" id="okinawa-shortcut">
+          <span class="page-shortcut-text"><span class="page-shortcut-title">Okinawa campervan plan</span><span class="page-shortcut-subtitle">Island map, RV parks and free overnight spots, the loop and van prices</span></span>
+          <span class="page-shortcut-arrow" aria-hidden="true">→</span>
         </button>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="japan"></ol>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="japan"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="korea" id="ch-korea">
-        <p class="rt-kicker">South Korea · optional</p>
+      <section class="trip-chapter" data-chapter="korea" id="chapter-korea">
+        <p class="page-kicker">South Korea · optional</p>
         <h2>Two weeks with a friend in Seoul</h2>
-        <p>If we go: <b data-draw="num" data-source="by_chapter" data-where="chapter=korea" data-field="nights">—</b> nights straight after Kyoto, about €<b data-draw="num" data-source="by_chapter" data-where="chapter=korea" data-field="budget">—</b> on top of the main route, counting the detour flights. It isn't in the trip totals.</p>
+        <p>If we go: <b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=korea" data-field="nights">—</b> nights straight after Kyoto, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=korea" data-field="budget">—</b> on top of the main route, counting the detour flights. It isn't in the trip totals.</p>
         <p>With the month plan as it is, those two weeks would come out of Thailand in April.</p>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="korea"></ol>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="korea"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="thailand" id="ch-thailand">
-        <p class="rt-kicker">Thailand · April</p>
+      <section class="trip-chapter" data-chapter="thailand" id="chapter-thailand">
+        <p class="page-kicker">Thailand · April</p>
         <h2>Bangkok, then the north</h2>
-        <p><b data-draw="num" data-source="by_chapter" data-where="chapter=thailand" data-field="nights">—</b> nights, about €<b data-draw="num" data-source="by_chapter" data-where="chapter=thailand" data-field="budget">—</b>. A few days in Bangkok, then Chiang Mai, where the volunteering placement sits for now (Thailand or Vietnam isn't decided). Songkran, the Thai New Year water festival, falls in mid-April.</p>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="thailand"></ol>
+        <p><b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=thailand" data-field="nights">—</b> nights, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=thailand" data-field="budget">—</b>. A few days in Bangkok, then Chiang Mai, where the volunteering placement sits for now (Thailand or Vietnam isn't decided). Songkran, the Thai New Year water festival, falls in mid-April.</p>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="thailand"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="laos" id="ch-laos">
-        <p class="rt-kicker">Laos · May</p>
+      <section class="trip-chapter" data-chapter="laos" id="chapter-laos">
+        <p class="page-kicker">Laos · May</p>
         <h2>Down the country by road and rail</h2>
-        <p><b data-draw="num" data-source="by_chapter" data-where="chapter=laos" data-field="nights">—</b> nights, about €<b data-draw="num" data-source="by_chapter" data-where="chapter=laos" data-field="budget">—</b>: overland from Chiang Mai to Luang Prabang, then south by train to Vang Vieng and Vientiane.</p>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="laos"></ol>
+        <p><b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=laos" data-field="nights">—</b> nights, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=laos" data-field="budget">—</b>: overland from Chiang Mai to Luang Prabang, then south by train to Vang Vieng and Vientiane.</p>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="laos"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="vietnam" id="ch-vietnam">
-        <p class="rt-kicker">Vietnam · June</p>
+      <section class="trip-chapter" data-chapter="vietnam" id="chapter-vietnam">
+        <p class="page-kicker">Vietnam · June</p>
         <h2>Hanoi to Ho Chi Minh City</h2>
-        <p><b data-draw="num" data-source="by_chapter" data-where="chapter=vietnam" data-field="nights">—</b> nights, about €<b data-draw="num" data-source="by_chapter" data-where="chapter=vietnam" data-field="budget">—</b>: fly in to Hanoi, take the train south to Hoi An, and finish in Ho Chi Minh City, which our notes flag as the cheapest place to fly on to Australia.</p>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="vietnam"></ol>
+        <p><b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=vietnam" data-field="nights">—</b> nights, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=vietnam" data-field="budget">—</b>: fly in to Hanoi, take the train south to Hoi An, and finish in Ho Chi Minh City, which our notes flag as the cheapest place to fly on to Australia.</p>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="vietnam"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="australia" id="ch-australia">
-        <p class="rt-kicker">Australia · July</p>
+      <section class="trip-chapter" data-chapter="australia" id="chapter-australia">
+        <p class="page-kicker">Australia · July</p>
         <h2>Two weeks at Mark's in Melbourne, then Sydney</h2>
-        <p><b data-draw="num" data-source="by_chapter" data-where="chapter=australia" data-field="nights">—</b> nights, about €<b data-draw="num" data-source="by_chapter" data-where="chapter=australia" data-field="budget">—</b>. The first fortnight is at Mark's place in Melbourne, so it only counts food and outings; Sydney is still open. The long flight down from Vietnam is the second-biggest transport cost after the one out of Brussels.</p>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="australia"></ol>
+        <p><b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=australia" data-field="nights">—</b> nights, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=australia" data-field="budget">—</b>. The first fortnight is at Mark's place in Melbourne, so it only counts food and outings; Sydney is still open. The long flight down from Vietnam is the second-biggest transport cost after the one out of Brussels.</p>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="australia"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="nz" id="ch-nz">
-        <p class="rt-kicker">New Zealand · August and September · the finish</p>
+      <section class="trip-chapter" data-chapter="nz" id="chapter-nz">
+        <p class="page-kicker">New Zealand · August and September · the finish</p>
         <h2>Two months to end on</h2>
-        <p>A <b data-draw="num" data-source="legs" data-where="to=Auckland" data-field="km">—</b> km hop across the Tasman to Auckland, then the South Island. <b data-draw="num" data-source="by_chapter" data-where="chapter=nz" data-field="nights">—</b> nights, about €<b data-draw="num" data-source="by_chapter" data-where="chapter=nz" data-field="budget">—</b> before any working-holiday income.</p>
-        <ol class="rt-stops" data-draw="stoplist" data-source="stays" data-chapter="nz"></ol>
+        <p>A <b data-draw="number_value" data-source="trip_travel_legs" data-where="to=Auckland" data-field="km">—</b> km hop across the Tasman to Auckland, then the South Island. <b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=nz" data-field="nights">—</b> nights, about €<b data-draw="number_value" data-source="trip_totals_by_chapter" data-where="chapter=nz" data-field="budget">—</b> before any working-holiday income.</p>
+        <ol class="trip-stop-list" data-draw="trip_stop_list" data-source="trip_stays_with_nights" data-chapter="nz"></ol>
       </section>
 
-      <section class="rt-step" data-read-step data-chapter="totals" id="ch-money">
-        <p class="rt-kicker">The whole trip</p>
+      <section class="trip-chapter" data-chapter="totals" id="chapter-money">
+        <p class="page-kicker">The whole trip</p>
         <h2>Where the money goes</h2>
-        <p>Of roughly €<b data-draw="num" data-source="totals" data-row="0" data-field="budget">—</b>, €<b data-draw="num" data-source="totals" data-row="0" data-field="transport_eur">—</b> (<b data-draw="num" data-source="totals" data-row="0" data-field="transport_share" data-fmt="pct">—</b>) is getting from place to place and €<b data-draw="num" data-source="totals" data-row="0" data-field="stay_eur">—</b> is the daily cost of being there, up to the end of September. The optional fortnight in Seoul would add about €<b data-draw="num" data-source="totals" data-row="0" data-field="optional_budget">—</b>.</p>
+        <p>Of roughly €<b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="budget">—</b>, €<b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="transport_eur">—</b> (<b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="transport_share" data-fmt="pct">—</b>) is getting from place to place and €<b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="stay_eur">—</b> is the daily cost of being there, up to the end of September. The optional fortnight in Seoul would add about €<b data-draw="number_value" data-source="trip_overall_totals" data-row="0" data-field="optional_budget">—</b>.</p>
         <p>The long-haul flights are the lever: moving or dropping one changes the total more than trimming a daily allowance.</p>
       </section>
     </div>
   </div>
 
-  <p class="rt-note">The month for each country is ours; the cities, the exact days within each month and every euro figure are rough placeholders for two people: transport between stops plus a daily allowance for lodging, food and activities. Distances are straight great-circle lines between cities, not actual routes.</p>
+  <p class="trip-footnote">The month for each country is ours; the cities, the exact days within each month and every euro figure are rough placeholders for two people: transport between stops plus a daily allowance for lodging, food and activities. Distances are straight great-circle lines between cities, not actual routes.</p>
 </div>
 </section>
 
-<section class="pg ins" id="insurance" hidden>
-  <header class="rt-head">
-    <h1 class="rt-title">Travel insurance</h1>
-    <p class="rt-lede">What we need covered, what each insurer offers, what it costs and who still has to answer. Taken from our Notion notes.</p>
+<!-- ===== PAGE: Insurance (pages/insurance/) ===== -->
+<section class="page content-page" id="insurance" hidden>
+  <header class="page-header">
+    <h1 class="page-title">Travel insurance</h1>
+    <p class="page-intro">What we need covered, what each insurer offers, what it costs and who still has to answer. Taken from our Notion notes.</p>
   </header>
 
-  <h2 class="ins-h2" id="ins-needs">What we need</h2>
-  <div class="ins-grid">
-    <div class="ins-card is-must" id="needs-must">
+  <h2 class="section-heading" id="insurance-needs">What we need</h2>
+  <div class="card-grid">
+    <div class="card is-must" id="insurance-needs-must">
       <h3>Must have</h3>
-      <p class="ins-note">Non-negotiable, with our minimum where we set one.</p>
-      <ul class="ins-needs" data-draw="needs" data-source="needs" data-priority="must"></ul>
+      <p class="card-note">Non-negotiable, with our minimum where we set one.</p>
+      <ul class="insurance-needs-list" data-draw="insurance_needs_list" data-source="insurance_needs" data-priority="must"></ul>
     </div>
-    <div class="ins-card" id="needs-nice">
+    <div class="card" id="insurance-needs-nice">
       <h3>Nice to have</h3>
-      <p class="ins-note">Worth paying a little more for.</p>
-      <ul class="ins-needs" data-draw="needs" data-source="needs" data-priority="nice"></ul>
+      <p class="card-note">Worth paying a little more for.</p>
+      <ul class="insurance-needs-list" data-draw="insurance_needs_list" data-source="insurance_needs" data-priority="nice"></ul>
     </div>
-    <div class="ins-card" id="needs-skip">
+    <div class="card" id="insurance-needs-skip">
       <h3>Don't care</h3>
-      <p class="ins-note">Fine if it's there; not a reason to choose.</p>
-      <ul class="ins-needs" data-draw="needs" data-source="needs" data-priority="skip"></ul>
+      <p class="card-note">Fine if it's there; not a reason to choose.</p>
+      <ul class="insurance-needs-list" data-draw="insurance_needs_list" data-source="insurance_needs" data-priority="skip"></ul>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="ins-shortlist">Shortlist</h2>
-  <p class="ins-intro">Published terms confirm every must-have for three insurers: Chapka Cap Aventure, ACS Globe Traveller and AVI Marco Polo. Chapka has the better optional cover out of the box; ACS is usually cheaper under 40.</p>
-  <div class="ins-callout">
+  <h2 class="section-heading" id="insurance-shortlist">Shortlist</h2>
+  <p class="insurance-section-intro">Published terms confirm every must-have for three insurers: Chapka Cap Aventure, ACS Globe Traveller and AVI Marco Polo. Chapka has the better optional cover out of the box; ACS is usually cheaper under 40.</p>
+  <div class="insurance-callout">
     <h3>Open points from our own calls and emails</h3>
     <ul>
       <li>Chapka: our notes say climbing is excluded and the policy covers tourist travel only (a working holiday needs another one), which contradicts the summary's supervised-climbing tick.</li>
@@ -365,46 +176,46 @@
       <li>World Nomads: not available to residents of France or Belgium.</li>
     </ul>
   </div>
-  <div class="ins-card" id="card-verdicts">
+  <div class="card" id="card-insurance-verdicts">
     <h3>Must-have check</h3>
-    <p class="ins-note">Whether every must-have could be confirmed from published terms.</p>
-    <div class="ins-scroll">
-      <table class="ins-table" data-draw="tbl" data-source="verdicts" data-row-key="insurer" data-cols="insurer|Insurer;verdict|Verdict;must_haves|Must-haves;optional|Optional cover;note|What we found"></table>
+    <p class="card-note">Whether every must-have could be confirmed from published terms.</p>
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="data_table" data-source="insurance_verdicts_by_insurer" data-cols="insurer|Insurer;verdict|Verdict;must_haves|Must-haves;optional|Optional cover;note|What we found"></table>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="ins-coverage">Coverage, insurer by insurer</h2>
-  <p class="ins-intro">Our own comparison from policy documents, calls and emails. Scroll sideways for every column; the insurer stays pinned.</p>
-  <div class="ins-card" id="card-coverage">
-    <div class="ins-scroll">
-      <table class="ins-table is-wide" data-draw="tbl" data-source="coverage" data-row-key="insurer" data-cols="insurer|Insurer;status|Status;hospital|Hospital costs;dental|Dental;family_hospitalised|Family hospitalised: return (grandparents incl.);repatriation|Medical repatriation;family_death|Family death: return (grandparents incl.);climbing|Indoor or supervised climbing;delays|Delays and missed flights;luggage|Luggage theft, loss or damage;notes|Notes;contact|Contact"></table>
+  <h2 class="section-heading" id="insurance-coverage">Coverage, insurer by insurer</h2>
+  <p class="insurance-section-intro">Our own comparison from policy documents, calls and emails. Scroll sideways for every column; the insurer stays pinned.</p>
+  <div class="card" id="card-insurance-coverage">
+    <div class="table-scroll-container">
+      <table class="data-table is-wide" data-draw="data_table" data-source="insurance_coverage_by_insurer" data-cols="insurer|Insurer;status|Status;hospital|Hospital costs;dental|Dental;family_hospitalised|Family hospitalised: return (grandparents incl.);repatriation|Medical repatriation;family_death|Family death: return (grandparents incl.);climbing|Indoor or supervised climbing;delays|Delays and missed flights;luggage|Luggage theft, loss or damage;notes|Notes;contact|Contact"></table>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="ins-prices">Prices</h2>
-  <div class="ins-card" id="card-prices">
+  <h2 class="section-heading" id="insurance-prices">Prices</h2>
+  <div class="card" id="card-insurance-prices">
     <h3>Quoted price by insurer</h3>
-    <p class="ins-note">Base price plus the supplement for the USA and Canada, as listed in our comparison grid. The grid doesn't say which period the price covers.</p>
-    <div class="ins-seg" role="group" aria-label="Traveller profile">
+    <p class="card-note">Base price plus the supplement for the USA and Canada, as listed in our comparison grid. The grid doesn't say which period the price covers.</p>
+    <div class="insurance-profile-switch" role="group" aria-label="Traveller profile">
       <button type="button" data-profile="couple_u40" aria-pressed="true">Couple, under 40</button>
       <button type="button" data-profile="solo_u40" aria-pressed="false">Solo, under 40</button>
       <button type="button" data-profile="solo_o40" aria-pressed="false">Solo, 40 and over</button>
     </div>
-    <div class="ins-chart" id="price-chart" data-draw="prices" data-source="prices"></div>
-    <div class="ins-legend"><span><i class="ins-sw-base"></i>Base price</span><span><i class="ins-sw-us"></i>+ USA and Canada</span></div>
+    <div class="insurance-price-chart" id="insurance-price-chart" data-draw="insurance_price_chart" data-source="insurance_prices_by_profile"></div>
+    <div class="insurance-price-chart-legend"><span><i class="insurance-legend-swatch-base-price"></i>Base price</span><span><i class="insurance-legend-swatch-usa-canada"></i>+ USA and Canada</span></div>
   </div>
 
-  <h2 class="ins-h2" id="ins-desk">Earlier desk research</h2>
-  <p class="ins-intro">Indicative yearly prices and headline cover from the first round of research, before the calls.</p>
-  <div class="ins-card" id="card-desk">
-    <div class="ins-scroll">
-      <table class="ins-table" data-draw="tbl" data-source="desk" data-row-key="insurer" data-cols="insurer|Insurer;price_per_person_year|Price per person per year;medical_ceiling|Medical ceiling;emergency_dental|Emergency dental;luggage|Luggage and theft;early_return|Early return (family death);cancellation|Cancellation;home_country|Home-country cover;trustpilot|Trustpilot"></table>
+  <h2 class="section-heading" id="insurance-desk-research">Earlier desk research</h2>
+  <p class="insurance-section-intro">Indicative yearly prices and headline cover from the first round of research, before the calls.</p>
+  <div class="card" id="card-insurance-desk-research">
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="data_table" data-source="insurance_comparison_desk" data-cols="insurer|Insurer;price_per_person_year|Price per person per year;medical_ceiling|Medical ceiling;emergency_dental|Emergency dental;luggage|Luggage and theft;early_return|Early return (family death);cancellation|Cancellation;home_country|Home-country cover;trustpilot|Trustpilot"></table>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="ins-ask">What to ask the uncertain ones</h2>
-  <p class="ins-quote">« En cas de décès ou d'hospitalisation grave d'un grand-parent pendant mon séjour, est-ce que mon contrat prend en charge mon billet aller-retour pour rentrer en France ? »</p>
-  <ul class="ins-links">
+  <h2 class="section-heading" id="insurance-questions-to-ask">What to ask the uncertain ones</h2>
+  <p class="insurance-question-quote">« En cas de décès ou d'hospitalisation grave d'un grand-parent pendant mon séjour, est-ce que mon contrat prend en charge mon billet aller-retour pour rentrer en France ? »</p>
+  <ul class="link-list">
     <li><a href="https://www.ava.fr/assurance-voyage/ava-pass/" target="_blank" rel="noopener">AVA Pass</a></li>
     <li><a href="https://www.chapkadirect.com/" target="_blank" rel="noopener">Chapka</a> · <a href="https://lesglobeblogueurs.com/chapka/" target="_blank" rel="noopener">Globe Blogueurs review</a></li>
     <li><a href="https://www.acs-ami.com/fr/assurance-voyage/globe-traveller/" target="_blank" rel="noopener">ACS Globe Traveller</a> · <a href="https://www.acs-ami.com/fr/assurance-voyage/globe-partner/" target="_blank" rel="noopener">Globe Partner</a></li>
@@ -420,59 +231,60 @@
     <li><a href="https://www.worldnomads.com/travel-insurance" target="_blank" rel="noopener">World Nomads</a></li>
   </ul>
 
-  <button type="button" class="ins-back" data-page="trip">← Back to the trip</button>
+  <button type="button" class="back-to-trip-button" data-page="trip">← Back to the trip</button>
 </section>
 
-<section class="pg ins oki-wrap" id="okinawa" hidden>
-  <header class="rt-head">
-    <p class="rt-kicker">Japan · 15 February to 1 March</p>
-    <h1 class="rt-title">Okinawa by campervan</h1>
-    <p class="rt-lede">Two weeks round the main island in a Daihatsu Hijet kei camper from Evertrail Okinawa, sleeping at campsites and RV parks, with three free nights by the sea and in a park. Pick-up and return at Evertrail's office in Okinawa City, about an hour by bus from Naha airport.</p>
+<!-- ===== PAGE: Okinawa campervan, no tab: opened from the Japan chapter (pages/okinawa/) ===== -->
+<section class="page content-page okinawa-page-container" id="okinawa" hidden>
+  <header class="page-header">
+    <p class="page-kicker">Japan · 15 February to 1 March</p>
+    <h1 class="page-title">Okinawa by campervan</h1>
+    <p class="page-intro">Two weeks round the main island in a Daihatsu Hijet kei camper from Evertrail Okinawa, sleeping at campsites and RV parks, with three free nights by the sea and in a park. Pick-up and return at Evertrail's office in Okinawa City, about an hour by bus from Naha airport.</p>
   </header>
 
-  <div class="exp-tiles">
-    <div class="exp-tile" id="oki-nights"><p class="exp-label">Nights in the van</p><p class="exp-big"><span data-draw="num" data-source="okinawa_totals" data-row="0" data-field="nights">—</span></p></div>
-    <div class="exp-tile" id="oki-cost"><p class="exp-label">Rough cost for two (van, parking, food, fuel)</p><p class="exp-big">€<span data-draw="num" data-source="okinawa_totals" data-row="0" data-field="cost_eur">—</span></p></div>
-    <div class="exp-tile" id="oki-parking"><p class="exp-label">Paid parking in total (known fees)</p><p class="exp-big">¥<span data-draw="num" data-source="okinawa_totals" data-row="0" data-field="parking_jpy">—</span></p></div>
+  <div class="stat-tiles">
+    <div class="stat-tile" id="okinawa-nights"><p class="stat-tile-label">Nights in the van</p><p class="stat-tile-value"><span data-draw="number_value" data-source="okinawa_overall_totals" data-row="0" data-field="nights">—</span></p></div>
+    <div class="stat-tile" id="okinawa-cost"><p class="stat-tile-label">Rough cost for two (van, parking, food, fuel)</p><p class="stat-tile-value">€<span data-draw="number_value" data-source="okinawa_overall_totals" data-row="0" data-field="cost_eur">—</span></p></div>
+    <div class="stat-tile" id="okinawa-parking"><p class="stat-tile-label">Paid parking in total (known fees)</p><p class="stat-tile-value">¥<span data-draw="number_value" data-source="okinawa_overall_totals" data-row="0" data-field="parking_jpy">—</span></p></div>
   </div>
 
-  <div class="oki-grid">
-    <div class="ins-card" id="card-okimap">
+  <div class="okinawa-map-and-loop-grid">
+    <div class="card" id="card-okinawa-map">
       <h3>The island and where to sleep</h3>
-      <p class="ins-note">Numbers follow the loop. Hover a marker for its fee and facilities. Locations are approximate.</p>
-      <div class="oki-map" id="okinawa-map" data-draw="okimap" data-source="okinawa_shapes okinawa_spots okinawa_stays"></div>
-      <div class="oki-legend">
-        <span><svg width="12" height="12" aria-hidden="true"><rect class="oki-sw-paid" x="1" y="1" width="10" height="10" rx="2"></rect></svg>Paid RV park or auto-camp</span>
-        <span><svg width="12" height="12" aria-hidden="true"><circle class="oki-sw-free" cx="6" cy="6" r="5"></circle></svg>Free spot (park, beach, wild)</span>
+      <p class="card-note">Numbers follow the loop. Hover a marker for its fee and facilities. Locations are approximate.</p>
+      <div class="okinawa-map" id="okinawa-map" data-draw="okinawa_campervan_map" data-source="okinawa_municipality_outlines okinawa_overnight_spots okinawa_stays_with_nights"></div>
+      <div class="okinawa-map-legend">
+        <span><svg width="12" height="12" aria-hidden="true"><rect class="okinawa-legend-swatch-paid-park" x="1" y="1" width="10" height="10" rx="2"></rect></svg>Paid RV park or auto-camp</span>
+        <span><svg width="12" height="12" aria-hidden="true"><circle class="okinawa-legend-swatch-free-spot" cx="6" cy="6" r="5"></circle></svg>Free spot (park, beach, wild)</span>
         <span><svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="4.5" fill="none" stroke="currentColor" stroke-width="1.5"></circle></svg>Roadside station: daytime only</span>
-        <span><svg width="12" height="12" aria-hidden="true"><path class="oki-sw-camp" d="M6 1 L11 11 L1 11 Z"></path></svg>Campsite (fee not found)</span>
-        <span><svg width="22" height="8" aria-hidden="true"><line class="oki-sw-route" x1="1" y1="4" x2="21" y2="4" stroke-width="2.5" stroke-linecap="round"></line></svg>Our loop</span>
+        <span><svg width="12" height="12" aria-hidden="true"><path class="okinawa-legend-swatch-campsite" d="M6 1 L11 11 L1 11 Z"></path></svg>Campsite (fee not found)</span>
+        <span><svg width="22" height="8" aria-hidden="true"><line class="okinawa-legend-swatch-route" x1="1" y1="4" x2="21" y2="4" stroke-width="2.5" stroke-linecap="round"></line></svg>Our loop</span>
       </div>
     </div>
-    <div class="ins-card" id="card-okiloop">
+    <div class="card" id="card-okinawa-loop">
       <h3>The loop</h3>
-      <p class="ins-note">Okinawa City as a base for the south, then the wild north-east coast and Yanbaru forest, a long stop on the Motobu peninsula for Kouri and the aquarium area, and back to Okinawa City to return the van.</p>
-      <ol class="oki-loop" data-draw="okiloop" data-source="okinawa_stays"></ol>
+      <p class="card-note">Okinawa City as a base for the south, then the wild north-east coast and Yanbaru forest, a long stop on the Motobu peninsula for Kouri and the aquarium area, and back to Okinawa City to return the van.</p>
+      <ol class="okinawa-loop-list" data-draw="okinawa_loop_list" data-source="okinawa_stays_with_nights"></ol>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="oki-spots">Every spot we found</h2>
-  <div class="ins-card" id="card-okispots">
-    <div class="ins-scroll">
-      <table class="ins-table" data-draw="tbl" data-source="okinawa_spots" data-row-key="name" data-cols="name|Spot;type|Type;town|Town;fee|Fee;facilities|Facilities;source|Source"></table>
+  <h2 class="section-heading" id="okinawa-spots">Every spot we found</h2>
+  <div class="card" id="card-okinawa-spots">
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="data_table" data-source="okinawa_overnight_spots" data-cols="name|Spot;type|Type;town|Town;fee|Fee;facilities|Facilities;source|Source"></table>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="oki-vans">Renting the van</h2>
-  <div class="ins-card" id="card-okivans">
-    <p class="ins-note">Prices as published in the guides below. Weekday, weekend and peak rates differ, so a weekday pick-up and return is cheaper. A kei camper avoids the big vans' problems: nearly 3 m high, no multi-storey car parks, scraping on steep side roads, and pushed around by strong wind.</p>
-    <div class="ins-scroll">
-      <table class="ins-table" data-draw="tbl" data-source="okinawa_vans" data-row-key="offer" data-cols="offer|Company and van;size|Size and berths;price|Price;source|Source"></table>
+  <h2 class="section-heading" id="okinawa-van-rental">Renting the van</h2>
+  <div class="card" id="card-okinawa-van-rental">
+    <p class="card-note">Prices as published in the guides below. Weekday, weekend and peak rates differ, so a weekday pick-up and return is cheaper. A kei camper avoids the big vans' problems: nearly 3 m high, no multi-storey car parks, scraping on steep side roads, and pushed around by strong wind.</p>
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="data_table" data-source="okinawa_campervan_rental_offers" data-cols="offer|Company and van;size|Size and berths;price|Price;source|Source"></table>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="oki-hijet">Renting the Hijet from Evertrail</h2>
-  <ul class="oki-tips">
+  <h2 class="section-heading" id="okinawa-hijet-rental">Renting the Hijet from Evertrail</h2>
+  <ul class="okinawa-tips-list">
     <li>Price isn't published: ask for a quote for 14 nights (15 February to 1 March 2027).</li>
     <li>Insurance is fully comprehensive; if we cause a crash we pay up to ¥300,000, or nothing with the optional waiver chosen at booking.</li>
     <li>Getting there: bus 111 or 117 from the airport, about an hour, ¥1,330 each; or Evertrail's shuttle at ¥10,000 for two, one way (10:30 to 16:00). Earliest pick-up 9:30.</li>
@@ -480,8 +292,8 @@
     <li>Drivers must be 21 or over. Evertrail can book campsites for us and suggest wild spots; off-road driving and unapproved beaches are banned.</li>
   </ul>
 
-  <h2 class="ins-h2" id="oki-tips">Before we go</h2>
-  <ul class="oki-tips">
+  <h2 class="section-heading" id="okinawa-before-we-go">Before we go</h2>
+  <ul class="okinawa-tips-list">
     <li>Roadside stations (michi-no-eki) are for breaks, shopping and information, not overnight stays: sleep at campsites or RV parks.</li>
     <li>Arrive before dark: spots are hard to find after sunset, especially the free ones.</li>
     <li>Book the van at the same time as the flights, and use the rental company's online price calculator. Expect about an hour of handover before you leave.</li>
@@ -490,7 +302,7 @@
     <li>Car parks at tourist sites can have height or length limits. Don't run the engine or air conditioning while sleeping, and don't leave windows open overnight.</li>
     <li>At pick-up, check how the fuel cap opens and the refuelling rules; fill the water tank before relying on an on-board shower.</li>
   </ul>
-  <ul class="ins-links">
+  <ul class="link-list">
     <li><a href="https://www.nap-camp.com/mag/78093" target="_blank" rel="noopener">nap-camp: Okinawa campervan rentals</a></li>
     <li><a href="https://www.jackery.jp/blogs/vanlife/vanlife-around-okinawa" target="_blank" rel="noopener">Jackery: van life around Okinawa</a></li>
     <li><a href="https://en.tabiiro.travel/activities/article/okinawa-campervan-guide/" target="_blank" rel="noopener">Tabiiro: Okinawa campervan guide</a></li>
@@ -501,723 +313,86 @@
     <li><a href="https://japan-experience.com/transportation/driving-licence-translation" target="_blank" rel="noopener">Japan Experience: licence translation</a></li>
   </ul>
 
-  <button type="button" class="ins-back" data-page="trip" data-scroll="ch-japan">← Back to Japan on the trip</button>
+  <button type="button" class="back-to-trip-button" data-page="trip" data-scroll="chapter-japan">← Back to Japan on the trip</button>
 </section>
 
-<section class="pg ins" id="expenses" hidden>
-  <header class="rt-head">
-    <h1 class="rt-title">Expenses</h1>
-    <p class="rt-lede">What we've spent on the trip so far and who paid. This is a copy of our Notion expenses table: new entries show up here once it's exported again.</p>
-    <div class="exp-actions">
-      <a class="exp-open" href="https://app.notion.com/p/39980dbae6b1803eb529d411449dfd0f" target="_blank" rel="noopener">Open our expenses table in Notion <span aria-hidden="true">↗</span></a>
+<!-- ===== PAGE: Expenses (pages/expenses/) ===== -->
+<section class="page content-page" id="expenses" hidden>
+  <header class="page-header">
+    <h1 class="page-title">Expenses</h1>
+    <p class="page-intro">What we've spent on the trip so far and who paid. This is a copy of our Notion expenses table: new entries show up here once it's exported again.</p>
+    <div class="expenses-header-actions">
+      <a class="expenses-open-in-notion-link" href="https://app.notion.com/p/39980dbae6b1803eb529d411449dfd0f" target="_blank" rel="noopener">Open our expenses table in Notion <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
-  <div class="exp-tiles">
-    <div class="exp-tile" id="exp-total">
-      <p class="exp-label">Spent so far</p>
-      <p class="exp-big">€<span data-draw="num" data-source="expense_totals" data-row="0" data-field="total_eur" data-fmt="eur2">—</span></p>
+  <div class="stat-tiles">
+    <div class="stat-tile" id="expenses-total">
+      <p class="stat-tile-label">Spent so far</p>
+      <p class="stat-tile-value">€<span data-draw="number_value" data-source="expenses_overall_total" data-row="0" data-field="total_eur" data-fmt="eur2">—</span></p>
     </div>
-    <div class="exp-tile" id="exp-payers">
-      <p class="exp-label">Paid by</p>
-      <ul class="exp-list" data-draw="explist" data-source="expense_by_payer" data-key="who_paid"></ul>
+    <div class="stat-tile" id="expenses-by-payer">
+      <p class="stat-tile-label">Paid by</p>
+      <ul class="expenses-amount-list" data-draw="expenses_amount_list" data-source="expenses_total_by_payer" data-key="who_paid"></ul>
     </div>
-    <div class="exp-tile" id="exp-categories">
-      <p class="exp-label">By category</p>
-      <ul class="exp-list" data-draw="explist" data-source="expense_by_category" data-key="category"></ul>
+    <div class="stat-tile" id="expenses-by-category">
+      <p class="stat-tile-label">By category</p>
+      <ul class="expenses-amount-list" data-draw="expenses_amount_list" data-source="expenses_total_by_category" data-key="category"></ul>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="exp-tickets">Tickets</h2>
-  <div class="exp-tiles">
-    <div class="exp-tile" id="tix-bought">
-      <p class="exp-label">Already bought</p>
-      <p class="exp-big is-ok">€<span data-draw="num" data-source="ticket_totals" data-row="0" data-field="paid_eur" data-fmt="eur2">—</span></p>
+  <h2 class="section-heading" id="expenses-tickets">Tickets</h2>
+  <div class="stat-tiles">
+    <div class="stat-tile" id="tickets-bought">
+      <p class="stat-tile-label">Already bought</p>
+      <p class="stat-tile-value is-ok">€<span data-draw="number_value" data-source="expenses_travel_ticket_totals" data-row="0" data-field="paid_eur" data-fmt="eur2">—</span></p>
     </div>
-    <div class="exp-tile" id="tix-tobuy">
-      <p class="exp-label">Still to buy (estimate, main route)</p>
-      <p class="exp-big">€<span data-draw="num" data-source="ticket_totals" data-row="0" data-field="to_buy_eur">—</span></p>
+    <div class="stat-tile" id="tickets-to-buy">
+      <p class="stat-tile-label">Still to buy (estimate, main route)</p>
+      <p class="stat-tile-value">€<span data-draw="number_value" data-source="expenses_travel_ticket_totals" data-row="0" data-field="to_buy_eur">—</span></p>
     </div>
-    <div class="exp-tile" id="tix-count">
-      <p class="exp-label">Legs left to book</p>
-      <p class="exp-big"><span data-draw="num" data-source="ticket_totals" data-row="0" data-field="to_buy_count">—</span></p>
+    <div class="stat-tile" id="tickets-left-to-book">
+      <p class="stat-tile-label">Legs left to book</p>
+      <p class="stat-tile-value"><span data-draw="number_value" data-source="expenses_travel_ticket_totals" data-row="0" data-field="to_buy_count">—</span></p>
     </div>
   </div>
-  <div class="ins-card" id="card-tickets">
+  <div class="card" id="card-expenses-tickets">
     <h3>Every flight, train and bus on the route</h3>
-    <p class="ins-note">In travel order, for two people. Green rows are bought, with what we actually paid; the rest are estimates from the trip plan. The Seoul legs only apply if we go.</p>
-    <div class="ins-scroll">
-      <table class="ins-table" data-draw="tbl" data-source="tickets" data-row-key="n" data-rowclass="status" data-cols="n|#;date|Date;from|From;to|To;mode|Mode;estimate_eur|Estimate (€);paid_eur|Paid (€);status|Status"></table>
+    <p class="card-note">In travel order, for two people. Green rows are bought, with what we actually paid; the rest are estimates from the trip plan. The Seoul legs only apply if we go.</p>
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="data_table" data-source="expenses_travel_tickets" data-rowclass="status" data-cols="n|#;date|Date;from|From;to|To;mode|Mode;estimate_eur|Estimate (€);paid_eur|Paid (€);status|Status"></table>
     </div>
   </div>
 
-  <h2 class="ins-h2" id="exp-all">Spending log</h2>
-  <div class="ins-card" id="card-expenses">
-    <div class="exp-cardhead">
+  <h2 class="section-heading" id="expenses-spending-log">Spending log</h2>
+  <div class="card" id="card-expenses-spending-log">
+    <div class="expenses-card-header">
       <div>
         <h3>Every expense</h3>
-        <p class="ins-note">Oldest first, as entered in Notion.</p>
+        <p class="card-note">Oldest first, as entered in Notion.</p>
       </div>
-      <div class="exp-csvwrap">
-        <button type="button" class="exp-csv" id="expenses-csv">Download as CSV</button>
-        <span class="exp-msg" data-msg="saved" hidden>Saved.</span>
-        <span class="exp-msg" data-msg="declined" hidden>Download cancelled.</span>
-        <span class="exp-msg" data-msg="busy" hidden>A download prompt is already open.</span>
-        <span class="exp-msg" data-msg="unavailable" hidden>Download failed.</span>
+      <div class="expenses-csv-download-container">
+        <button type="button" class="expenses-csv-download-button" id="expenses-csv-download">Download as CSV</button>
+        <span class="expenses-csv-download-message" data-msg="saved" hidden>Saved.</span>
+        <span class="expenses-csv-download-message" data-msg="declined" hidden>Download cancelled.</span>
+        <span class="expenses-csv-download-message" data-msg="busy" hidden>A download prompt is already open.</span>
+        <span class="expenses-csv-download-message" data-msg="unavailable" hidden>Download failed.</span>
       </div>
     </div>
-    <div class="ins-scroll">
-      <table class="ins-table" data-draw="tbl" data-source="expense_rows" data-row-key="n" data-cols="n|#;date|Date;expense|Expense;category|Category;amount_eur|Amount (€);who_paid|Who paid;for_whom|For whom;country|Country;merchant|Merchant;notes|Notes"></table>
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="data_table" data-source="expenses_cleaned_rows" data-cols="n|#;date|Date;expense|Expense;category|Category;amount_eur|Amount (€);who_paid|Who paid;for_whom|For whom;country|Country;merchant|Merchant;notes|Notes"></table>
     </div>
   </div>
 
-  <button type="button" class="ins-back" data-page="trip">← Back to the trip</button>
+  <button type="button" class="back-to-trip-button" data-page="trip">← Back to the trip</button>
 </section>
 
-<script>
-  dash.calc('stays', {
-    inputs: ['stops'],
-    title: 'Stops with nights',
-    description: 'Each stop with its numbers read as numbers and the nights between arriving and leaving.',
-    fn: (stops) => stops.map((r) => {
-      const a = r.arrive ? Date.parse(r.arrive) : NaN, d = r.depart ? Date.parse(r.depart) : NaN;
-      return {stop: +r.stop, city: r.city, country: r.country, chapter: r.chapter, lat: +r.lat, lon: +r.lon,
-        arrive: r.arrive || null, depart: r.depart || null, nights: isNaN(a) || isNaN(d) ? 0 : Math.round((d - a) / 864e5),
-        transport_in: r.transport_in || null, transport_eur: +r.transport_eur || 0, daily_eur: +r.daily_eur || 0, status: r.status, optional: r.optional === 'yes', note: r.note || '', paid_expense: (r.paid_expense || '').toLowerCase()};
-    }).sort((x, y) => x.stop - y.stop)
-  });
-
-  dash.calc('legs', {
-    inputs: ['stays'],
-    title: 'Legs between stops',
-    description: 'Each leg of the main route (optional stops skipped), plus the detour legs to and from each optional stop, with great-circle km and transport cost.',
-    fn: (stays) => {
-      const rad = Math.PI / 180;
-      const km = (a, b) => {
-        const h = Math.sin((b.lat - a.lat) * rad / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin((b.lon - a.lon) * rad / 2) ** 2;
-        return Math.round(2 * 6371 * Math.asin(Math.sqrt(h)));
-      };
-      const leg = (a, b, chapter, cost, optional) => ({from: a.city, to: b.city, chapter, mode: b.transport_in, km: km(a, b), transport_eur: cost, optional,
-        from_lat: a.lat, from_lon: a.lon, to_lat: b.lat, to_lon: b.lon});
-      const main = stays.filter((s) => !s.optional);
-      const out = main.slice(1).map((b, i) => leg(main[i], b, b.chapter, b.transport_eur, false));
-      stays.forEach((o, i) => {
-        if (!o.optional) return;
-        const prev = stays.slice(0, i).reverse().find((s) => !s.optional), next = stays.slice(i + 1).find((s) => !s.optional);
-        if (prev) out.push(leg(prev, o, o.chapter, o.transport_eur, true));
-        if (next) out.push(leg(o, next, o.chapter, 0, true));
-      });
-      return out;
-    }
-  });
-
-  dash.calc('by_chapter', {
-    inputs: ['stays', 'legs'],
-    title: 'Totals per region',
-    description: 'Nights, distance and cost per region; a leg counts toward the region it arrives in, and a detour to an optional stop toward that stop.',
-    fn: (stays, legs) => [...new Set(stays.map((s) => s.chapter))].map((chapter) => {
-      const ss = stays.filter((s) => s.chapter === chapter), ll = legs.filter((l) => l.chapter === chapter);
-      const transport_eur = ll.reduce((t, l) => t + l.transport_eur, 0), stay_eur = ss.reduce((t, s) => t + s.nights * s.daily_eur, 0);
-      return {chapter, optional: ss.every((s) => s.optional), nights: ss.reduce((t, s) => t + s.nights, 0), km: ll.reduce((t, l) => t + l.km, 0),
-        transport_eur, stay_eur, budget: transport_eur + stay_eur};
-    })
-  });
-
-  dash.calc('totals', {
-    inputs: ['stays', 'by_chapter'],
-    title: 'Whole-trip totals',
-    description: 'The main route: days from leaving the first stop to leaving the last (or reaching it, with no end date), countries after the start, summed distance and cost; optional stops counted apart.',
-    fn: (stays, by_chapter) => {
-      const first = stays[0], last = stays[stays.length - 1];
-      const main = by_chapter.filter((c) => !c.optional), opt = by_chapter.filter((c) => c.optional);
-      const transport_eur = main.reduce((t, c) => t + c.transport_eur, 0), stay_eur = main.reduce((t, c) => t + c.stay_eur, 0);
-      return [{days: Math.round((Date.parse(last.depart || last.arrive) - Date.parse(first.depart)) / 864e5),
-        countries: new Set(stays.slice(1).filter((s) => !s.optional).map((s) => s.country)).size,
-        km: main.reduce((t, c) => t + c.km, 0), transport_eur, stay_eur, budget: transport_eur + stay_eur,
-        transport_share: transport_eur / (transport_eur + stay_eur),
-        optional_nights: opt.reduce((t, c) => t + c.nights, 0), optional_budget: opt.reduce((t, c) => t + c.budget, 0)}];
-    }
-  });
-
-  const st = window.__rt = {chapter: 'all', view: null, raf: 0};
-  const fmtInt = d3.format(','), fmtPct = d3.format('.0%'), fmtDay = d3.utcFormat('%-d %b');
-  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  document.querySelectorAll('.rt-sw-flight').forEach((e) => { e.style.stroke = dash.colors[0]; });
-  document.querySelectorAll('.rt-sw-train').forEach((e) => { e.style.stroke = dash.colors[1]; });
-  document.querySelectorAll('.rt-sw-opt').forEach((e) => { e.style.stroke = 'var(--color-ok)'; });
-
-  const findRow = (el, rows) => {
-    if (el.dataset.where) {
-      const pairs = el.dataset.where.split('&').map((p) => p.split('=').map(decodeURIComponent));
-      return rows.find((r) => pairs.every(([k, v]) => String(r[k]) === v));
-    }
-    return rows[+(el.dataset.row || 0)];
-  };
-
-  dash.draw('num', (el) => {
-    const d = dash.data(el.dataset.source);
-    const row = d.status === 'ok' ? findRow(el, d.data) : null;
-    const v = row ? row[el.dataset.field] : null;
-    el.textContent = v == null || Number.isNaN(v) ? '—' : el.dataset.fmt === 'pct' ? fmtPct(v) : el.dataset.fmt === 'eur2' ? d3.format(',.2f')(v) : fmtInt(Math.round(v));
-  });
-
-  dash.draw('stoplist', (el) => {
-    const d = dash.data('stays');
-    el.replaceChildren();
-    if (d.status !== 'ok') return;
-    d.data.filter((s) => s.chapter === el.dataset.chapter).forEach((s) => {
-      const li = document.createElement('li');
-      const city = document.createElement('span'); city.className = 'rt-city'; city.textContent = s.city;
-      const when = document.createElement('span'); when.className = 'rt-when';
-      when.textContent = (s.arrive ? fmtDay(new Date(s.arrive)) : '') + (s.depart ? ' – ' + fmtDay(new Date(s.depart)) : '') + (s.nights ? ' · ' + s.nights + ' nights' : '');
-      const tag = document.createElement('span'); tag.className = 'rt-tag is-' + String(s.status).replace(/\s+/g, '-'); tag.textContent = s.status;
-      li.append(city, when, tag);
-      if (s.note) { const n = document.createElement('span'); n.className = 'rt-note-line'; n.textContent = s.note; li.append(n); }
-      el.append(li);
-    });
-  });
-
-  // Natural Earth projection centred on 90°E, in the same units as the pre-projected country outlines (y points down).
-  const RAD = Math.PI / 180, UNIT = 1000;
-  const rotLon = (lon) => ((lon - 90 + 540) % 360) - 180;
-  const neRaw = (lr, lat) => {
-    const l = lr * RAD, p = lat * RAD, p2 = p * p, p4 = p2 * p2;
-    return [UNIT * l * (0.8707 - 0.131979 * p2 + p4 * (-0.013791 + p4 * (0.003971 * p2 - 0.001529 * p4))),
-      -UNIT * p * (1.007226 + p2 * (0.015085 + p4 * (-0.044475 + 0.028874 * p2 - 0.005916 * p4)))];
-  };
-  const ne = (lon, lat) => neRaw(rotLon(lon), lat);
-  const spherePts = [];
-  for (let lat = 90; lat >= -90; lat -= 2) spherePts.push(neRaw(180, lat));
-  for (let lat = -90; lat <= 90; lat += 2) spherePts.push(neRaw(-180, lat));
-  const sphereD = 'M' + spherePts.map((p) => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join('L') + 'Z';
-  const greatCircle = (lon1, lat1, lon2, lat2, n) => {
-    const v = (lo, la) => [Math.cos(la * RAD) * Math.cos(lo * RAD), Math.cos(la * RAD) * Math.sin(lo * RAD), Math.sin(la * RAD)];
-    const a = v(lon1, lat1), b = v(lon2, lat2);
-    const w = Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])));
-    if (w < 1e-9) return [[lon1, lat1], [lon2, lat2]];
-    const out = [];
-    for (let i = 0; i <= n; i++) {
-      const t = i / n, s1 = Math.sin((1 - t) * w) / Math.sin(w), s2 = Math.sin(t * w) / Math.sin(w);
-      const x = s1 * a[0] + s2 * b[0], y = s1 * a[1] + s2 * b[1], z = s1 * a[2] + s2 * b[2];
-      out.push([Math.atan2(y, x) / RAD, Math.asin(z) / RAD]);
-    }
-    return out;
-  };
-  const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-  dash.draw('map', (el) => {
-    if (st.raf) { cancelAnimationFrame(st.raf); st.raf = 0; }
-    el.replaceChildren();
-    const c = dash.data('countries'), s = dash.data('stays'), l = dash.data('legs');
-    const all = [c, s, l];
-    if (all.some((d) => d.status === 'error' || d.status === 'missing' || d.status === 'declined')) {
-      el.classList.remove('dash-skeleton');
-      const f = document.createElement('div'); f.className = 'rt-fail'; f.textContent = 'Failed to load'; el.append(f);
-      return;
-    }
-    if (all.some((d) => d.status !== 'ok')) { el.classList.add('dash-skeleton'); return; }
-    el.classList.remove('dash-skeleton');
-    const W = el.clientWidth, H = el.clientHeight;
-    if (!W || !H) return;
-
-    const stops = s.data, legs = l.data;
-    const focus = st.chapter === 'all' || st.chapter === 'totals' ? null : st.chapter;
-    const visited = new Set(stops.filter((d) => d.stop > 0 && !d.optional).map((d) => d.country));
-    const focusCountries = new Set(stops.filter((d) => d.chapter === focus).map((d) => d.country));
-    const isOn = (chapter) => !focus || chapter === focus;
-    const modeColor = (m) => m === 'train' || m === 'bus' ? dash.colors[1] : dash.colors[0];
-
-    // The view: zoom k and the centre (in projected units) to frame the focused region, or the whole world.
-    let fitPts = spherePts;
-    if (focus) {
-      const pts = stops.filter((d) => d.chapter === focus);
-      const m = pts.length === 1 ? 8 : 1.5 + 0.15 * Math.max(d3.max(pts, (d) => d.lat) - d3.min(pts, (d) => d.lat), d3.max(pts, (d) => d.lon) - d3.min(pts, (d) => d.lon));
-      const lo0 = d3.min(pts, (d) => d.lon) - m, lo1 = d3.max(pts, (d) => d.lon) + m;
-      const la0 = d3.min(pts, (d) => d.lat) - m, la1 = d3.max(pts, (d) => d.lat) + m;
-      fitPts = [];
-      for (let i = 0; i <= 8; i++) {
-        const lo = lo0 + (lo1 - lo0) * i / 8, la = la0 + (la1 - la0) * i / 8;
-        fitPts.push(ne(lo, la0), ne(lo, la1), ne(lo0, la), ne(lo1, la));
-      }
-    }
-    const x0 = d3.min(fitPts, (p) => p[0]), x1 = d3.max(fitPts, (p) => p[0]);
-    const y0 = d3.min(fitPts, (p) => p[1]), y1 = d3.max(fitPts, (p) => p[1]);
-    const pad = Math.min(W, H) * 0.06;
-    const target = {k: Math.min((W - 2 * pad) / (x1 - x0), (H - 2 * pad) / (y1 - y0)), cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, W, H};
-    const from = st.view && st.view.W === W && st.view.H === H ? st.view : target;
-
-    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('role', 'img').attr('aria-label', 'Map of the trip route');
-    const world = svg.append('g');
-    world.append('path').attr('class', 'rt-ocean').attr('d', sphereD);
-    world.append('g').selectAll('path').data(c.data).join('path')
-      .attr('class', (d) => 'rt-land' + (visited.has(d.country) ? ' is-visited' : '') + (focusCountries.has(d.country) ? ' is-focus' : ''))
-      .attr('d', (d) => d.d)
-      .style('fill', (d) => visited.has(d.country) ? dash.colors[0] : null);
-    const legPaths = svg.append('g').selectAll('path').data(legs).join('path')
-      .attr('class', (d) => 'rt-leg is-' + d.mode + (d.optional ? ' is-optional' : '') + (isOn(d.chapter) ? '' : ' is-off'))
-      .style('stroke', (d) => d.optional ? 'var(--color-ok)' : isOn(d.chapter) ? modeColor(d.mode) : null);
-    const legLines = legs.map((d) => greatCircle(d.from_lon, d.from_lat, d.to_lon, d.to_lat, 64));
-    const dots = svg.append('g').selectAll('circle').data(stops).join('circle')
-      .attr('class', (d) => 'rt-dot' + (d.optional ? ' is-optional' : '')).attr('r', (d) => focus && d.chapter === focus ? 5 : 3.5)
-      .style('stroke', (d) => d.optional ? 'var(--color-ok)' : isOn(d.chapter) ? 'var(--color-fg)' : null);
-    const labelled = stops.filter((d, i) => focus ? d.chapter === focus : i === 0 || i === 1 || i === stops.length - 1);
-    const labels = svg.append('g').selectAll('text').data(labelled).join('text')
-      .attr('class', 'rt-label').attr('dy', '-0.75em').attr('text-anchor', 'middle').text((d) => d.city);
-
-    let view = from;
-    const toScreen = (lon, lat) => { const p = ne(lon, lat); return [W / 2 + view.k * (p[0] - view.cx), H / 2 + view.k * (p[1] - view.cy)]; };
-
-    const tip = document.createElement('div'); tip.className = 'rt-tip'; tip.hidden = true; el.append(tip);
-    const hits = svg.append('g').selectAll('circle').data(stops).join('circle').attr('class', 'rt-hit').attr('r', 11)
-      .on('pointerenter', (ev, d) => {
-        const t1 = document.createElement('div'); t1.textContent = d.city + ', ' + d.country;
-        const t2 = document.createElement('div'); t2.className = 'rt-tip-sub';
-        t2.textContent = (d.arrive ? fmtDay(new Date(d.arrive)) : 'Start') + ' – ' + (d.depart ? fmtDay(new Date(d.depart)) : 'End') + (d.nights ? ' · ' + d.nights + ' nights' : '') + ' · ' + d.status;
-        const t3 = document.createElement('div'); t3.className = 'rt-tip-sub'; t3.textContent = d.note || '';
-        tip.replaceChildren(t1, t2, ...(d.note ? [t3] : [])); tip.hidden = false;
-        const [x, y] = toScreen(d.lon, d.lat);
-        const tw = tip.offsetWidth, th = tip.offsetHeight;
-        tip.style.left = Math.max(4, Math.min(W - tw - 4, x - tw / 2)) + 'px';
-        tip.style.top = (y - th - 14 < 4 ? y + 14 : y - th - 14) + 'px';
-      })
-      .on('pointerleave', () => { tip.hidden = true; });
-
-    const render = (v) => {
-      view = v; st.view = v;
-      world.attr('transform', `translate(${W / 2 - v.k * v.cx},${H / 2 - v.k * v.cy}) scale(${v.k})`);
-      legPaths.attr('d', (d, i) => {
-        let out = '', prev = null;
-        legLines[i].forEach(([lo, la]) => {
-          const r = rotLon(lo), [x, y] = toScreen(lo, la);
-          out += (prev === null || Math.abs(r - prev) > 180 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
-          prev = r;
-        });
-        return out;
-      });
-      dots.attr('cx', (d) => toScreen(d.lon, d.lat)[0]).attr('cy', (d) => toScreen(d.lon, d.lat)[1]);
-      hits.attr('cx', (d) => toScreen(d.lon, d.lat)[0]).attr('cy', (d) => toScreen(d.lon, d.lat)[1]);
-      labels.attr('x', (d) => toScreen(d.lon, d.lat)[0]).attr('y', (d) => toScreen(d.lon, d.lat)[1]);
-    };
-
-    const same = Math.abs(from.k - target.k) / target.k < 0.005 && Math.abs(from.cx - target.cx) < 1 && Math.abs(from.cy - target.cy) < 1;
-    if (same || reduceMotion) { render(target); return; }
-    render(from);
-    const start = performance.now(), lk0 = Math.log(from.k), lk1 = Math.log(target.k);
-    const step = (now) => {
-      const t = Math.min(1, (now - start) / 900), e = ease(t);
-      render({k: Math.exp(lk0 + (lk1 - lk0) * e), cx: from.cx + (target.cx - from.cx) * e, cy: from.cy + (target.cy - from.cy) * e, W, H});
-      st.raf = t < 1 ? requestAnimationFrame(step) : 0;
-    };
-    st.raf = requestAnimationFrame(step);
-  });
-
-  const steps = document.querySelectorAll('.rt-step');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((en) => {
-      if (!en.isIntersecting) return;
-      const ch = en.target.dataset.chapter;
-      steps.forEach((s) => s.classList.toggle('is-active', s === en.target));
-      if (st.chapter !== ch) { st.chapter = ch; dash.draw('map'); dash.draw('timeline'); }
-    });
-  }, {root: document, rootMargin: '-45% 0px -45% 0px'});
-  steps.forEach((s) => io.observe(s));
-
-  // Pages: the trip story and the insurance notes, one shown at a time.
-  const showPage = (id, scrollTo) => {
-    document.querySelectorAll('.pg').forEach((p) => { p.hidden = p.id !== id; });
-    document.querySelectorAll('.pg-tabs [data-page]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.page === id)));
-    dash.setLink(id);
-    const target = (scrollTo && document.getElementById(scrollTo)) || document.querySelector('.pg-tabs');
-    if (target) target.scrollIntoView({block: 'start'});
-  };
-  document.querySelectorAll('[data-page]').forEach((b) => b.addEventListener('click', () => showPage(b.dataset.page, b.dataset.scroll)));
-  {
-    const named = location.hash.slice(1);
-    const el = named && document.getElementById(named);
-    const pg = el && el.closest('.pg');
-    if (pg && pg.id !== 'trip') showPage(pg.id, named);
-  }
-
-  dash.draw('needs', (el) => {
-    const d = dash.data('needs');
-    el.replaceChildren();
-    if (d.status !== 'ok') return;
-    d.data.filter((r) => r.priority === el.dataset.priority).forEach((r) => {
-      const li = document.createElement('li');
-      li.textContent = r.cover;
-      if (r.minimum) { const m = document.createElement('span'); m.className = 'ins-min'; m.textContent = r.minimum; li.append(m); }
-      el.append(li);
-    });
-  });
-
-  dash.draw('tbl', (el) => {
-    const d = dash.data(el.dataset.source);
-    el.replaceChildren();
-    if (d.status !== 'ok') return;
-    const cols = el.dataset.cols.split(';').map((s) => s.split('|'));
-    const hr = el.createTHead().insertRow();
-    cols.forEach(([f, label]) => { const th = document.createElement('th'); th.scope = 'col'; th.dataset.field = f; th.textContent = label; hr.append(th); });
-    const tb = el.createTBody();
-    d.data.forEach((r) => {
-      const tr = tb.insertRow();
-      if (el.dataset.rowclass && r[el.dataset.rowclass]) tr.className = 'is-' + String(r[el.dataset.rowclass]).replace(/\s+/g, '-');
-      cols.forEach(([f]) => {
-        const td = tr.insertCell();
-        const v = r[f] == null ? '' : String(r[f]);
-        const money = /_eur$/.test(f);
-        td.textContent = money ? (r[f] == null ? '' : d3.format(',.2f')(r[f])) : v;
-        if (money) td.classList.add('is-num');
-        if ((f === 'verdict' || f === 'status') && v) td.className = 'is-' + v.replace(/\s+/g, '-');
-      });
-    });
-  });
-
-  const insState = window.__ins = {profile: 'couple_u40'};
-  document.querySelectorAll('.ins-sw-base').forEach((e) => { e.style.background = dash.colors[0]; });
-  document.querySelectorAll('.ins-sw-us').forEach((e) => { e.style.background = dash.colors[2]; });
-  document.querySelectorAll('.ins-seg [data-profile]').forEach((b) => b.addEventListener('click', () => {
-    insState.profile = b.dataset.profile;
-    document.querySelectorAll('.ins-seg [data-profile]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    dash.draw('prices');
-  }));
-
-  dash.draw('prices', (el) => {
-    el.replaceChildren();
-    const d = dash.data('prices');
-    if (d.status === 'error' || d.status === 'missing' || d.status === 'declined') {
-      el.classList.remove('dash-skeleton');
-      const f = document.createElement('div'); f.className = 'rt-fail'; f.textContent = 'Failed to load'; el.append(f);
-      return;
-    }
-    if (d.status !== 'ok') { el.classList.add('dash-skeleton'); return; }
-    el.classList.remove('dash-skeleton');
-    const W = el.clientWidth;
-    if (!W) return;
-    const eur = (v) => '€' + d3.format(',')(v);
-    const rows = d.data.filter((r) => r.profile === insState.profile && r.base_eur != null)
-      .map((r) => ({...r, base: +r.base_eur, extra: r.usa_canada_eur == null ? 0 : +r.usa_canada_eur}))
-      .sort((a, b) => (a.base + a.extra) - (b.base + b.extra));
-    const rowH = 30, barH = 18, top = 4;
-    const H = top + rows.length * rowH + 4;
-    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('role', 'img').attr('aria-label', 'Quoted price by insurer');
-    const label = (r) => r.extra ? eur(r.base) + ' + ' + eur(r.extra) : eur(r.base);
-    const names = svg.append('g').selectAll('text').data(rows).join('text').attr('class', 'ins-name').text((r) => r.insurer);
-    const vals = svg.append('g').selectAll('text').data(rows).join('text').attr('class', 'ins-val').text(label);
-    const narrow = W < 520;
-    let nameW = 0, valW = 0;
-    names.each(function () { nameW = Math.max(nameW, this.getComputedTextLength()); });
-    vals.each(function () { valW = Math.max(valW, this.getComputedTextLength()); });
-    const x0 = narrow ? 0 : nameW + 12;
-    const x = d3.scaleLinear([0, d3.max(rows, (r) => r.base + r.extra) || 1], [x0, Math.max(x0 + 40, W - valW - 10)]);
-    const y = (i) => top + i * rowH + (narrow ? 12 : 0);
-    if (narrow) {
-      svg.attr('height', H + rows.length * 12).attr('viewBox', `0 0 ${W} ${H + rows.length * 12}`);
-      el.style.minHeight = (H + rows.length * 12) + 'px';
-    } else { el.style.minHeight = H + 'px'; }
-    const yy = (i) => narrow ? top + i * (rowH + 12) + 14 : y(i);
-    names.attr('x', narrow ? 0 : nameW).attr('text-anchor', narrow ? 'start' : 'end')
-      .attr('y', (r, i) => narrow ? yy(i) - 4 : yy(i) + barH / 2).attr('dominant-baseline', narrow ? 'auto' : 'central');
-    const g = svg.append('g');
-    rows.forEach((r, i) => {
-      const yb = narrow ? yy(i) : yy(i);
-      g.append('rect').attr('x', x(0)).attr('y', yb).attr('width', Math.max(0, x(r.base) - x(0))).attr('height', barH).attr('rx', 3).style('fill', dash.colors[0]);
-      if (r.extra) g.append('rect').attr('x', x(r.base)).attr('y', yb).attr('width', Math.max(0, x(r.base + r.extra) - x(r.base))).attr('height', barH).attr('rx', 3).style('fill', dash.colors[2]);
-    });
-    vals.attr('x', (r) => x(r.base + r.extra) + 6).attr('y', (r, i) => yy(i) + barH / 2).attr('dominant-baseline', 'central');
-
-    const tip = document.createElement('div'); tip.className = 'rt-tip'; tip.hidden = true; el.append(tip);
-    svg.append('g').selectAll('rect').data(rows).join('rect')
-      .attr('x', 0).attr('width', W).attr('y', (r, i) => yy(i) - (narrow ? 14 : 6)).attr('height', narrow ? rowH + 12 : rowH).style('fill', 'transparent')
-      .on('pointermove', (ev, r) => {
-        const lines = [r.insurer + (r.offer ? ' · ' + r.offer : ''), 'Base ' + eur(r.base) + (r.usa_canada_eur == null ? '' : ' · USA and Canada +' + eur(r.extra))];
-        if (r.note) lines.push(r.note);
-        tip.replaceChildren(...lines.map((s, i) => { const dv = document.createElement('div'); if (i) dv.className = 'rt-tip-sub'; dv.textContent = s; return dv; }));
-        tip.hidden = false;
-        const [px, py] = d3.pointer(ev, el);
-        const tw = tip.offsetWidth;
-        tip.style.left = Math.max(4, Math.min(W - tw - 4, px - tw / 2)) + 'px';
-        tip.style.top = (py + 16) + 'px';
-      })
-      .on('pointerleave', () => { tip.hidden = true; });
-  });
-
-  dash.calc('expense_rows', {
-    inputs: ['expenses'],
-    title: 'Expenses, cleaned',
-    description: 'Each expense with its amount read as a number of euros and its date as YYYY-MM-DD, oldest first.',
-    fn: (expenses) => expenses.map((r) => {
-      const day = new Date(Date.parse(r.Date + ' UTC'));
-      return {date: isNaN(day) ? r.Date : day.toISOString().slice(0, 10), expense: r.Expense, category: r.Category,
-        amount_eur: Number(String(r.Amount).replace(/[^0-9.\-]/g, '')) || 0, who_paid: r['who paid'], for_whom: r['for whom'],
-        country: r.pays, merchant: r.Merchant, notes: r.Notes};
-    }).sort((a, b) => String(a.date).localeCompare(String(b.date))).map((r, i) => ({n: i + 1, ...r}))
-  });
-
-  dash.calc('expense_by_payer', {
-    inputs: ['expense_rows'],
-    title: 'Expenses by who paid',
-    description: 'Total euros paid by each person.',
-    fn: (expense_rows) => [...new Set(expense_rows.map((r) => r.who_paid))].map((who_paid) => ({who_paid,
-      amount_eur: expense_rows.filter((r) => r.who_paid === who_paid).reduce((t, r) => t + r.amount_eur, 0)}))
-  });
-
-  dash.calc('expense_by_category', {
-    inputs: ['expense_rows'],
-    title: 'Expenses by category',
-    description: 'Total euros per category.',
-    fn: (expense_rows) => [...new Set(expense_rows.map((r) => r.category))].map((category) => ({category,
-      amount_eur: expense_rows.filter((r) => r.category === category).reduce((t, r) => t + r.amount_eur, 0)}))
-  });
-
-  dash.calc('expense_totals', {
-    inputs: ['expense_rows'],
-    title: 'Expenses total',
-    description: 'All expenses summed, in euros.',
-    fn: (expense_rows) => [{total_eur: expense_rows.reduce((t, r) => t + r.amount_eur, 0), count: expense_rows.length}]
-  });
-
-  dash.draw('explist', (el) => {
-    const d = dash.data(el.dataset.source);
-    el.replaceChildren();
-    if (d.status !== 'ok') return;
-    d.data.slice().sort((a, b) => b.amount_eur - a.amount_eur).forEach((r) => {
-      const li = document.createElement('li');
-      const k = document.createElement('span'); k.textContent = r[el.dataset.key];
-      const v = document.createElement('span'); v.textContent = '€' + d3.format(',.2f')(r.amount_eur);
-      li.append(k, v); el.append(li);
-    });
-  });
-
-  // Download the expenses table as a CSV (UTF-8 with BOM so Excel keeps accents).
-  const expCols = [['date', 'Date'], ['expense', 'Expense'], ['category', 'Category'], ['amount_eur', 'Amount (EUR)'], ['who_paid', 'Who paid'],
-    ['for_whom', 'For whom'], ['country', 'Country'], ['merchant', 'Merchant'], ['notes', 'Notes']];
-  const csvCell = (v) => { const s = v == null ? '' : String(v); return /[",\n\r;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-  dash.onData(() => {
-    const ok = dash.data('expense_rows').status === 'ok';
-    document.querySelectorAll('.exp-csv').forEach((b) => { b.disabled = !ok; });
-  });
-  const dlReady = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
-  const showMsg = (name) => document.querySelectorAll('.exp-msg').forEach((m) => { m.hidden = m.dataset.msg !== name; });
-  document.querySelectorAll('.exp-csv').forEach((b) => b.addEventListener('click', async () => {
-    const d = dash.data('expense_rows');
-    if (d.status !== 'ok') return;
-    const lines = [expCols.map(([, h]) => csvCell(h)).join(',')]
-      .concat(d.data.map((r) => expCols.map(([f]) => csvCell(r[f])).join(',')));
-    const csv = '﻿' + lines.join('\r\n') + '\r\n';
-    showMsg(null);
-    const downloads = await dlReady;
-    if (!downloads) {
-      const url = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'}));
-      const a = document.createElement('a'); a.href = url; a.download = 'trip-expenses.csv';
-      document.body.append(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      showMsg('saved');
-      return;
-    }
-    try {
-      await downloads.save({filename: 'trip-expenses.csv', data: csv});
-      showMsg('saved');
-    } catch (e) {
-      const code = e && e.code;
-      showMsg(code === 'declined' ? 'declined' : code === 'rate_limited' ? 'busy' : 'unavailable');
-    }
-  }));
-
-  // Timeline: one segment per country, sized by its dates, from the first departure to the last day.
-  const goChapter = (ch) => {
-    const el = document.getElementById(ch === 'start' ? 'ch-loop' : 'ch-' + ch);
-    if (el) el.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block: 'center'});
-  };
-  dash.draw('timeline', (el) => {
-    el.replaceChildren();
-    const s = dash.data('stays');
-    if (s.status !== 'ok') return;
-    const W = el.clientWidth, H = el.clientHeight;
-    if (!W || !H) return;
-    const stops = s.data;
-    const day = (v) => new Date(v + 'T00:00:00Z');
-    const first = stops[0], last = stops[stops.length - 1];
-    const t0 = day(first.depart), t1 = day(last.depart || last.arrive);
-    const segs = [...new Set(stops.filter((d) => d.chapter !== 'start').map((d) => d.chapter))].map((chapter) => {
-      const ss = stops.filter((d) => d.chapter === chapter);
-      const a = d3.min(ss, (d) => day(d.arrive)), b = d3.max(ss, (d) => day(d.depart || d.arrive));
-      return {chapter, country: ss[0].country, optional: ss.every((d) => d.optional), a, b};
-    });
-    const cur = st.chapter;
-    const lit = (g) => cur === 'all' || cur === 'totals' || g.chapter === cur;
-    const fmt = d3.utcFormat('%-d %b');
-    const horizontal = el.dataset.orient === 'h';
-    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('role', 'img').attr('aria-label', 'Trip timeline from ' + first.city + ' to ' + last.country);
-    const main = segs.filter((g) => !g.optional), opt = segs.filter((g) => g.optional);
-
-    if (!horizontal) {
-      const y = d3.scaleUtc([t0, t1], [10, H - 10]);
-      const x = 14;
-      svg.append('line').attr('class', 'rt-tl-axis').attr('x1', x).attr('x2', x).attr('y1', y(t0)).attr('y2', y(t1));
-      const ends = [[first, t0, first.city], [last, t1, last.country]];
-      ends.forEach(([d, tt, name], i) => {
-        svg.append('circle').attr('cx', x).attr('cy', y(tt)).attr('r', 4).style('fill', 'var(--color-panel)').style('stroke', 'var(--color-fg)').style('stroke-width', 2);
-      });
-      const g = svg.append('g').selectAll('g').data(main).join('g').attr('class', 'rt-tl-seg')
-        .on('click', (ev, d) => goChapter(d.chapter));
-      g.append('rect').attr('x', x - 4).attr('width', 8).attr('y', (d) => y(d.a) + 1).attr('height', (d) => Math.max(2, y(d.b) - y(d.a) - 2)).attr('rx', 3)
-        .style('fill', (d) => lit(d) ? dash.colors[0] : 'var(--cds-chart-muted)').style('opacity', (d) => lit(d) ? 1 : 0.5);
-      g.append('rect').attr('x', 0).attr('width', W).attr('y', (d) => y(d.a)).attr('height', (d) => Math.max(2, y(d.b) - y(d.a))).style('fill', 'transparent');
-      const mid = (d) => (y(d.a) + y(d.b)) / 2;
-      g.append('text').attr('class', (d) => 'rt-tl-name' + (lit(d) && cur !== 'all' && cur !== 'totals' ? ' is-on' : '')).attr('x', x + 12).attr('y', (d) => mid(d) - 2).text((d) => d.country);
-      g.append('text').attr('class', 'rt-tl-date').attr('x', x + 12).attr('y', (d) => mid(d) + 11).text((d) => fmt(d.a) + ' – ' + fmt(d.b));
-      const og = svg.append('g').selectAll('g').data(opt).join('g').attr('class', 'rt-tl-seg').on('click', (ev, d) => goChapter(d.chapter));
-      og.append('rect').attr('x', x - 13).attr('width', 4).attr('y', (d) => y(d.a) + 1).attr('height', (d) => Math.max(2, y(d.b) - y(d.a) - 2)).attr('rx', 2)
-        .style('fill', 'var(--color-ok)').style('opacity', (d) => d.chapter === cur || cur === 'all' || cur === 'totals' ? 1 : 0.55);
-      svg.append('text').attr('class', 'rt-tl-date').attr('x', x + 12).attr('y', y(t0) + 4).text(first.city.replace(/ \(.*\)/, '') + ' · ' + fmt(t0));
-      svg.append('text').attr('class', 'rt-tl-date').attr('x', x + 12).attr('y', y(t1) + 4).text('End · ' + fmt(t1));
-      if (cur !== 'all' && cur !== 'totals') {
-        const c = segs.find((d) => d.chapter === cur);
-        if (c) svg.append('circle').attr('cx', c.optional ? x - 11 : x).attr('cy', mid(c)).attr('r', 6).style('fill', 'var(--color-panel)').style('stroke', c.optional ? 'var(--color-ok)' : dash.colors[0]).style('stroke-width', 3);
-      }
-      // Keep labels from meeting: hide a segment's date line when the segment is short.
-      g.selectAll('.rt-tl-date').style('display', (d) => y(d.b) - y(d.a) < 30 ? 'none' : null);
-      g.selectAll('.rt-tl-name').style('display', (d) => y(d.b) - y(d.a) < 14 ? 'none' : null);
-    } else {
-      const x = d3.scaleUtc([t0, t1], [4, W - 4]);
-      const g = svg.append('g').selectAll('g').data(main).join('g').attr('class', 'rt-tl-seg').on('click', (ev, d) => goChapter(d.chapter));
-      g.append('rect').attr('y', 8).attr('height', 8).attr('x', (d) => x(d.a) + 1).attr('width', (d) => Math.max(2, x(d.b) - x(d.a) - 2)).attr('rx', 3)
-        .style('fill', (d) => lit(d) ? dash.colors[0] : 'var(--cds-chart-muted)').style('opacity', (d) => lit(d) ? 1 : 0.5);
-      svg.append('g').selectAll('rect').data(opt).join('rect').attr('y', 1).attr('height', 4).attr('x', (d) => x(d.a) + 1).attr('width', (d) => Math.max(2, x(d.b) - x(d.a) - 2)).attr('rx', 2)
-        .style('fill', 'var(--color-ok)');
-      const c = segs.find((d) => d.chapter === cur);
-      const label = c ? c.country + ' · ' + fmt(c.a) + ' – ' + fmt(c.b) : first.city.replace(/ \(.*\)/, '') + ' ' + fmt(t0) + ' → ' + last.country + ' ' + fmt(t1);
-      const lx = c ? Math.min(Math.max(4, (x(c.a) + x(c.b)) / 2), W - 4) : W / 2;
-      const txt = svg.append('text').attr('class', 'rt-tl-name is-on').attr('y', 34).attr('x', lx).attr('text-anchor', 'middle').text(label);
-      const tw = txt.node().getComputedTextLength();
-      txt.attr('x', Math.min(Math.max(tw / 2 + 2, lx), W - tw / 2 - 2));
-    }
-  });
-
-  dash.calc('tickets', {
-    inputs: ['legs', 'stays', 'expense_rows'],
-    title: 'Tickets on the route',
-    description: 'Every flight, train and bus leg of the route in travel order with its estimated cost (campervan driving is left out: the van is in the daily cost); a leg is bought when its stop names a keyword (paid_expense) found in Travel expenses, whose amounts are summed as paid.',
-    fn: (legs, stays, expense_rows) => legs.filter((l) => l.mode !== 'campervan').map((l) => {
-      const from = stays.find((s) => s.city === l.from), to = stays.find((s) => s.city === l.to);
-      const key = l.optional ? '' : (to && to.paid_expense) || '';
-      const hits = key ? expense_rows.filter((e) => e.category === 'Travel' && String(e.expense).toLowerCase().includes(key)) : [];
-      const paid = hits.reduce((t, e) => t + e.amount_eur, 0);
-      return {date: (from && from.depart) || '', from: l.from, to: l.to, mode: l.mode, estimate_eur: l.optional && l.transport_eur === 0 ? null : l.transport_eur,
-        paid_eur: hits.length ? paid : null, status: l.optional ? 'Optional' : hits.length ? 'Bought' : 'To buy'};
-    }).sort((a, b) => a.date.localeCompare(b.date) || (a.status === 'Optional') - (b.status === 'Optional')).map((r, i) => ({n: i + 1, ...r}))
-  });
-
-  dash.calc('ticket_totals', {
-    inputs: ['tickets'],
-    title: 'Tickets bought and to buy',
-    description: 'Paid total of bought legs, and the estimate and count of main-route legs not bought yet.',
-    fn: (tickets) => {
-      const left = tickets.filter((t) => t.status === 'To buy');
-      return [{paid_eur: tickets.reduce((s, t) => s + (t.paid_eur || 0), 0), to_buy_eur: left.reduce((s, t) => s + (t.estimate_eur || 0), 0), to_buy_count: left.length}];
-    }
-  });
-
-  // Okinawa page
-  dash.calc('okinawa_stays', {
-    inputs: ['okinawa_loop'],
-    title: 'Okinawa loop with nights',
-    description: 'Each stop of the campervan loop with the nights between arriving and leaving.',
-    fn: (okinawa_loop) => okinawa_loop.map((r) => ({...r, nights: Math.round((Date.parse(r.depart) - Date.parse(r.arrive)) / 864e5)})).sort((a, b) => a.order - b.order)
-  });
-  dash.calc('okinawa_totals', {
-    inputs: ['okinawa_stays'],
-    title: 'Okinawa loop totals',
-    description: 'Nights in the van, rough cost for two (nights × daily allowance) and paid parking (nights × nightly fee).',
-    fn: (okinawa_stays) => [{nights: okinawa_stays.reduce((t, r) => t + r.nights, 0),
-      cost_eur: okinawa_stays.reduce((t, r) => t + r.nights * r.daily_eur, 0),
-      parking_jpy: okinawa_stays.reduce((t, r) => t + r.nights * (r.parking_jpy || 0), 0),
-      unknown_fee_nights: okinawa_stays.filter((r) => r.parking_jpy == null).reduce((t, r) => t + r.nights, 0)}]
-  });
-
-  const OKI = {lon0: 127.95, lat0: 26.5, k: 1000};
-  OKI.c = Math.cos(OKI.lat0 * Math.PI / 180);
-  const okiP = (lon, lat) => [(lon - OKI.lon0) * OKI.c * OKI.k, -(lat - OKI.lat0) * OKI.k];
-  const spotKind = (type) => /^Paid/.test(type) ? 'paid' : /^Roadside/.test(type) ? 'day' : /^Free/.test(type) ? 'free' : 'camp';
-  const spotColor = (kind) => kind === 'paid' ? dash.colors[2] : kind === 'free' ? 'var(--color-ok)' : dash.colors[3];
-  document.querySelectorAll('.oki-sw-paid').forEach((e) => { e.style.fill = dash.colors[2]; });
-  document.querySelectorAll('.oki-sw-free').forEach((e) => { e.style.fill = 'var(--color-ok)'; });
-  document.querySelectorAll('.oki-sw-camp').forEach((e) => { e.style.fill = dash.colors[3]; });
-  document.querySelectorAll('.oki-sw-route').forEach((e) => { e.style.stroke = dash.colors[0]; });
-
-  dash.draw('okimap', (el) => {
-    el.replaceChildren();
-    const sh = dash.data('okinawa_shapes'), sp = dash.data('okinawa_spots'), lp = dash.data('okinawa_stays');
-    if ([sh, sp, lp].some((d) => d.status === 'error' || d.status === 'missing')) {
-      el.classList.remove('dash-skeleton');
-      const f = document.createElement('div'); f.className = 'rt-fail'; f.textContent = 'Failed to load'; el.append(f); return;
-    }
-    if ([sh, sp, lp].some((d) => d.status !== 'ok')) { el.classList.add('dash-skeleton'); return; }
-    el.classList.remove('dash-skeleton');
-    const W = el.clientWidth, H = el.clientHeight;
-    if (!W || !H) return;
-    const pts = sp.data.map((s) => okiP(s.lon, s.lat)).concat(lp.data.map((s) => okiP(s.lon, s.lat)));
-    const pad = 0.05 * OKI.k;
-    const x0 = d3.min(pts, (p) => p[0]) - pad, x1 = d3.max(pts, (p) => p[0]) + pad, y0 = d3.min(pts, (p) => p[1]) - pad, y1 = d3.max(pts, (p) => p[1]) + pad;
-    const k = Math.min(W / (x1 - x0), H / (y1 - y0));
-    const tx = W / 2 - k * (x0 + x1) / 2, ty = H / 2 - k * (y0 + y1) / 2;
-    const S = (lon, lat) => { const p = okiP(lon, lat); return [tx + k * p[0], ty + k * p[1]]; };
-    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Map of Okinawa main island with overnight spots and our loop');
-    svg.append('rect').attr('class', 'oki-sea').attr('width', W).attr('height', H).attr('rx', 6);
-    svg.append('g').attr('transform', `translate(${tx},${ty}) scale(${k})`).selectAll('path').data(sh.data).join('path').attr('class', 'oki-land').attr('d', (d) => d.d);
-    const loop = lp.data;
-    svg.append('path').attr('class', 'oki-route').style('stroke', dash.colors[0])
-      .attr('d', 'M' + loop.map((s) => S(s.lon, s.lat).map((v) => v.toFixed(1)).join(',')).join('L'));
-    const tip = document.createElement('div'); tip.className = 'rt-tip'; tip.hidden = true; el.append(tip);
-    const showTip = (ev, lines) => {
-      tip.replaceChildren(...lines.map((s, i) => { const dv = document.createElement('div'); if (i) dv.className = 'rt-tip-sub'; dv.textContent = s; return dv; }));
-      tip.hidden = false;
-      const [px, py] = d3.pointer(ev, el); const tw = tip.offsetWidth, th = tip.offsetHeight;
-      tip.style.left = Math.max(4, Math.min(W - tw - 4, px - tw / 2)) + 'px';
-      tip.style.top = (py - th - 14 < 4 ? py + 16 : py - th - 14) + 'px';
-    };
-    const g = svg.append('g').selectAll('g').data(sp.data).join('g').attr('transform', (d) => `translate(${S(d.lon, d.lat).join(',')})`)
-      .on('pointermove', (ev, d) => showTip(ev, [d.name, d.type + ' · ' + d.town, d.fee + (d.facilities ? ' · ' + d.facilities : '')]))
-      .on('pointerleave', () => { tip.hidden = true; });
-    g.each(function (d) {
-      const kind = spotKind(d.type), sel = d3.select(this);
-      if (kind === 'paid') sel.append('rect').attr('x', -6).attr('y', -6).attr('width', 12).attr('height', 12).attr('rx', 2);
-      else if (kind === 'free') sel.append('circle').attr('r', 6);
-      else if (kind === 'day') sel.append('circle').attr('r', 4.5);
-      else sel.append('path').attr('d', 'M0 -7 L6.5 5 L-6.5 5 Z');
-      sel.select(':first-child').attr('class', 'oki-spot').style('fill', kind === 'day' ? 'none' : spotColor(kind)).style('stroke', kind === 'day' ? 'var(--color-fg-muted)' : null);
-      sel.append('circle').attr('r', 12).style('fill', 'transparent');
-    });
-    const seen = new Map();
-    loop.forEach((s) => { const key = s.lat + ',' + s.lon; seen.set(key, (seen.get(key) || []).concat(s)); });
-    const badges = [...seen.values()];
-    const b = svg.append('g').selectAll('g').data(badges).join('g').attr('transform', (ss) => { const [x, y] = S(ss[0].lon, ss[0].lat); return `translate(${x + 14},${y - 14})`; })
-      .on('pointermove', (ev, ss) => showTip(ev, [ss.map((s) => s.order).join(' and ') + '. ' + ss[0].place, ss.map((s) => s.spot + (s.nights ? ' · ' + s.nights + ' nights' : '')).join(' / ')]))
-      .on('pointerleave', () => { tip.hidden = true; });
-    b.append('circle').attr('r', 10).style('fill', dash.colors[0]).style('stroke', 'var(--color-panel)').style('stroke-width', 1.5);
-    b.append('text').attr('class', 'oki-badge-text').text((ss) => ss.length > 1 ? ss[0].order + '/' + ss[ss.length - 1].order : ss[0].order).style('font-size', (ss) => ss.length > 1 ? '8px' : null);
-    b.append('text').attr('class', 'oki-label').attr('x', 14).attr('dy', '0.35em').text((ss) => ss[0].place);
-  });
-
-  dash.draw('okiloop', (el) => {
-    el.replaceChildren();
-    const d = dash.data('okinawa_stays');
-    if (d.status !== 'ok') return;
-    const fmt = d3.utcFormat('%-d %b');
-    d.data.forEach((s) => {
-      const li = document.createElement('li');
-      const n = document.createElement('span'); n.className = 'oki-num'; n.style.background = dash.colors[0]; n.textContent = s.order;
-      const p = document.createElement('span'); p.className = 'oki-place'; p.textContent = s.place + ' · ' + s.spot;
-      const sub = document.createElement('span'); sub.className = 'oki-sub';
-      sub.textContent = fmt(new Date(s.arrive)) + (s.nights ? ' – ' + fmt(new Date(s.depart)) + ' · ' + s.nights + (s.nights === 1 ? ' night · ' : ' nights · ') + (s.parking_jpy == null ? 'fee to confirm' : s.parking_jpy ? '¥' + d3.format(',')(s.parking_jpy) + '/night' : 'free') + ' · ~€' + s.daily_eur + '/day for two' : '');
-      li.append(n, p, sub); el.append(li);
-    });
-  });
-</script>
+<!-- ===== Scripts: shared first (runtime + shared draws + tabs), then one per page. Trip before Expenses (tickets use the trip legs). ===== -->
+<script src="shared/shared-scripts.js"></script>
+<script src="pages/trip/trip-page.js"></script>
+<script src="pages/insurance/insurance-page.js"></script>
+<script src="pages/expenses/expenses-page.js"></script>
+<script src="pages/okinawa/okinawa-page.js"></script>
 
 </div>
 </body>

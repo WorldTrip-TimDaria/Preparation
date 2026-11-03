@@ -1,0 +1,97 @@
+/* Shared styles for every page: colour/size tokens (light and dark), the site frame, tabs,
+ page headers, cards, data tables, stat tiles, tooltips and buttons used on more than one page.
+ Page-only styles live in pages/<page>/<page>-page.css. */
+
+/* ===== Theme tokens ===== */
+:root {
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-size-caption: 0.8125rem; --font-size-body: 0.9375rem; --font-size-heading: 1.0625rem; --font-size-title: 1.5rem;
+  --font-weight-medium: 600;
+  --gap-extra-small: 4px; --gap-small: 8px; --gap-medium: 16px; --gap-large: 24px; --gap-extra-large: 40px;
+  --padding-extra-small: 4px; --padding-small: 8px; --padding-medium: 12px; --padding-large: 20px;
+  --border-radius: 8px; --duration-slow: 300ms; --easing-out: cubic-bezier(.2,.8,.2,1);
+  --color-text: #1f1e1c; --color-text-muted: #6b6862; --color-background: #faf9f6; --color-panel: #ffffff; --color-border: #e4e1da;
+  --color-success: #2e7d4f; --color-warning: #b26a00; --color-error: #c0392b;
+  --color-chart-muted: #a9a59c; --color-chart-axis: #c9c5bc;
+  --color-text-secondary: #6b6862; --color-popover-background: #ffffff; --color-popover-border: #e4e1da; --shadow-popover: 0 4px 16px rgba(0,0,0,.12);
+  --series-1: #2f6fdb; --series-2: #d9822b; --series-3: #8a5cd1; --series-4: #c2477a; --series-5: #2a9d8f; --series-6: #b5892c; --series-7: #5b7a99; --series-8: #7d8b3a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: #ecebe7; --color-text-muted: #a19e97; --color-background: #161614; --color-panel: #201f1d; --color-border: #34322e;
+    --color-success: #5cc28a; --color-warning: #e0a347; --color-error: #ef6b5b;
+    --color-chart-muted: #6d6a64; --color-chart-axis: #4a4843;
+    --color-text-secondary: #a19e97; --color-popover-background: #26251f; --color-popover-border: #3a3833; --shadow-popover: 0 4px 16px rgba(0,0,0,.5);
+    --series-1: #6ea0f2; --series-2: #f0a35e; --series-3: #b292ec; --series-4: #e07aa4; --series-5: #5cc0b3; --series-6: #d8b25a; --series-7: #8ca7c2; --series-8: #a9b765;
+  }
+}
+html, body { margin: 0; background: var(--color-background); color: var(--color-text); font-family: var(--font-sans); }
+
+/* ===== Site frame ===== */
+#site-root { max-width: 1400px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; }
+#site-root *, #site-root *::before, #site-root *::after { box-sizing: border-box; }
+#site-root b { font-weight: 700; }
+.loading-skeleton { background: linear-gradient(90deg, var(--color-border), transparent, var(--color-border)); background-size: 200% 100%; animation: sk 1.4s linear infinite; border-radius: var(--border-radius); }
+@keyframes sk { to { background-position: -200% 0; } }
+
+/* ===== Tabs and shortcut buttons between pages ===== */
+.page-tabs { display: flex; gap: var(--gap-extra-small); margin-bottom: var(--gap-large); border-bottom: 1px solid var(--color-border); }
+.page-tabs button { font: inherit; font-size: var(--font-size-body); background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--padding-extra-small) var(--padding-small); margin-bottom: -1px; color: var(--color-text-muted); cursor: pointer; }
+.page-tabs button[aria-pressed="true"] { color: var(--color-text); border-bottom-color: var(--color-text); }
+.page-shortcut-button + .page-shortcut-button { margin-top: var(--gap-small); }
+.page-shortcut-button.is-compact { margin: var(--gap-extra-small) 0 var(--gap-small); padding: var(--padding-small) var(--padding-medium); }
+.page-shortcut-button { display: flex; align-items: center; gap: var(--gap-medium); width: 100%; max-width: 30rem; margin-top: var(--gap-medium); text-align: left; font: inherit; color: var(--color-text); background: var(--color-panel); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--padding-medium) var(--padding-large); cursor: pointer; transition: border-color var(--duration-slow); }
+.page-shortcut-button:hover, .page-shortcut-button:focus-visible { border-color: var(--color-text-muted); }
+.page-shortcut-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.page-shortcut-title { font-size: var(--font-size-heading); font-weight: var(--font-weight-medium); }
+.page-shortcut-subtitle { font-size: var(--font-size-caption); color: var(--color-text-muted); }
+.page-shortcut-arrow { font-size: var(--font-size-heading); color: var(--color-text-muted); }
+
+/* ===== Page header ===== */
+.page-header { margin-bottom: var(--gap-large); }
+.page-title { font-family: var(--font-serif); font-weight: 400; font-size: calc(var(--font-size-title) * 1.4); line-height: 1.15; margin: 0 0 var(--gap-small); }
+.page-intro { font-size: var(--font-size-body); color: var(--color-text-muted); max-width: 44rem; margin: 0; line-height: 1.55; }
+.page-intro b { color: var(--color-text); font-variant-numeric: tabular-nums; }
+.page-kicker { font-size: var(--font-size-caption); color: var(--color-text-muted); margin: 0 0 var(--gap-extra-small); }
+
+/* ===== Content pages (insurance, okinawa, expenses): sections and cards ===== */
+.content-page { font-family: var(--font-sans); }
+.section-heading { font-family: var(--font-serif); font-weight: 400; font-size: var(--font-size-title); margin: var(--gap-extra-large) 0 var(--gap-small); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: var(--gap-medium); }
+.card { background: var(--color-panel); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--padding-large); min-width: 0; }
+.card h3 { font-size: var(--font-size-heading); font-weight: var(--font-weight-medium); margin: 0 0 2px; }
+.card-note { font-size: var(--font-size-caption); color: var(--color-text-muted); margin: 0 0 var(--gap-small); line-height: 1.5; }
+
+/* ===== Data tables (filled by the data_table draw function) ===== */
+.table-scroll-container { overflow: auto; max-height: 75vh; }
+.data-table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: var(--font-size-caption); line-height: 1.45; }
+.data-table th, .data-table td { text-align: left; vertical-align: top; padding: var(--padding-extra-small) var(--padding-small); border-bottom: 1px solid var(--color-border); }
+.data-table thead th { position: sticky; top: 0; z-index: 2; background: var(--color-panel); color: var(--color-text-muted); font-weight: var(--font-weight-medium); white-space: nowrap; }
+.data-table tbody td:first-child, .data-table thead th:first-child { position: sticky; left: 0; background: var(--color-panel); font-weight: var(--font-weight-medium); min-width: 9rem; }
+.data-table thead th:first-child { z-index: 3; }
+.data-table.is-wide td { min-width: 11rem; }
+.data-table.is-wide td:first-child { min-width: 9rem; }
+.data-table td.is-Confirmed { color: var(--color-success); }
+.data-table td.is-Uncertain, .data-table td.is-To-check { color: var(--color-warning); }
+.data-table td.is-Fails, .data-table td.is-Ruled-out { color: var(--color-error); }
+.data-table tr.is-Bought td { color: var(--color-success); background: color-mix(in srgb, var(--color-success) 12%, var(--color-panel)); }
+.data-table tr.is-Bought td:first-child { box-shadow: inset 3px 0 0 var(--color-success); }
+.data-table tr.is-Optional td { color: var(--color-text-muted); font-style: italic; }
+.data-table td.is-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ===== Stat tiles ===== */
+.stat-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--gap-medium); margin: var(--gap-large) 0; }
+.stat-tile { background: var(--color-panel); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--padding-large); }
+.stat-tile-label { font-size: var(--font-size-caption); color: var(--color-text-muted); margin: 0 0 var(--gap-extra-small); }
+.stat-tile-value { font-family: var(--font-serif); font-weight: 400; font-size: calc(var(--font-size-title) * 1.3); font-variant-numeric: tabular-nums; margin: 0; }
+.stat-tile-value.is-ok { color: var(--color-success); }
+
+/* ===== Links, back button, chart tooltip, load failure ===== */
+.link-list { columns: 2 16rem; font-size: var(--font-size-body); line-height: 1.8; padding-left: 1.1rem; margin: 0; }
+.link-list a { color: var(--color-text); }
+.back-to-trip-button { font: inherit; font-size: var(--font-size-body); margin: var(--gap-extra-large) 0 var(--gap-medium); background: none; border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--padding-extra-small) var(--padding-medium); color: var(--color-text); cursor: pointer; }
+.chart-tooltip { position: absolute; pointer-events: none; background: var(--color-popover-background); border: 1px solid var(--color-popover-border); border-radius: var(--border-radius); box-shadow: var(--shadow-popover); padding: var(--padding-extra-small) var(--padding-small); font-size: var(--font-size-caption); white-space: nowrap; }
+.chart-tooltip .chart-tooltip-secondary-line { color: var(--color-text-secondary); }
+.load-failure-message { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: var(--gap-extra-small); color: var(--color-text-muted); font-size: var(--font-size-caption); }
+.load-failure-message::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-error); }

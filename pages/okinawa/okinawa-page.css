@@ -1,0 +1,21 @@
+/* Okinawa campervan page (opened from the Japan chapter of the trip). */
+.okinawa-map-and-loop-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--gap-large); align-items: start; }
+@container (max-width: 760px) { .okinawa-map-and-loop-grid { grid-template-columns: minmax(0, 1fr); } }
+.okinawa-page-container { container-type: inline-size; }
+.okinawa-map { position: relative; height: min(80vh, 720px); min-height: 420px; }
+.okinawa-map svg { display: block; }
+.okinawa-map-land { fill: var(--color-chart-muted); fill-opacity: .3; stroke: var(--color-panel); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.okinawa-map-sea { fill: var(--color-background); }
+.okinawa-map-route { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.okinawa-map-spot { stroke: var(--color-panel); stroke-width: 1.5; }
+.okinawa-map-badge-text { font-size: 11px; font-weight: var(--font-weight-medium); fill: var(--color-background); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.okinawa-map-label { font-size: var(--font-size-caption); fill: var(--color-text); paint-order: stroke; stroke: var(--color-panel); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.okinawa-map-legend { display: flex; flex-wrap: wrap; gap: var(--gap-medium); font-size: var(--font-size-caption); color: var(--color-text-muted); margin-top: var(--gap-small); }
+.okinawa-map-legend span { display: inline-flex; align-items: center; gap: var(--gap-extra-small); }
+.okinawa-loop-list { list-style: none; margin: 0; padding: 0; }
+.okinawa-loop-list li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 2px var(--gap-small); padding: var(--gap-small) 0; border-top: 1px solid var(--color-border); }
+.okinawa-loop-list li:first-child { border-top: 0; }
+.okinawa-loop-stop-number { grid-row: span 2; width: 1.4rem; height: 1.4rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--font-size-caption); font-weight: var(--font-weight-medium); color: var(--color-background); }
+.okinawa-loop-place { font-size: var(--font-size-body); font-weight: var(--font-weight-medium); }
+.okinawa-loop-details { font-size: var(--font-size-caption); color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.okinawa-tips-list { margin: 0; padding-left: 1.1rem; font-size: var(--font-size-body); line-height: 1.6; }
