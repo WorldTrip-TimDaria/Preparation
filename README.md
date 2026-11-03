@@ -45,6 +45,12 @@ pages/
     okinawa-page.js
     okinawa-campervan-plan.json               ← edit: loop, overnight spots, rental offers
     okinawa-municipality-outlines-do-not-edit.json   generated map outlines
+  storage_box/                the "Storage box" tab: storage boxes in Belgium compared by size
+    storage-box-page.css
+    storage-box-page.js
+    storage_boxes_belgium.xlsx                ← edit: the comparison sheet
+    convert-excel-to-json.py                  run after editing the Excel
+    storage-box-comparison.json               written by the script, don't edit
 ```
 
 d3 v7 loads from cdnjs. The fonts load from Google Fonts; they're optional, and the page falls back to system fonts.
@@ -113,7 +119,7 @@ Two draw functions are shared and need no JavaScript at all:
    - add a `<link rel="stylesheet">` in `<head>` and a `<script>` at the end of `<body>`.
 3. In `<page>-page.js`, wrap the code in `(function () { ... })();`. Register the data first, then add the calculations and draw functions.
 
-You can reuse `card`, `card-grid`, `section-heading`, `stat-tiles`/`stat-tile` and `data-table` from the shared styles. For a page without a tab (like Okinawa), skip the tab button and link to it with any `data-page="<page>"` button.
+You can reuse `card`, `card-grid`, `section-heading`, `stat-tiles`/`stat-tile`, `data-table` and `toggle-button-group` (a row of buttons, one pressed at a time) from the shared styles. For a page without a tab (like Okinawa), skip the tab button and link to it with any `data-page="<page>"` button.
 
 ### Add a chapter (country) to the trip
 
@@ -169,6 +175,26 @@ There is one section per table, in page order:
   - `parking_jpy` per night, or `null` if unknown.
 - `overnight_spots`: every overnight spot we found. A `type` starting with `Paid`, `Free` or `Roadside` sets the marker shape; any other type gets the campsite marker. Coordinates are approximate.
 - `rental_offers`: the rental offers.
+
+### `pages/storage_box/storage_boxes_belgium.xlsx`: the storage box comparison
+
+Edit the Excel file, then rebuild the page's data:
+
+```bash
+python3 pages/storage_box/convert-excel-to-json.py
+# Wrote storage-box-comparison.json: 40 boxes, 13 open points, 3 read-me topics.
+```
+
+The script needs only Python 3 and reads three sheets:
+
+- **Comparison** becomes the boxes. It needs these column headers exactly: `Brand`, `Location`, `Box / size`, `Floor area (m²)`, `Height (m)`, `Volume (m³)`, `Monthly price (€)`, `Total 12 months (€)`, `Notes` and `Source and date consulted` (a URL followed by `(YYYY-MM-DD)`).
+  - A row without a monthly price is skipped.
+  - Formula cells use the value Excel saved, so save the file in Excel before converting.
+  - A box without a volume (or a floor area) stays out of the chart and the size ranges for that measure. The page says which boxes are missing.
+- **Open points** (`Item`, `Type`, `What I could not open or get`, `Suggested next step`) becomes the "Still to check" table.
+- **Read me** becomes "How the prices are counted". The `Colours` and `Blue numbers` topics are left out, because they describe the Excel file only.
+
+If a header is renamed, the script stops and says which one is missing. To change the size ranges (m³ and m²) or the default range, edit `SIZE_MEASURES` at the top of `storage-box-page.js`.
 
 ### Map outlines (`*-do-not-edit.json`)
 

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="pages/insurance/insurance-page.css">
 <link rel="stylesheet" href="pages/expenses/expenses-page.css">
 <link rel="stylesheet" href="pages/okinawa/okinawa-page.css">
+<link rel="stylesheet" href="pages/storage_box/storage-box-page.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 </head>
 <body>
@@ -22,6 +23,7 @@
   <button type="button" data-page="trip" aria-pressed="true">Trip</button>
   <button type="button" data-page="insurance" aria-pressed="false">Insurance</button>
   <button type="button" data-page="expenses" aria-pressed="false">Expenses</button>
+  <button type="button" data-page="storage-box" aria-pressed="false">Storage box</button>
 </nav>
 
 <!-- ===== PAGE: Trip (pages/trip/) ===== -->
@@ -36,6 +38,10 @@
     </button>
     <button type="button" class="page-shortcut-button" data-page="expenses" id="expenses-shortcut">
       <span class="page-shortcut-text"><span class="page-shortcut-title">Expenses</span><span class="page-shortcut-subtitle">What we've spent so far and who paid, with a link to our Notion table</span></span>
+      <span class="page-shortcut-arrow" aria-hidden="true">→</span>
+    </button>
+    <button type="button" class="page-shortcut-button" data-page="storage-box" id="storage-box-shortcut">
+      <span class="page-shortcut-text"><span class="page-shortcut-title">Storage box in Belgium</span><span class="page-shortcut-subtitle">Storage boxes compared by size and 12-month cost, and what we still have to check</span></span>
       <span class="page-shortcut-arrow" aria-hidden="true">→</span>
     </button>
   </header>
@@ -154,12 +160,10 @@
     </div>
     <div class="card" id="insurance-needs-nice">
       <h3>Nice to have</h3>
-      <p class="card-note">Worth paying a little more for.</p>
       <ul class="insurance-needs-list" data-draw="insurance_needs_list" data-source="insurance_needs" data-priority="nice"></ul>
     </div>
     <div class="card" id="insurance-needs-skip">
       <h3>Don't care</h3>
-      <p class="card-note">Fine if it's there; not a reason to choose.</p>
       <ul class="insurance-needs-list" data-draw="insurance_needs_list" data-source="insurance_needs" data-priority="skip"></ul>
     </div>
   </div>
@@ -195,8 +199,8 @@
   <h2 class="section-heading" id="insurance-prices">Prices</h2>
   <div class="card" id="card-insurance-prices">
     <h3>Quoted price by insurer</h3>
-    <p class="card-note">Base price plus the supplement for the USA and Canada, as listed in our comparison grid. The grid doesn't say which period the price covers.</p>
-    <div class="insurance-profile-switch" role="group" aria-label="Traveller profile">
+    <p class="card-note">Base price plus the supplement for the USA and Canada, as listed in our comparison grid.</p>
+    <div class="toggle-button-group" role="group" aria-label="Traveller profile">
       <button type="button" data-profile="couple_u40" aria-pressed="true">Couple, under 40</button>
       <button type="button" data-profile="solo_u40" aria-pressed="false">Solo, under 40</button>
       <button type="button" data-profile="solo_o40" aria-pressed="false">Solo, 40 and over</button>
@@ -206,7 +210,7 @@
   </div>
 
   <h2 class="section-heading" id="insurance-desk-research">Earlier desk research</h2>
-  <p class="insurance-section-intro">Indicative yearly prices and headline cover from the first round of research, before the calls.</p>
+  <p class="insurance-section-intro">Indicative yearly prices and headline cover from the first round of research.</p>
   <div class="card" id="card-insurance-desk-research">
     <div class="table-scroll-container">
       <table class="data-table" data-draw="data_table" data-source="insurance_comparison_desk" data-cols="insurer|Insurer;price_per_person_year|Price per person per year;medical_ceiling|Medical ceiling;emergency_dental|Emergency dental;luggage|Luggage and theft;early_return|Early return (family death);cancellation|Cancellation;home_country|Home-country cover;trustpilot|Trustpilot"></table>
@@ -387,12 +391,64 @@
   <button type="button" class="back-to-trip-button" data-page="trip">← Back to the trip</button>
 </section>
 
+<!-- ===== PAGE: Storage box (pages/storage_box/) ===== -->
+<section class="page content-page" id="storage-box" hidden>
+  <header class="page-header">
+    <h1 class="page-title">Storage box in Belgium</h1>
+    <p class="page-intro"><b data-draw="number_value" data-source="storage_box_totals" data-row="0" data-field="box_count">—</b> boxes with a price, from <b data-draw="number_value" data-source="storage_box_totals" data-row="0" data-field="brand_count">—</b> companies. Pick how to measure them and a size range to compare. From our comparison sheet (storage_boxes_belgium.xlsx).</p>
+  </header>
+
+  <div class="storage-box-size-controls">
+    <div class="toggle-button-group" role="group" aria-label="Measure the boxes by">
+      <span class="storage-box-control-label">Measure</span>
+      <button type="button" data-storage-box-measure="volume" aria-pressed="true">Volume (m³)</button>
+      <button type="button" data-storage-box-measure="floor_area" aria-pressed="false">Floor area (m²)</button>
+    </div>
+    <div class="toggle-button-group" role="group" aria-label="Size range">
+      <span class="storage-box-control-label">Size</span>
+      <span class="storage-box-size-range-buttons" data-draw="storage_box_size_range_buttons" data-source="storage_box_options_with_unit_prices"></span>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="storage-box-best-value">Best value: <span data-draw="storage_box_selected_range_label">—</span></h2>
+  <div class="stat-tiles" data-draw="storage_box_best_value_tiles" data-source="storage_box_options_with_unit_prices"></div>
+
+  <div class="card" id="card-storage-box-cost-chart">
+    <h3>12-month cost by size</h3>
+    <p class="card-note">Each dot is a box; a company's boxes are joined by a line. The shaded band is the size range you picked. Hover a dot for its details.</p>
+    <div class="storage-box-cost-chart" id="storage-box-cost-chart" data-draw="storage_box_cost_chart" data-source="storage_box_options_with_unit_prices"></div>
+    <div class="storage-box-brand-legend" data-draw="storage_box_brand_legend" data-source="storage_box_options_with_unit_prices"></div>
+    <p class="card-note storage-box-missing-size-note" data-draw="storage_box_missing_size_note" data-source="storage_box_options_with_unit_prices"></p>
+  </div>
+
+  <h2 class="section-heading" id="storage-box-every-box">Every box: <span data-draw="storage_box_selected_range_label">—</span></h2>
+  <div class="card" id="card-storage-box-comparison">
+    <p class="card-note">Click a column header to sort. Open "Notes" for promotions, deposits, insurance and the source.</p>
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="storage_box_comparison_table" data-source="storage_box_options_with_unit_prices"></table>
+    </div>
+  </div>
+
+  <h2 class="section-heading" id="storage-box-how-prices-are-counted">How the prices are counted</h2>
+  <ul class="storage-box-read-me-list" data-draw="storage_box_read_me_list" data-source="storage_box_read_me"></ul>
+
+  <h2 class="section-heading" id="storage-box-open-points">Still to check</h2>
+  <div class="card" id="card-storage-box-open-points">
+    <div class="table-scroll-container">
+      <table class="data-table" data-draw="data_table" data-source="storage_box_open_points" data-cols="item|Item;type|Type;missing|What is missing;next_step|Next step"></table>
+    </div>
+  </div>
+
+  <button type="button" class="back-to-trip-button" data-page="trip">← Back to the trip</button>
+</section>
+
 <!-- ===== Scripts: shared first (runtime + shared draws + tabs), then one per page. Trip before Expenses (tickets use the trip legs). ===== -->
 <script src="shared/shared-scripts.js"></script>
 <script src="pages/trip/trip-page.js"></script>
 <script src="pages/insurance/insurance-page.js"></script>
 <script src="pages/expenses/expenses-page.js"></script>
 <script src="pages/okinawa/okinawa-page.js"></script>
+<script src="pages/storage_box/storage-box-page.js"></script>
 
 </div>
 </body>
