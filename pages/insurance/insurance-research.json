@@ -1,0 +1,711 @@
+{
+  "needs": [
+    {
+      "id": "n1",
+      "priority": "must",
+      "cover": "Hospital costs",
+      "minimum": "at least €200,000"
+    },
+    {
+      "id": "n2",
+      "priority": "must",
+      "cover": "Dental costs",
+      "minimum": "at least €300"
+    },
+    {
+      "id": "n3",
+      "priority": "must",
+      "cover": "Transport to hospital",
+      "minimum": ""
+    },
+    {
+      "id": "n4",
+      "priority": "must",
+      "cover": "Return trip if a family member dies (grandparents included)",
+      "minimum": ""
+    },
+    {
+      "id": "n5",
+      "priority": "must",
+      "cover": "Medical repatriation",
+      "minimum": ""
+    },
+    {
+      "id": "n6",
+      "priority": "nice",
+      "cover": "Return trip if a family member is ill (grandparents included)",
+      "minimum": ""
+    },
+    {
+      "id": "n7",
+      "priority": "nice",
+      "cover": "Indoor or supervised climbing",
+      "minimum": ""
+    },
+    {
+      "id": "n8",
+      "priority": "nice",
+      "cover": "Third-party liability for rental damage",
+      "minimum": ""
+    },
+    {
+      "id": "n9",
+      "priority": "nice",
+      "cover": "Transport delays and missed flights",
+      "minimum": ""
+    },
+    {
+      "id": "n10",
+      "priority": "nice",
+      "cover": "Luggage theft, loss or damage",
+      "minimum": ""
+    },
+    {
+      "id": "n11",
+      "priority": "skip",
+      "cover": "Legal cover",
+      "minimum": ""
+    },
+    {
+      "id": "n12",
+      "priority": "skip",
+      "cover": "A relative at our bedside if hospitalised",
+      "minimum": ""
+    },
+    {
+      "id": "n13",
+      "priority": "skip",
+      "cover": "Extended-stay costs",
+      "minimum": ""
+    },
+    {
+      "id": "n14",
+      "priority": "skip",
+      "cover": "Third-party liability for bodily injury",
+      "minimum": ""
+    },
+    {
+      "id": "n15",
+      "priority": "skip",
+      "cover": "Third-party liability for property damage",
+      "minimum": ""
+    },
+    {
+      "id": "n16",
+      "priority": "skip",
+      "cover": "Cash advance if passport or card is lost or stolen",
+      "minimum": ""
+    },
+    {
+      "id": "n17",
+      "priority": "skip",
+      "cover": "Car rental excess refund",
+      "minimum": ""
+    },
+    {
+      "id": "n18",
+      "priority": "skip",
+      "cover": "Return after an attack or natural disaster",
+      "minimum": ""
+    },
+    {
+      "id": "n19",
+      "priority": "skip",
+      "cover": "Search and rescue costs",
+      "minimum": ""
+    },
+    {
+      "id": "n20",
+      "priority": "skip",
+      "cover": "Early return after an incident at home",
+      "minimum": ""
+    },
+    {
+      "id": "n21",
+      "priority": "skip",
+      "cover": "Death benefit",
+      "minimum": ""
+    },
+    {
+      "id": "n22",
+      "priority": "skip",
+      "cover": "Help after repatriation",
+      "minimum": ""
+    }
+  ],
+  "verdicts_by_insurer": [
+    {
+      "insurer": "Chapka Cap Aventure",
+      "verdict": "Confirmed",
+      "must_haves": "All confirmed",
+      "optional": "Luggage ✅, delays ✅, supervised climbing ✅ (check options)",
+      "note": "€200k medical worldwide, no excess; emergency dental; repatriation at 100%; early return for a relative's death, grandparents named."
+    },
+    {
+      "insurer": "ACS Globe Traveller",
+      "verdict": "Confirmed",
+      "must_haves": "All confirmed",
+      "optional": "Luggage ✅, sports option available",
+      "note": "€300k medical (customisable up to €500k); dental €300 urgent / €600 accident; repatriation at real cost; transport for a close family death, grandparents named."
+    },
+    {
+      "insurer": "AVI Marco Polo",
+      "verdict": "Confirmed",
+      "must_haves": "All confirmed",
+      "optional": "Luggage ✅, Sports & Loisirs option for climbing",
+      "note": "Up to €1M medical, no excess; early return for a parent, grandparent or sibling's death; evacuation unlimited at real cost."
+    },
+    {
+      "insurer": "Heymondo Long Stay",
+      "verdict": "Uncertain",
+      "must_haves": "Family round trip unconfirmed",
+      "optional": "Luggage ✅",
+      "note": "€2.5M medical, €400 dental. Covers a relative coming to us, not us going to them."
+    },
+    {
+      "insurer": "ACS Globe Partner",
+      "verdict": "Uncertain",
+      "must_haves": "Family round-trip direction unconfirmed",
+      "optional": "Luggage limited",
+      "note": "Under 40 only. €300k medical, €300 dental; a relative at the bedside after 7+ days in hospital."
+    },
+    {
+      "insurer": "World Nomads",
+      "verdict": "Uncertain",
+      "must_haves": "Family round trip unconfirmed",
+      "optional": "Generally good for adventure",
+      "note": "Cover depends on country of residence."
+    },
+    {
+      "insurer": "SafetyWing Essential",
+      "verdict": "Uncertain",
+      "must_haves": "Family round trip unconfirmed",
+      "optional": "Sports add-on available",
+      "note": "$250k medical, $1,000 dental; evacuation capped at $100k lifetime (lower than others)."
+    },
+    {
+      "insurer": "AVA Pass",
+      "verdict": "Uncertain",
+      "must_haves": "Duration and family trip unconfirmed",
+      "optional": "Varies by formula",
+      "note": "Built for stays up to 6 months; family ticket found only for a relative coming to us."
+    },
+    {
+      "insurer": "AXA / Assur-Travel / YupWeGo",
+      "verdict": "Unknown",
+      "must_haves": "Unknown",
+      "optional": "Unknown",
+      "note": "Aggregator or short-stay products; needs a direct quote and policy review."
+    },
+    {
+      "insurer": "Genki",
+      "verdict": "Fails",
+      "must_haves": "No family travel cover",
+      "optional": "N/A",
+      "note": "Health insurance only: no family travel, luggage or delays."
+    }
+  ],
+  "coverage_by_insurer": [
+    {
+      "insurer": "AVA Pass",
+      "status": "To check",
+      "hospital": "€300k (Santé Aventure) – unlimited",
+      "dental": "€300",
+      "family_hospitalised": "Round-trip ticket (grandparents incl.) – once a year",
+      "repatriation": "Real cost",
+      "family_death": "Round-trip ticket (grandparents incl.) – once a year",
+      "climbing": "Leisure: no exclusion",
+      "delays": "5h delay: €150 max (up to real cost)",
+      "luggage": "€2k (valuables max 50% of cover)",
+      "notes": "No comfort costs; Santé Aventure (tourist); PVT; can use parents' address; quick phone answers. Up to 184 days: €419 (codes blog-avava / backava: 5% off). PVT: €40/month, €160 minimum.",
+      "contact": "Called – quick answer"
+    },
+    {
+      "insurer": "AVI International",
+      "status": "",
+      "hospital": "€1M, no excess",
+      "dental": "€500 if accident / €150 urgent care",
+      "family_hospitalised": "Return home",
+      "repatriation": "Real cost",
+      "family_death": "Round trip if trip > 5 months, else one way",
+      "climbing": "Covered as amateur",
+      "delays": "Round trip if trip > 5 months, else one way",
+      "luggage": "€3k if lost by the airline",
+      "notes": "PVT and Marco Polo (2 contracts for 2 situations). €100 for 3 months; €525–555 for 6 months (holiday).",
+      "contact": ""
+    },
+    {
+      "insurer": "Assur-Travel",
+      "status": "To check",
+      "hospital": "€250k (first-euro excess), emergencies only – Access offer",
+      "dental": "€300 urgent care",
+      "family_hospitalised": "Round trip",
+      "repatriation": "Real cost",
+      "family_death": "Round trip",
+      "climbing": "Leisure: no exclusion for us (except mountaineering)",
+      "delays": "✗",
+      "luggage": "Access offer (€250/person)",
+      "notes": "App listing nearby doctors; no refund of comfort costs (I think). Covers PVT + leisure?",
+      "contact": ""
+    },
+    {
+      "insurer": "Chapka Direct",
+      "status": "To check",
+      "hospital": "€200k, no excess",
+      "dental": "€600/year",
+      "family_hospitalised": "Return home",
+      "repatriation": "Real cost",
+      "family_death": "Return home (round trip?)",
+      "climbing": "Climbing excluded",
+      "delays": "",
+      "luggage": "€2k",
+      "notes": "Tourist travel only; a working holiday needs another insurance.",
+      "contact": ""
+    },
+    {
+      "insurer": "ACS Globe Partner",
+      "status": "",
+      "hospital": "€300k",
+      "dental": "€300/year urgent",
+      "family_hospitalised": "?",
+      "repatriation": "Real cost",
+      "family_death": "Return home (round trip?) – if it happens in our country of residence",
+      "climbing": "Maybe?",
+      "delays": ">4h: €150",
+      "luggage": "€1k on top of the carrier's (not for a flight within one country)",
+      "notes": "Working holiday different from long stay?",
+      "contact": "Called (hung up), emailed – no answer after 3 days"
+    },
+    {
+      "insurer": "Yupwego",
+      "status": "",
+      "hospital": "€500k (USA/Japan included)",
+      "dental": "€600 if accident",
+      "family_hospitalised": "Round trip (bedridden before death) – only in one country chosen in advance",
+      "repatriation": "?",
+      "family_death": "Round trip, only in one country chosen in advance – 'death of a relative'",
+      "climbing": "No",
+      "delays": "No",
+      "luggage": "If stolen",
+      "notes": "No phone answer; website incomplete (in my view).",
+      "contact": "Called (hung up)"
+    },
+    {
+      "insurer": "AXA short stay (< 3 months)",
+      "status": "Ruled out",
+      "hospital": "?",
+      "dental": "?",
+      "family_hospitalised": "?",
+      "repatriation": "?",
+      "family_death": "?",
+      "climbing": "?",
+      "delays": "?",
+      "luggage": "?",
+      "notes": "Short stays only.",
+      "contact": ""
+    },
+    {
+      "insurer": "WorldTrips",
+      "status": "",
+      "hospital": "€200k",
+      "dental": "€300 emergency only (accident only)",
+      "family_hospitalised": "Maybe (parent, spouse, sibling, child or grandchild)",
+      "repatriation": "Real cost",
+      "family_death": "Yes (parent, spouse, sibling, child, grandchild) – Atlas International plan",
+      "climbing": "? (Atlas Travel excludes organised, regularly scheduled sports)",
+      "delays": "5h+: necessary accommodation",
+      "luggage": "Yes, if lost by a carrier",
+      "notes": "US-based (phone included). About €120 for 3 months.",
+      "contact": ""
+    },
+    {
+      "insurer": "World Nomads",
+      "status": "Ruled out",
+      "hospital": "3.5M",
+      "dental": "300+ (emergency only)",
+      "family_hospitalised": "?",
+      "repatriation": "Real cost",
+      "family_death": "Return ticket (grandparents?)",
+      "climbing": "Indoor or outdoor climbing covered (not above 6,000 m or free solo)",
+      "delays": "6h delay: prepaid accommodation, meals (max 250/day); claim from the carrier first; each flight counted separately",
+      "luggage": "Essential items up to $1,000 (air travel only)",
+      "notes": "Not available to residents of France or Belgium.",
+      "contact": "Emailed"
+    },
+    {
+      "insurer": "Heymondo Long Stay",
+      "status": "To check",
+      "hospital": "€2.3M",
+      "dental": "Probably (if in pain)",
+      "family_hospitalised": "Return to country of residence",
+      "repatriation": "Real cost",
+      "family_death": "Return to country of residence",
+      "climbing": "Indoor walls covered; outdoor climbing as an option",
+      "delays": "Accommodation + necessary expenses",
+      "luggage": "Passport/visa replacement costs",
+      "notes": "$250 excess on medical claims. Tourist long stay only. Must start and end at our tax address: no one-way or partial trips.",
+      "contact": "Emailed"
+    },
+    {
+      "insurer": "SafetyWing Nomad",
+      "status": "",
+      "hospital": "€230k",
+      "dental": "$1k",
+      "family_hospitalised": "No – only parent, spouse, sibling, child or grandchild (dying or deceased)",
+      "repatriation": "Real cost",
+      "family_death": "No – same list, no grandparents; we can travel to their country",
+      "climbing": "Supervised environment",
+      "delays": "Some hours: $60; 8h or more: $150–450 ($150/night after the first 8h)",
+      "luggage": "Up to $3,000 per period, $500 per item (with proof); wallet theft $150; passport reimbursed",
+      "notes": "Working holiday or travel: same policy.",
+      "contact": ""
+    },
+    {
+      "insurer": "Genki",
+      "status": "To check",
+      "hospital": "€1M (including checking symptoms)",
+      "dental": "€1k",
+      "family_hospitalised": "No",
+      "repatriation": "Real cost (but the policy ends)",
+      "family_death": "No",
+      "climbing": "Included",
+      "delays": "✗",
+      "luggage": "✗",
+      "notes": "USA/Canada: first 7 days of each stay, emergencies only. €50 excess per case.",
+      "contact": ""
+    },
+    {
+      "insurer": "Allianz Care",
+      "status": "",
+      "hospital": "€1M+",
+      "dental": "€300+ (option)",
+      "family_hospitalised": "Probably not (health insurance, not travel)",
+      "repatriation": "Real cost",
+      "family_death": "Probably not",
+      "climbing": "?",
+      "delays": "✗",
+      "luggage": "✗",
+      "notes": "10% off with code LIFE10 (valid 15 April – 14 May 2026).",
+      "contact": ""
+    }
+  ],
+  "prices_by_profile": [
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "Yupwego",
+      "offer": "",
+      "base_eur": 19.5,
+      "usa_canada_eur": null,
+      "note": "Under 30; +€22 with COVID option"
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "ACS Globe Partner",
+      "offer": "",
+      "base_eur": 29.5,
+      "usa_canada_eur": 12,
+      "note": ""
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "Heymondo Voyage Tranquillité",
+      "offer": "15% discount",
+      "base_eur": 41,
+      "usa_canada_eur": 7,
+      "note": ""
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "ACS Globe Traveller",
+      "offer": "",
+      "base_eur": 43,
+      "usa_canada_eur": 19,
+      "note": ""
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "Heymondo Voyage Premium",
+      "offer": "15% discount",
+      "base_eur": 49,
+      "usa_canada_eur": 51,
+      "note": ""
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "Chapka Cap Assistance 24/24h",
+      "offer": "5% discount",
+      "base_eur": 55,
+      "usa_canada_eur": 9,
+      "note": ""
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "AVA Pass",
+      "offer": "",
+      "base_eur": 62,
+      "usa_canada_eur": 24,
+      "note": ""
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "Assur-Travel Prime",
+      "offer": "",
+      "base_eur": 65,
+      "usa_canada_eur": 38,
+      "note": ""
+    },
+    {
+      "profile": "solo_u40",
+      "profile_label": "Solo, under 40",
+      "insurer": "AVI Assurance Routard",
+      "offer": "",
+      "base_eur": 67,
+      "usa_canada_eur": 12,
+      "note": ""
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "Yupwego",
+      "offer": "",
+      "base_eur": 47,
+      "usa_canada_eur": null,
+      "note": "30 and over; +€45 with COVID option"
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "ACS Globe Partner",
+      "offer": "",
+      "base_eur": null,
+      "usa_canada_eur": null,
+      "note": "Not offered"
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "Heymondo Voyage Tranquillité",
+      "offer": "15% discount",
+      "base_eur": 41,
+      "usa_canada_eur": 7,
+      "note": ""
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "ACS Globe Traveller",
+      "offer": "",
+      "base_eur": 43,
+      "usa_canada_eur": 19,
+      "note": ""
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "Heymondo Voyage Premium",
+      "offer": "15% discount",
+      "base_eur": 49,
+      "usa_canada_eur": 51,
+      "note": ""
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "Chapka Cap Assistance 24/24h",
+      "offer": "5% discount",
+      "base_eur": 55,
+      "usa_canada_eur": 9,
+      "note": ""
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "AVA Pass",
+      "offer": "",
+      "base_eur": 62,
+      "usa_canada_eur": 24,
+      "note": ""
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "Assur-Travel Prime",
+      "offer": "",
+      "base_eur": 75,
+      "usa_canada_eur": 60,
+      "note": ""
+    },
+    {
+      "profile": "solo_o40",
+      "profile_label": "Solo, 40 and over",
+      "insurer": "AVI Assurance Routard",
+      "offer": "",
+      "base_eur": 81,
+      "usa_canada_eur": 15,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "Yupwego",
+      "offer": "",
+      "base_eur": 39,
+      "usa_canada_eur": null,
+      "note": "Under 30; +€44 with COVID option"
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "ACS Globe Partner",
+      "offer": "",
+      "base_eur": 59,
+      "usa_canada_eur": 24,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "Heymondo Voyage Tranquillité",
+      "offer": "15% discount",
+      "base_eur": 82,
+      "usa_canada_eur": 14,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "ACS Globe Traveller",
+      "offer": "",
+      "base_eur": 86,
+      "usa_canada_eur": 38,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "Heymondo Voyage Premium",
+      "offer": "15% discount",
+      "base_eur": 98,
+      "usa_canada_eur": 102,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "Chapka Cap Assistance 24/24h",
+      "offer": "5% discount",
+      "base_eur": 110,
+      "usa_canada_eur": 18,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "AVA Pass",
+      "offer": "",
+      "base_eur": 124,
+      "usa_canada_eur": 48,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "Assur-Travel Prime",
+      "offer": "",
+      "base_eur": 126,
+      "usa_canada_eur": 82,
+      "note": ""
+    },
+    {
+      "profile": "couple_u40",
+      "profile_label": "Couple, under 40",
+      "insurer": "AVI Assurance Routard",
+      "offer": "",
+      "base_eur": 134,
+      "usa_canada_eur": 23,
+      "note": ""
+    }
+  ],
+  "comparison_desk": [
+    {
+      "insurer": "Chapka Cap Aventure",
+      "link": "https://www.chapkadirect.com/",
+      "price_per_person_year": "~€730",
+      "medical_ceiling": "€1M",
+      "emergency_dental": "✅",
+      "luggage": "✅ (€2,000)",
+      "early_return": "✅ (return + resume trip)",
+      "cancellation": "Add-on only",
+      "home_country": "✅ (30 days)",
+      "trustpilot": "4.5/5"
+    },
+    {
+      "insurer": "ACS Globe Partner",
+      "link": "https://www.acs-ami.com/fr/assurance-voyage/globe-partner/",
+      "price_per_person_year": "~€468",
+      "medical_ceiling": "€300k (USA) / more elsewhere",
+      "emergency_dental": "✅",
+      "luggage": "✅ (moderate)",
+      "early_return": "✅",
+      "cancellation": "Add-on only",
+      "home_country": "✅",
+      "trustpilot": "4.2/5"
+    },
+    {
+      "insurer": "AVI Marco Polo",
+      "link": "https://www.avi-international.com/",
+      "price_per_person_year": "~€730",
+      "medical_ceiling": "€1M",
+      "emergency_dental": "✅",
+      "luggage": "✅ (with excess)",
+      "early_return": "✅",
+      "cancellation": "Add-on only",
+      "home_country": "✅ (partial)",
+      "trustpilot": "4.1/5"
+    },
+    {
+      "insurer": "Heymondo Long Stay",
+      "link": "https://heymondo.com/long-stay-travel-insurance/",
+      "price_per_person_year": "~€800–1,300",
+      "medical_ceiling": "€1M",
+      "emergency_dental": "✅",
+      "luggage": "✅ (€4,000)",
+      "early_return": "✅",
+      "cancellation": "Add-on only",
+      "home_country": "❌",
+      "trustpilot": "4.2/5"
+    },
+    {
+      "insurer": "SafetyWing Essential",
+      "link": "https://safetywing.com/nomad-insurance/policy",
+      "price_per_person_year": "~€540",
+      "medical_ceiling": "$250k",
+      "emergency_dental": "✅ ($1,000)",
+      "luggage": "✅ ($3,000)",
+      "early_return": "✅",
+      "cancellation": "Limited",
+      "home_country": "✅ (30 days/90)",
+      "trustpilot": "3.8–4/5"
+    },
+    {
+      "insurer": "Genki Explorer",
+      "link": "https://genki.world/",
+      "price_per_person_year": "~€780",
+      "medical_ceiling": "Unlimited",
+      "emergency_dental": "✅",
+      "luggage": "❌",
+      "early_return": "⚠️ Check terms",
+      "cancellation": "❌",
+      "home_country": "❌ (limited)",
+      "trustpilot": "4.1/5"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+/* Expenses page. */
+.expenses-header-actions { display: flex; flex-wrap: wrap; gap: var(--gap-small); margin-top: var(--gap-medium); }
+.expenses-open-in-notion-link { display: inline-flex; align-items: center; gap: var(--gap-extra-small); font-size: var(--font-size-body); color: var(--color-text); text-decoration: none; background: var(--color-panel); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--padding-extra-small) var(--padding-medium); }
+.expenses-open-in-notion-link:hover, .expenses-open-in-notion-link:focus-visible { border-color: var(--color-text-muted); }
+
+/* ===== Totals by payer and category ===== */
+.expenses-amount-list { list-style: none; margin: 0; padding: 0; }
+.expenses-amount-list li { display: flex; justify-content: space-between; gap: var(--gap-small); padding: var(--gap-extra-small) 0; border-top: 1px solid var(--color-border); font-size: var(--font-size-body); font-variant-numeric: tabular-nums; }
+.expenses-amount-list li:first-child { border-top: 0; }
+
+/* ===== CSV download ===== */
+.expenses-card-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--gap-small); }
+.expenses-csv-download-button { font: inherit; font-size: var(--font-size-caption); color: var(--color-text); background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--padding-extra-small) var(--padding-small); cursor: pointer; }
+.expenses-csv-download-button:hover, .expenses-csv-download-button:focus-visible { border-color: var(--color-text-muted); }
+.expenses-csv-download-container { display: flex; flex-direction: column; align-items: flex-end; gap: var(--gap-extra-small); max-width: 18rem; }
+.expenses-csv-download-message { font-size: var(--font-size-caption); color: var(--color-text-muted); text-align: right; }
+.expenses-csv-download-button:disabled { opacity: .5; cursor: default; }

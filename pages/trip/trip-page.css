@@ -1,0 +1,66 @@
+/* Trip page: the scrolling story with the sticky timeline and world map. */
+.trip-page-content { container-type: inline-size; font-family: var(--font-sans); }
+.trip-chapter b { color: var(--color-text); font-variant-numeric: tabular-nums; }
+
+/* ===== Layout: timeline | chapters | map ===== */
+.trip-story-layout { display: grid; grid-template-columns: 7.5rem minmax(0, 0.85fr) minmax(0, 1.3fr); gap: var(--gap-large); align-items: start; }
+.trip-timeline-container { grid-column: 1; grid-row: 1; position: sticky; top: var(--gap-medium); }
+.trip-chapters { grid-column: 2; grid-row: 1; padding-bottom: 35vh; }
+.trip-map-container { grid-column: 3; grid-row: 1; position: sticky; top: var(--gap-medium); }
+
+/* ===== Timeline ===== */
+.trip-timeline-vertical { position: relative; height: min(72vh, 640px); min-height: 320px; }
+.trip-timeline-vertical svg { display: block; overflow: visible; }
+.trip-timeline-horizontal { display: none; position: relative; height: 46px; margin-top: var(--gap-extra-small); }
+.trip-timeline-segment { cursor: pointer; }
+.trip-timeline-country-name { font-size: var(--font-size-caption); fill: var(--color-text-muted); }
+.trip-timeline-country-name.is-on { fill: var(--color-text); font-weight: var(--font-weight-medium); }
+.trip-timeline-dates { font-size: 11px; fill: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.trip-timeline-axis { stroke: var(--color-chart-axis); stroke-width: 1; }
+
+/* ===== World map and legend ===== */
+.trip-map { position: relative; height: min(72vh, 640px); min-height: 320px; border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-panel); overflow: hidden; }
+.trip-map svg { display: block; }
+.trip-map-legend { display: flex; flex-wrap: wrap; gap: var(--gap-medium); margin-top: var(--gap-small); font-size: var(--font-size-caption); color: var(--color-text-muted); }
+.trip-map-legend span { display: inline-flex; align-items: center; gap: var(--gap-extra-small); }
+.trip-map-legend line { stroke-width: 2; }
+.trip-map-ocean { fill: var(--color-background); stroke: var(--color-border); vector-effect: non-scaling-stroke; }
+.trip-map-land { fill: var(--color-chart-muted); fill-opacity: .3; stroke: var(--color-panel); stroke-width: .5; vector-effect: non-scaling-stroke; }
+.trip-map-land.is-visited { fill-opacity: .3; }
+.trip-map-land.is-focus { fill-opacity: .55; }
+.trip-map-leg { fill: none; stroke: var(--color-chart-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.trip-map-leg.is-flight { stroke-dasharray: 6 5; stroke-linecap: butt; }
+.trip-map-leg.is-off { opacity: .4; }
+.trip-map-leg.is-optional { stroke-dasharray: 1 5; stroke-linecap: round; stroke-width: 2.5; }
+.trip-map-stop-dot.is-optional { stroke-dasharray: 2 2; }
+.trip-map-stop-dot { fill: var(--color-panel); stroke: var(--color-chart-muted); stroke-width: 2; }
+.trip-map-stop-hover-area { fill: transparent; cursor: default; }
+.trip-map-city-label { font-size: var(--font-size-caption); fill: var(--color-text); paint-order: stroke; stroke: var(--color-panel); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+
+/* ===== Chapters (one per country) and their stop lists ===== */
+.trip-chapter { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; opacity: .35; transition: opacity var(--duration-slow) var(--easing-out); }
+.trip-chapter.is-active { opacity: 1; }
+.trip-chapter h2 { font-family: var(--font-serif); font-weight: 400; font-size: var(--font-size-title); margin: 0 0 var(--gap-small); line-height: 1.2; }
+.trip-chapter p { font-size: var(--font-size-body); line-height: 1.6; margin: 0 0 var(--gap-small); }
+.trip-stop-list { list-style: none; margin: var(--gap-small) 0 0; padding: 0; border-top: 1px solid var(--color-border); }
+.trip-stop-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--gap-extra-small) var(--gap-small); padding: var(--gap-extra-small) 0; border-bottom: 1px solid var(--color-border); font-size: var(--font-size-caption); }
+.trip-stop-list .trip-stop-city { font-size: var(--font-size-body); font-weight: var(--font-weight-medium); }
+.trip-stop-list .trip-stop-dates { color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.trip-stop-list .trip-stop-status-tag { margin-left: auto; padding: 0 var(--padding-extra-small); border: 1px solid var(--color-border); border-radius: var(--border-radius); color: var(--color-text-muted); }
+.trip-stop-list .trip-stop-status-tag.is-given { color: var(--color-success); }
+.trip-stop-list .trip-stop-note { flex-basis: 100%; color: var(--color-text-muted); font-style: italic; }
+.trip-stop-list .trip-stop-status-tag.is-from-notes { color: var(--color-text); }
+.trip-stop-list .trip-stop-status-tag.is-optional { color: var(--color-warning); }
+
+.trip-footnote { font-size: var(--font-size-caption); color: var(--color-text-muted); max-width: 44rem; line-height: 1.5; margin: var(--gap-large) 0 0; }
+
+/* ===== Narrow screens: map on top, horizontal timeline ===== */
+@container (max-width: 760px) {
+  .trip-story-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .trip-map-container { grid-column: 1; grid-row: 1; top: 0; z-index: 2; background: var(--color-background); padding: var(--gap-extra-small) 0 var(--gap-small); }
+  .trip-map { height: 42vh; min-height: 240px; }
+  .trip-chapters { grid-column: 1; grid-row: 2; }
+  .trip-timeline-container { display: none; }
+  .trip-timeline-horizontal { display: block; }
+  .trip-chapter { min-height: 62vh; }
+}

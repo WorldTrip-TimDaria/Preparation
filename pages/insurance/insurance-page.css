@@ -1,0 +1,26 @@
+/* Insurance page. */
+.insurance-section-intro { font-size: var(--font-size-body); line-height: 1.6; max-width: 44rem; margin: 0 0 var(--gap-medium); }
+
+/* ===== What we need ===== */
+.insurance-needs-list { list-style: none; margin: 0; padding: 0; }
+.insurance-needs-list li { padding: var(--gap-extra-small) 0; border-top: 1px solid var(--color-border); font-size: var(--font-size-body); line-height: 1.4; }
+.insurance-needs-list .insurance-need-minimum { display: block; font-size: var(--font-size-caption); color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.card.is-must { border-top: 3px solid var(--color-success); }
+
+/* ===== Open points ===== */
+.insurance-callout { border-left: 3px solid var(--color-warning); background: var(--color-panel); border-radius: var(--border-radius); padding: var(--padding-medium) var(--padding-large); margin: var(--gap-medium) 0; max-width: 52rem; }
+.insurance-callout h3 { font-size: var(--font-size-body); font-weight: var(--font-weight-medium); margin: 0 0 var(--gap-extra-small); }
+.insurance-callout ul { margin: 0; padding-left: 1.1rem; font-size: var(--font-size-body); line-height: 1.55; }
+
+/* ===== Price chart and profile switch ===== */
+.insurance-profile-switch { display: inline-flex; flex-wrap: wrap; gap: var(--gap-extra-small); margin-bottom: var(--gap-small); }
+.insurance-profile-switch button { font: inherit; font-size: var(--font-size-caption); padding: var(--padding-extra-small) var(--padding-small); border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-background); color: var(--color-text-muted); cursor: pointer; }
+.insurance-profile-switch button[aria-pressed="true"] { color: var(--color-text); border-color: var(--color-text); }
+.insurance-price-chart { position: relative; min-height: 320px; }
+.insurance-price-chart svg { display: block; }
+.insurance-price-chart .insurance-price-chart-insurer-name { font-size: var(--font-size-caption); fill: var(--color-text); }
+.insurance-price-chart .insurance-price-chart-value { font-size: var(--font-size-caption); fill: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.insurance-price-chart-legend { display: flex; gap: var(--gap-medium); font-size: var(--font-size-caption); color: var(--color-text-muted); margin-top: var(--gap-small); }
+.insurance-price-chart-legend i { display: inline-block; width: .7rem; height: .7rem; border-radius: 2px; margin-right: var(--gap-extra-small); vertical-align: -1px; }
+
+.insurance-question-quote { font-family: var(--font-serif); font-size: var(--font-size-heading); line-height: 1.5; margin: var(--gap-small) 0 var(--gap-medium); padding-left: var(--padding-large); border-left: 3px solid var(--color-border); max-width: 44rem; }
