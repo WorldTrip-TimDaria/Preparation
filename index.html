@@ -726,7 +726,7 @@
     const visited = new Set(stops.filter((d) => d.stop > 0 && !d.optional).map((d) => d.country));
     const focusCountries = new Set(stops.filter((d) => d.chapter === focus).map((d) => d.country));
     const isOn = (chapter) => !focus || chapter === focus;
-    const modeColor = (m) => m === 'train' ? dash.colors[1] : dash.colors[0];
+    const modeColor = (m) => m === 'train' || m === 'bus' ? dash.colors[1] : dash.colors[0];
 
     // The view: zoom k and the centre (in projected units) to frame the focused region, or the whole world.
     let fitPts = spherePts;
