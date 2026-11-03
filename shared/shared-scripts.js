@@ -145,7 +145,8 @@
   });
 
   // data_table: <table data-draw="data_table" data-source="<id>" data-cols="column|Header;column|Header">.
-  // Columns ending in _eur are formatted as money; verdict/status cells and data-rowclass rows get an is-<value> class.
+  // Columns ending in _eur are formatted as money; verdict/status cells and data-rowclass rows get an is-<value> class,
+  // and a cell whose row has <column>_flag gets is-<flag>.
   dashboard.draw('data_table', (el) => {
     const d = dashboard.data(el.dataset.source);
     el.replaceChildren();
@@ -163,7 +164,9 @@
         const money = /_eur$/.test(f);
         td.textContent = money ? (r[f] == null ? '' : d3.format(',.2f')(r[f])) : v;
         if (money) td.classList.add('is-num');
-        if ((f === 'verdict' || f === 'status') && v) td.className = 'is-' + v.replace(/\s+/g, '-');
+        // The colour class ignores a reason in brackets: 'Fails (no grandparents)' -> is-Fails.
+        if ((f === 'verdict' || f === 'status') && v) td.className = 'is-' + v.replace(/\s*\(.*$/, '').replace(/\s+/g, '-');
+        if (r[f + '_flag']) td.classList.add('is-' + String(r[f + '_flag']).replace(/\s+/g, '-'));
       });
     });
   });

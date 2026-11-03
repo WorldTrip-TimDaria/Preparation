@@ -135,72 +135,100 @@
   ],
   "verdicts_by_insurer": [
     {
+      "insurer": "AVA Pass",
+      "verdict": "Confirmed",
+      "must_haves": "Confirmed by phone only: the written policy says a one-way ticket home (\"titre de transport retour\"). Parents' address allowed (phone); in a dispute the tax address counts",
+      "max_length": "180 days (policy; website says 184) – our trip: 260",
+      "max_length_flag": "Too short",
+      "optional": "Varies by formula",
+      "note": "Our call: round-trip ticket home if a family member (grandparents included) is dying or dies, once a year. Written policy: early return = one-way ticket home, family not defined. €500k medical (€30 excess), €300 dental, repatriation at real cost, delays over 5h up to €150. Get the round trip confirmed by email."
+    },
+    {
+      "insurer": "AVA Plan Santé AVAnture",
+      "verdict": "Uncertain",
+      "must_haves": "Family return: the conditions say one ticket home (one way), the product sheet says round trip; cover ends once we are home",
+      "max_length": "3 to 12 months (365 days), not renewable",
+      "optional": "Luggage €2,000 (€15 excess); no delay cover; 'dangerous sports' excluded (list on ava.fr, not checked)",
+      "note": "Policy (June 2025): €300k medical, no excess (USA/Canada €1M option); €300 urgent dental; repatriation at real cost. Family = spouse, parents, grandparents, children, grandchildren, siblings, in-laws; death, or hospitalisation over 48h (1 ticket a year). Under 50. Whole trip (275-day rate): €515 under 35. Tax address counts as domicile in a dispute."
+    },
+    {
       "insurer": "Chapka Cap Aventure",
       "verdict": "Confirmed",
-      "must_haves": "All confirmed",
-      "optional": "Luggage ✅, delays ✅, supervised climbing ✅ (check options)",
-      "note": "€200k medical worldwide, no excess; emergency dental; repatriation at 100%; early return for a relative's death, grandparents named."
+      "must_haves": "All confirmed (policy), round trip under conditions. Repatriation and the family-return ticket go to our domicile (Belgium), where we won't live any more",
+      "max_length": "3 to 24 months",
+      "optional": "Luggage €2,000 (theft only with break-in or assault; phones excluded); no transport-delay cover; rock climbing (varappe) and mountaineering excluded, indoor walls not named",
+      "note": "Policy (Sept 2024): round-trip ticket home after the death of a spouse, parent, grandparent, child, sibling or parent-in-law, or their life-threatening hospitalisation. Round trip only if the return ticket is bought with the outbound one, we fly back out within 30 days, and the contract still runs at least 1 month after; otherwise one way. Once per 12 months. €200k medical, no excess; dental €600/year; repatriation at real cost. Tourist trips only, but unpaid manual work (fruit picking, light farm work) is covered. Buy before leaving: 12-day waiting period if bought abroad."
     },
     {
       "insurer": "ACS Globe Traveller",
-      "verdict": "Confirmed",
-      "must_haves": "All confirmed",
+      "verdict": "Fails",
+      "must_haves": "Family death only counts if it happens in our residence country (Belgium), where our family does not live",
+      "max_length": "Up to 12 months",
       "optional": "Luggage ✅, sports option available",
-      "note": "€300k medical (customisable up to €500k); dental €300 urgent / €600 accident; repatriation at real cost; transport for a close family death, grandparents named."
+      "note": "Policy (July 2026): close family includes grandparents, but only death counts (not hospitalisation), it must happen in our country of residence, and ACS pays one ticket home, not a round trip. Medical ceiling €150k, €300k or €500k to choose; dental €300 urgent / €600 accident; repatriation at real cost; delays over 4h up to €150."
     },
     {
       "insurer": "AVI Marco Polo",
-      "verdict": "Confirmed",
-      "must_haves": "All confirmed",
+      "verdict": "Partial",
+      "must_haves": "Urgent dental €150, below our €300",
+      "max_length": "2 to 24 months",
       "optional": "Luggage ✅, Sports & Loisirs option for climbing",
-      "note": "Up to €1M medical, no excess; early return for a parent, grandparent or sibling's death; evacuation unlimited at real cost."
+      "note": "Up to €1M medical, no excess; dental €500 after an accident but €150 for urgent care (our notes); early return for a parent, grandparent or sibling's death (round trip if the trip is over 5 months); evacuation unlimited at real cost."
     },
     {
       "insurer": "Heymondo Long Stay",
-      "verdict": "Uncertain",
-      "must_haves": "Family round trip unconfirmed",
+      "verdict": "Fails",
+      "must_haves": "Trip must start and end at our tax address (Belgium), and we won't go back there",
+      "max_length": "Up to 12 months (3 months, renewed)",
       "optional": "Luggage ✅",
-      "note": "€2.5M medical, €400 dental. Covers a relative coming to us, not us going to them."
+      "note": "2.3M medical (our notes) / €1M (web search), €400 dental. Covers a relative coming to us, not us going to them."
     },
     {
       "insurer": "ACS Globe Partner",
-      "verdict": "Uncertain",
-      "must_haves": "Family round-trip direction unconfirmed",
+      "verdict": "Fails",
+      "must_haves": "Grandparents not included (policy)",
+      "max_length": "12 months, renewable twice",
       "optional": "Luggage limited",
-      "note": "Under 40 only. €300k medical, €300 dental; a relative at the bedside after 7+ days in hospital."
+      "note": "Policy: 'close family' = children, father, mother, brothers and sisters, no grandparents; one ticket home after a death. Under 40 only. €300k medical, €300 urgent dental; luggage only during the outbound/return journey (€1,150)."
     },
     {
       "insurer": "World Nomads",
-      "verdict": "Uncertain",
-      "must_haves": "Family round trip unconfirmed",
+      "verdict": "Ruled out",
+      "must_haves": "Not available to us",
+      "max_length": "?",
       "optional": "Generally good for adventure",
-      "note": "Cover depends on country of residence."
+      "note": "Not available to residents of France or Belgium."
     },
     {
       "insurer": "SafetyWing Essential",
-      "verdict": "Uncertain",
-      "must_haves": "Family round trip unconfirmed",
+      "verdict": "Fails",
+      "must_haves": "No grandparents (our notes)",
+      "max_length": "Renews every 4 weeks",
       "optional": "Sports add-on available",
-      "note": "$250k medical, $1,000 dental; evacuation capped at $100k lifetime (lower than others)."
+      "note": "Family list: parent, spouse, sibling, child, grandchild. $250k medical, $1,000 dental; evacuation capped at $100k lifetime."
     },
     {
-      "insurer": "AVA Pass",
-      "verdict": "Uncertain",
-      "must_haves": "Duration and family trip unconfirmed",
-      "optional": "Varies by formula",
-      "note": "Built for stays up to 6 months; family ticket found only for a relative coming to us."
+      "insurer": "WorldTrips",
+      "verdict": "Fails",
+      "must_haves": "No grandparents (our notes)",
+      "max_length": "?",
+      "optional": "Luggage if lost by a carrier; delays 5h+",
+      "note": "Family list: parent, spouse, sibling, child, grandchild (Atlas International plan). 200k medical, 300 dental (accident only)."
     },
     {
       "insurer": "AXA / Assur-Travel / YupWeGo",
       "verdict": "Unknown",
       "must_haves": "Unknown",
+      "max_length": "AXA: under 3 months; others ?",
+      "max_length_flag": "Too short",
       "optional": "Unknown",
       "note": "Aggregator or short-stay products; needs a direct quote and policy review."
     },
     {
       "insurer": "Genki",
       "verdict": "Fails",
-      "must_haves": "No family travel cover",
+      "must_haves": "Health insurance only: no family travel cover",
+      "max_length": "Monthly, cancel any time",
       "optional": "N/A",
       "note": "Health insurance only: no family travel, luggage or delays."
     }
@@ -208,36 +236,50 @@
   "coverage_by_insurer": [
     {
       "insurer": "AVA Pass",
-      "status": "To check",
-      "hospital": "€300k (Santé Aventure) – unlimited",
+      "status": "Confirmed (by phone; 184 days max)",
+      "hospital": "300k (Santé Aventure) – unlimited",
       "dental": "€300",
       "family_hospitalised": "Round-trip ticket (grandparents incl.) – once a year",
       "repatriation": "Real cost",
       "family_death": "Round-trip ticket (grandparents incl.) – once a year",
       "climbing": "Leisure: no exclusion",
       "delays": "5h delay: €150 max (up to real cost)",
-      "luggage": "€2k (valuables max 50% of cover)",
-      "notes": "No comfort costs; Santé Aventure (tourist); PVT; can use parents' address; quick phone answers. Up to 184 days: €419 (codes blog-avava / backava: 5% off). PVT: €40/month, €160 minimum.",
-      "contact": "Called – quick answer"
+      "luggage": "2k (valuables max 50% of cover)",
+      "notes": "No comfort costs; Santé Aventure (tourist); PVT; can use parents' address; quick phone answers. Up to 184 days: €419 (codes blog-avava / backava: 5% off). PVT: €40/month, €160 minimum. AVA allows our parents' address while we leave from Belgium. Written policy: early return is a one-way ticket ('titre de transport retour'), max 180 days; tax address counts as domicile in a dispute.",
+      "contact": "Called – quick answer – parents' address with a Belgian departure: allowed"
+    },
+    {
+      "insurer": "AVA Plan Santé AVAnture",
+      "status": "Uncertain (round trip: documents disagree)",
+      "hospital": "300k, no excess (USA/Canada 1M option)",
+      "dental": "€300 urgent",
+      "family_hospitalised": "Over 48h: one ticket home, 1 per year (conditions); round trip (product sheet)",
+      "repatriation": "Real cost",
+      "family_death": "One ticket home (conditions) / round trip (product sheet); grandparents included",
+      "climbing": "'Dangerous sports' excluded (list on ava.fr, not checked)",
+      "delays": "✗",
+      "luggage": "€2,000 per year (€15 excess; valuables max 50%)",
+      "notes": "3 to 12 months, not renewable; under 50; cover ends once back home. From AVA policy documents (June 2025), not our notes.",
+      "contact": ""
     },
     {
       "insurer": "AVI International",
-      "status": "",
-      "hospital": "€1M, no excess",
-      "dental": "€500 if accident / €150 urgent care",
+      "status": "Partial (urgent dental €150)",
+      "hospital": "1M, no excess",
+      "dental": "€500 if accident / 150 urgent care",
       "family_hospitalised": "Return home",
       "repatriation": "Real cost",
       "family_death": "Round trip if trip > 5 months, else one way",
       "climbing": "Covered as amateur",
-      "delays": "Round trip if trip > 5 months, else one way",
-      "luggage": "€3k if lost by the airline",
-      "notes": "PVT and Marco Polo (2 contracts for 2 situations). €100 for 3 months; €525–555 for 6 months (holiday).",
+      "delays": "€150 flat if we arrive more than 4h late (max 2 claims for a trip under 6 months, 3 over 6 months); missed flights and weather delays excluded. From AVI's Marco Polo Multirisques notice (web), not our notes.",
+      "luggage": "3k if lost by the airline",
+      "notes": "PVT and Marco Polo (2 contracts for 2 situations). €100 for 3 months; 525–555 for 6 months (holiday).",
       "contact": ""
     },
     {
       "insurer": "Assur-Travel",
       "status": "To check",
-      "hospital": "€250k (first-euro excess), emergencies only – Access offer",
+      "hospital": "250k, covered from the first euro (no excess), emergencies only – Access offer",
       "dental": "€300 urgent care",
       "family_hospitalised": "Round trip",
       "repatriation": "Real cost",
@@ -250,36 +292,50 @@
     },
     {
       "insurer": "Chapka Direct",
-      "status": "To check",
-      "hospital": "€200k, no excess",
+      "status": "Confirmed (policy)",
+      "hospital": "200k, no excess",
       "dental": "€600/year",
-      "family_hospitalised": "Return home",
+      "family_hospitalised": "Return home. Policy: round trip if life-threatening, same conditions",
       "repatriation": "Real cost",
-      "family_death": "Return home (round trip?)",
-      "climbing": "Climbing excluded",
-      "delays": "",
-      "luggage": "€2k",
-      "notes": "Tourist travel only; a working holiday needs another insurance.",
+      "family_death": "Return home (round trip?). Policy: round trip (grandparents incl.) if return booked with outbound, within 30 days, contract valid 1 more month; else one way. Once per 12 months. The ticket goes to our country of domicile (tax address), not our family's country",
+      "climbing": "Climbing excluded. Policy: rock climbing (varappe) and mountaineering excluded; indoor walls not named",
+      "delays": "No transport-delay cover; luggage delivered >24h late: up to €150, outbound flight only (policy table)",
+      "luggage": "2k (valuables €1,000; theft only with break-in or assault; phones excluded – policy)",
+      "notes": "Tourist travel only; a working holiday needs another insurance. Policy: unpaid manual work (fruit picking, light farm work) is covered; 12-day waiting period if bought abroad. Policy: domicile = where we live before leaving (Belgium); repatriation and family-return tickets go there; 12-day waiting period if bought abroad.",
       "contact": ""
     },
     {
       "insurer": "ACS Globe Partner",
-      "status": "",
-      "hospital": "€300k",
+      "status": "Fails (no grandparents)",
+      "hospital": "300k",
       "dental": "€300/year urgent",
-      "family_hospitalised": "?",
+      "family_hospitalised": "Not covered (policy); a relative can come to us after 7+ days in hospital",
       "repatriation": "Real cost",
-      "family_death": "Return home (round trip?) – if it happens in our country of residence",
+      "family_death": "Return home (round trip?) – if it happens in our country of residence. Policy: one ticket home, grandparents not included",
       "climbing": "Maybe?",
       "delays": ">4h: €150",
-      "luggage": "€1k on top of the carrier's (not for a flight within one country)",
-      "notes": "Working holiday different from long stay?",
+      "luggage": "1k on top of the carrier's compensation (theft while staying in a country not covered)",
+      "notes": "Working holiday different from long stay? Policy: under 40; 'close family' = children, parents, brothers and sisters.",
       "contact": "Called (hung up), emailed – no answer after 3 days"
     },
     {
+      "insurer": "ACS Globe Traveller",
+      "status": "Fails (family death only in our tax country)",
+      "hospital": "€150k, €300k or €500k (to choose)",
+      "dental": "€300 urgent / €600 accident",
+      "family_hospitalised": "Not covered (policy); a relative can come to us after 6+ days in hospital",
+      "repatriation": "Real cost",
+      "family_death": "One ticket home, grandparents included, only if the death is in our country of residence (policy)",
+      "climbing": "Risky-sports option (check whether climbing counts)",
+      "delays": ">4h: meals, transfer and 1st night, up to €150",
+      "luggage": "€2,000 per contract if lost or damaged by a transport company (€30 excess)",
+      "notes": "Under 66; up to 12 months. From the ACS policy documents (July 2026), not our notes. No rule on the departure country; cover applies anywhere outside our country of residence.",
+      "contact": ""
+    },
+    {
       "insurer": "Yupwego",
-      "status": "",
-      "hospital": "€500k (USA/Japan included)",
+      "status": "Unknown",
+      "hospital": "500k (USA/Japan included)",
       "dental": "€600 if accident",
       "family_hospitalised": "Round trip (bedridden before death) – only in one country chosen in advance",
       "repatriation": "?",
@@ -292,7 +348,7 @@
     },
     {
       "insurer": "AXA short stay (< 3 months)",
-      "status": "Ruled out",
+      "status": "Ruled out (under 3 months only)",
       "hospital": "?",
       "dental": "?",
       "family_hospitalised": "?",
@@ -306,9 +362,9 @@
     },
     {
       "insurer": "WorldTrips",
-      "status": "",
-      "hospital": "€200k",
-      "dental": "€300 emergency only (accident only)",
+      "status": "Fails (no grandparents)",
+      "hospital": "200k",
+      "dental": "300 emergency only (accident only)",
       "family_hospitalised": "Maybe (parent, spouse, sibling, child or grandchild)",
       "repatriation": "Real cost",
       "family_death": "Yes (parent, spouse, sibling, child, grandchild) – Atlas International plan",
@@ -320,7 +376,7 @@
     },
     {
       "insurer": "World Nomads",
-      "status": "Ruled out",
+      "status": "Ruled out (not for France/Belgium residents)",
       "hospital": "3.5M",
       "dental": "300+ (emergency only)",
       "family_hospitalised": "?",
@@ -334,8 +390,8 @@
     },
     {
       "insurer": "Heymondo Long Stay",
-      "status": "To check",
-      "hospital": "€2.3M",
+      "status": "Fails (must end at our tax address in Belgium)",
+      "hospital": "2.3M",
       "dental": "Probably (if in pain)",
       "family_hospitalised": "Return to country of residence",
       "repatriation": "Real cost",
@@ -348,8 +404,8 @@
     },
     {
       "insurer": "SafetyWing Nomad",
-      "status": "",
-      "hospital": "€230k",
+      "status": "Fails (no grandparents)",
+      "hospital": "230k",
       "dental": "$1k",
       "family_hospitalised": "No – only parent, spouse, sibling, child or grandchild (dying or deceased)",
       "repatriation": "Real cost",
@@ -362,9 +418,9 @@
     },
     {
       "insurer": "Genki",
-      "status": "To check",
-      "hospital": "€1M (including checking symptoms)",
-      "dental": "€1k",
+      "status": "Fails (health insurance only, no family travel)",
+      "hospital": "1M (including checking symptoms)",
+      "dental": "1k",
       "family_hospitalised": "No",
       "repatriation": "Real cost (but the policy ends)",
       "family_death": "No",
@@ -376,9 +432,9 @@
     },
     {
       "insurer": "Allianz Care",
-      "status": "",
-      "hospital": "€1M+",
-      "dental": "€300+ (option)",
+      "status": "Uncertain (health insurance, probably no family travel)",
+      "hospital": "1M+",
+      "dental": "300+ (option)",
       "family_hospitalised": "Probably not (health insurance, not travel)",
       "repatriation": "Real cost",
       "family_death": "Probably not",
@@ -472,87 +528,6 @@
       "note": ""
     },
     {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "Yupwego",
-      "offer": "",
-      "base_eur": 47,
-      "usa_canada_eur": null,
-      "note": "30 and over; +€45 with COVID option"
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "ACS Globe Partner",
-      "offer": "",
-      "base_eur": null,
-      "usa_canada_eur": null,
-      "note": "Not offered"
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "Heymondo Voyage Tranquillité",
-      "offer": "15% discount",
-      "base_eur": 41,
-      "usa_canada_eur": 7,
-      "note": ""
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "ACS Globe Traveller",
-      "offer": "",
-      "base_eur": 43,
-      "usa_canada_eur": 19,
-      "note": ""
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "Heymondo Voyage Premium",
-      "offer": "15% discount",
-      "base_eur": 49,
-      "usa_canada_eur": 51,
-      "note": ""
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "Chapka Cap Assistance 24/24h",
-      "offer": "5% discount",
-      "base_eur": 55,
-      "usa_canada_eur": 9,
-      "note": ""
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "AVA Pass",
-      "offer": "",
-      "base_eur": 62,
-      "usa_canada_eur": 24,
-      "note": ""
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "Assur-Travel Prime",
-      "offer": "",
-      "base_eur": 75,
-      "usa_canada_eur": 60,
-      "note": ""
-    },
-    {
-      "profile": "solo_o40",
-      "profile_label": "Solo, 40 and over",
-      "insurer": "AVI Assurance Routard",
-      "offer": "",
-      "base_eur": 81,
-      "usa_canada_eur": 15,
-      "note": ""
-    },
-    {
       "profile": "couple_u40",
       "profile_label": "Couple, under 40",
       "insurer": "Yupwego",
@@ -638,8 +613,8 @@
     {
       "insurer": "Chapka Cap Aventure",
       "link": "https://www.chapkadirect.com/",
-      "price_per_person_year": "~€730",
-      "medical_ceiling": "€1M",
+      "price_per_person_year": "~€730 (official grid: €767)",
+      "medical_ceiling": "€200k (€1M with USA/Canada)",
       "emergency_dental": "✅",
       "luggage": "✅ (€2,000)",
       "early_return": "✅ (return + resume trip)",
@@ -706,6 +681,140 @@
       "cancellation": "❌",
       "home_country": "❌ (limited)",
       "trustpilot": "4.1/5"
+    }
+  ],
+  "long_stay_prices": [
+    {
+      "chart": "tourist",
+      "insurer": "Chapka Cap Aventure",
+      "month_eur": 69.33,
+      "six_months_eur": 416,
+      "usa_canada_month_eur": null,
+      "usa_canada_six_months_eur": null,
+      "note": "No 1-month rate (3 to 24 months); per month = 6-month price ÷ 6. Longer is cheaper: 3 months €217, 12 months €767 (≈€64/month). −5% for a couple. USA/Canada: no grid; their example, 6 months with 1 month there, is €444.",
+      "source": "Chapka price grid (official)",
+      "source_url": "https://www.chapkadirect.fr/index.php?action=produit&id=795",
+      "couple_factor": 1.9
+    },
+    {
+      "chart": "tourist",
+      "insurer": "ACS Globe Partner",
+      "month_eur": 39,
+      "six_months_eur": 234,
+      "usa_canada_month_eur": 16,
+      "usa_canada_six_months_eur": 96,
+      "note": "Under 40 only. 6 months = 6 × monthly (ACS's own examples match: 3 months €117; 6 months in the USA €330).",
+      "source": "Novo-Monde (2026) + ACS examples",
+      "source_url": "https://www.acs-ami.com/fr/assurance-voyage/globe-partner/",
+      "couple_factor": 2
+    },
+    {
+      "chart": "tourist",
+      "insurer": "ACS Globe Traveller",
+      "month_eur": 62.5,
+      "six_months_eur": 375,
+      "usa_canada_month_eur": 56.5,
+      "usa_canada_six_months_eur": 339,
+      "note": "Default medical ceiling €150k, below our €200k minimum (a higher ceiling costs more). 6 months = 6 × monthly. ACS's own example is lower: 3 months in Latin America €150.",
+      "source": "Novo-Monde (2026)",
+      "source_url": "https://www.acs-ami.com/fr/assurance-voyage/globe-traveller/",
+      "couple_factor": 2
+    },
+    {
+      "chart": "tourist",
+      "insurer": "AVI Marco Polo",
+      "month_eur": 77.05,
+      "six_months_eur": 462.28,
+      "usa_canada_month_eur": 10.61,
+      "usa_canada_six_months_eur": 63.7,
+      "note": "Confort level (€300k medical), under 36, from AVI's weekly rate (€17.78/week; €20.23 in the zone with USA/Canada). That zone also holds Japan and Australia, which are on our route, so the full bar is what applies to us. Our notes: €525–555 for 6 months.",
+      "source": "AVI weekly price grid (official)",
+      "source_url": "https://www.avi-international.com/assurance-voyage/assurance-tour-du-monde",
+      "couple_factor": 2
+    },
+    {
+      "chart": "tourist",
+      "insurer": "AVA Pass",
+      "month_eur": 91,
+      "six_months_eur": 419,
+      "usa_canada_month_eur": 37,
+      "usa_canada_six_months_eur": 242,
+      "note": "Month = 'up to 30 days' rate. One contract lasts at most 184 days; our 260-day trip would need two back to back: €419 + €244 (up to 92 days) = €663 per person, if AVA allows it. Our notes: €419 up to 184 days, 5% off with code blog-avava / backava.",
+      "source": "AVA price grid (official)",
+      "source_url": "https://www.ava.fr/assurance-voyage/ava-pass/",
+      "couple_factor": 2
+    },
+    {
+      "chart": "tourist",
+      "insurer": "AVA Plan Santé AVAnture",
+      "month_eur": 59.33,
+      "six_months_eur": 356,
+      "usa_canada_month_eur": 45,
+      "usa_canada_six_months_eur": 276,
+      "note": "Under 35. No 1-month rate (from 92 days); per month = 6-month price ÷ 6. Longer is cheaper: 3 months €176, 12 months €659 (≈€55/month). USA/Canada is an option at €1.50/day. Under 50: 6 months €490. Our whole trip (260 days, up to 275-day rate): €515.",
+      "source": "AVA price grid (official)",
+      "source_url": "https://ava.fr/nos-solutions-globetrotter-pvt/plan-sante-avanture/",
+      "couple_factor": 2
+    },
+    {
+      "chart": "tourist",
+      "insurer": "Heymondo Long Stay",
+      "month_eur": 46.5,
+      "six_months_eur": 279,
+      "usa_canada_month_eur": 34.5,
+      "usa_canada_six_months_eur": 207,
+      "note": "Up to 49. 6 months = 6 × monthly. The French 'Long Séjour' (up to 40) is €74/month. Our notes: $250 excess on medical claims; the trip must start and end at our tax address.",
+      "source": "Novo-Monde (May 2026)",
+      "source_url": "https://www.novo-monde.com/avis-heymondo-assurance-voyage/",
+      "couple_factor": 2
+    },
+    {
+      "chart": "working_holiday",
+      "insurer": "Chapka Cap Working Holiday",
+      "month_eur": 41.5,
+      "six_months_eur": 249,
+      "usa_canada_month_eur": null,
+      "usa_canada_six_months_eur": null,
+      "note": "Per month = 6-month price ÷ 6. Longer is cheaper: 12 months €456 (€38/month). Ages 18–31, up to 35 for Australia.",
+      "source": "Chapka price grid (official)",
+      "source_url": "https://www.chapkadirect.fr/index.php?action=produit&id=927",
+      "couple_factor": 2
+    },
+    {
+      "chart": "working_holiday",
+      "insurer": "ACS Globe PVT",
+      "month_eur": 35.7,
+      "six_months_eur": 214.2,
+      "usa_canada_month_eur": null,
+      "usa_canada_six_months_eur": null,
+      "note": "Non-EU working-holiday countries (Australia, New Zealand, Japan), leaving from the EU. 6 months = 6 × monthly; −5% for 6 months or more through pvtistes.net.",
+      "source": "Novo-Monde (2026) + pvtistes.net",
+      "source_url": "https://pvtistes.net/reduction-globe-pvt/",
+      "couple_factor": 2
+    },
+    {
+      "chart": "working_holiday",
+      "insurer": "AVA Plan Santé PVT",
+      "month_eur": 40,
+      "six_months_eur": 240,
+      "usa_canada_month_eur": null,
+      "usa_canada_six_months_eur": null,
+      "note": "€40/month (€160 minimum) up to 335 days; 12 months €440. Up to 36. Matches our notes.",
+      "source": "AVA price grid (official)",
+      "source_url": "https://ava.fr/nos-solutions-globetrotter-pvt/plan-sante-pvt/",
+      "couple_factor": 2
+    },
+    {
+      "chart": "working_holiday",
+      "insurer": "AVI Working Holiday",
+      "month_eur": 35,
+      "six_months_eur": 210,
+      "usa_canada_month_eur": null,
+      "usa_canada_six_months_eur": null,
+      "note": "AVI only publishes 'from €35/month'; 6 months = 6 × that. Under 35.",
+      "source": "AVI website (starting price)",
+      "source_url": "https://www.avi-international.com/assurance-voyage/assurance-working-holiday-pvt",
+      "couple_factor": 2
     }
   ]
 }
