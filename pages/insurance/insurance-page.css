@@ -12,10 +12,7 @@
 .insurance-callout h3 { font-size: var(--font-size-body); font-weight: var(--font-weight-medium); margin: 0 0 var(--gap-extra-small); }
 .insurance-callout ul { margin: 0; padding-left: 1.1rem; font-size: var(--font-size-body); line-height: 1.55; }
 
-/* ===== Price chart and profile switch ===== */
-.insurance-profile-switch { display: inline-flex; flex-wrap: wrap; gap: var(--gap-extra-small); margin-bottom: var(--gap-small); }
-.insurance-profile-switch button { font: inherit; font-size: var(--font-size-caption); padding: var(--padding-extra-small) var(--padding-small); border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-background); color: var(--color-text-muted); cursor: pointer; }
-.insurance-profile-switch button[aria-pressed="true"] { color: var(--color-text); border-color: var(--color-text); }
+/* ===== Price chart (the profile switch uses the shared .toggle-button-group) ===== */
 .insurance-price-chart { position: relative; min-height: 320px; }
 .insurance-price-chart svg { display: block; }
 .insurance-price-chart .insurance-price-chart-insurer-name { font-size: var(--font-size-caption); fill: var(--color-text); }
@@ -24,3 +21,13 @@
 .insurance-price-chart-legend i { display: inline-block; width: .7rem; height: .7rem; border-radius: 2px; margin-right: var(--gap-extra-small); vertical-align: -1px; }
 
 .insurance-question-quote { font-family: var(--font-serif); font-size: var(--font-size-heading); line-height: 1.5; margin: var(--gap-small) 0 var(--gap-medium); padding-left: var(--padding-large); border-left: 3px solid var(--color-border); max-width: 44rem; }
+#insurance .card + .card { margin-top: var(--gap-medium); }
+#insurance .toggle-button-group + .toggle-button-group { margin-left: var(--gap-medium); }
+.data-table td.is-Partial { color: var(--color-warning); }
+.data-table td.is-Too-short { color: var(--color-warning); }
+.insurance-legend-swatch-confirmed { background: var(--color-success); }
+.insurance-legend-swatch-open { background: var(--color-warning); }
+.insurance-legend-swatch-open.is-light { opacity: .45; }
+.insurance-open-questions { margin: 0 0 var(--gap-medium); padding-left: 1.1rem; font-size: var(--font-size-body); line-height: 1.55; max-width: 52rem; }
+.data-table td.is-Unknown { color: var(--color-warning); }
+.insurance-legend-swatch-fails { background: var(--color-error); }

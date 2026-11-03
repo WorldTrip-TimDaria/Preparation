@@ -158,7 +158,7 @@
 <section class="page content-page" id="insurance" hidden>
   <header class="page-header">
     <h1 class="page-title">Travel insurance</h1>
-    <p class="page-intro">What we need covered, what each insurer offers, what it costs and who still has to answer. Taken from our Notion notes.</p>
+    <p class="page-intro">What we need covered, what each insurer offers, what it costs and who still has to answer. Taken from our Notion notes; prices and a few details from the web, with the source given.</p>
   </header>
 
   <h2 class="section-heading" id="insurance-needs">What we need</h2>
@@ -179,11 +179,11 @@
   </div>
 
   <h2 class="section-heading" id="insurance-shortlist">Shortlist</h2>
-  <p class="insurance-section-intro">Published terms confirm every must-have for three insurers: Chapka Cap Aventure, ACS Globe Traveller and AVI Marco Polo. Chapka has the better optional cover out of the box; ACS is usually cheaper under 40.</p>
+  <p class="insurance-section-intro">Chapka Cap Aventure has every must-have confirmed in its written policy, and covers the whole trip (3 to 24 months); but our domicile would be Belgium, so repatriation and the family-return ticket land there. AVA Pass is confirmed only by phone: its written policy says a one-way ticket home and 180 days at most. AVA's long-stay Plan Santé AVAnture covers the whole trip, but its documents disagree on the round trip. AVI Marco Polo is partial, with urgent dental at €150, below our €300.</p>
   <div class="insurance-callout">
     <h3>Open points from our own calls and emails</h3>
     <ul>
-      <li>Chapka: our notes say climbing is excluded and the policy covers tourist travel only (a working holiday needs another one), which contradicts the summary's supervised-climbing tick.</li>
+      <li>Chapka: the Cap Aventure policy table confirms a round-trip ticket if a family member dies or is hospitalised. Our notes say climbing is excluded and it covers tourist travel only (a working holiday needs another one).</li>
       <li>AVA Pass: called, quick and clear answers, and a family round trip including grandparents once a year. That is better than the published terms suggested.</li>
       <li>ACS: hung up on the phone, and no reply to the email yet.</li>
       <li>Heymondo: the trip must start and end at our tax address, with no one-way or partial trips.</li>
@@ -192,9 +192,9 @@
   </div>
   <div class="card" id="card-insurance-verdicts">
     <h3>Must-have check</h3>
-    <p class="card-note">Whether every must-have could be confirmed from published terms.</p>
+    <p class="card-note">Whether every must-have could be confirmed, from published terms or our own calls.</p>
     <div class="table-scroll-container">
-      <table class="data-table" data-draw="data_table" data-source="insurance_verdicts_by_insurer" data-cols="insurer|Insurer;verdict|Verdict;must_haves|Must-haves;optional|Optional cover;note|What we found"></table>
+      <table class="data-table" data-draw="data_table" data-source="insurance_verdicts_by_insurer" data-cols="insurer|Insurer;verdict|Verdict;must_haves|Must-haves;max_length|Max length;optional|Optional cover;note|What we found"></table>
     </div>
   </div>
 
@@ -207,16 +207,47 @@
   </div>
 
   <h2 class="section-heading" id="insurance-prices">Prices</h2>
+  <p class="insurance-section-intro">Under 40, whole world without the USA and Canada; USA and Canada is an optional extra. A couple pays for two people; only Chapka Cap Aventure gives a couple discount (−5%). Hover a bar for the conditions and the source.</p>
+
+  <div class="card" id="card-insurance-prices-tourist">
+    <h3>Travel insurance (tourist)</h3>
+    <div class="toggle-button-group" role="group" aria-label="Travellers" data-chart-target="insurance-price-chart-tourist">
+      <button type="button" data-people="couple" aria-pressed="true">Couple</button>
+      <button type="button" data-people="solo" aria-pressed="false">Solo</button>
+    </div>
+    <div class="toggle-button-group" role="group" aria-label="Period" data-chart-target="insurance-price-chart-tourist">
+      <button type="button" data-period="month" aria-pressed="true">Per month</button>
+      <button type="button" data-period="six_months" aria-pressed="false">6 months</button>
+    </div>
+    <div class="insurance-price-chart" id="insurance-price-chart-tourist" data-draw="insurance_price_chart" data-source="insurance_long_stay_prices" data-chart="tourist"></div>
+    <div class="insurance-price-chart-legend"><span><i class="insurance-legend-swatch-confirmed"></i>Every must-have confirmed</span><span><i class="insurance-legend-swatch-open"></i>Uncertain, partial or not checked</span><span><i class="insurance-legend-swatch-fails"></i>Fails</span><span><i class="insurance-legend-swatch-open is-light"></i>Lighter: + USA and Canada</span></div>
+    <p class="card-note">No reliable long-stay price found for Yupwego, Assur-Travel, Genki, WorldTrips or Allianz. SafetyWing Essential is $62.72 per 4 weeks (ages 10–39, USA extra), not shown because it is priced in dollars.</p>
+  </div>
+
+  <div class="card" id="card-insurance-prices-working-holiday">
+    <h3>Working-holiday insurance</h3>
+    <div class="toggle-button-group" role="group" aria-label="Travellers" data-chart-target="insurance-price-chart-working-holiday">
+      <button type="button" data-people="couple" aria-pressed="true">Couple</button>
+      <button type="button" data-people="solo" aria-pressed="false">Solo</button>
+    </div>
+    <div class="toggle-button-group" role="group" aria-label="Period" data-chart-target="insurance-price-chart-working-holiday">
+      <button type="button" data-period="month" aria-pressed="true">Per month</button>
+      <button type="button" data-period="six_months" aria-pressed="false">6 months</button>
+    </div>
+    <div class="insurance-price-chart" id="insurance-price-chart-working-holiday" data-draw="insurance_price_chart" data-source="insurance_long_stay_prices" data-chart="working_holiday"></div>
+    <div class="insurance-price-chart-legend"><span><i class="insurance-legend-swatch-open"></i>Not checked against our must-haves yet</span></div>
+    <p class="card-note">Heymondo has no working-holiday product. SafetyWing uses the same policy for travel and working holidays.</p>
+  </div>
+
   <div class="card" id="card-insurance-prices">
-    <h3>Quoted price by insurer</h3>
-    <p class="card-note">Base price plus the supplement for the USA and Canada, as listed in our comparison grid.</p>
-    <div class="toggle-button-group" role="group" aria-label="Traveller profile">
+    <h3>Short-trip price grid (Les Globe Blogueurs)</h3>
+    <p class="card-note">The grid in our notes, from lesglobeblogueurs.com. These are prices for a trip of about two weeks, not per month: AVA Pass costs €62 (+€24 USA and Canada) for up to 15 days, and ACS Globe Partner €29.50 for 15 days.</p>
+    <div class="toggle-button-group" role="group" aria-label="Traveller profile" data-chart-target="insurance-price-chart">
       <button type="button" data-profile="couple_u40" aria-pressed="true">Couple, under 40</button>
       <button type="button" data-profile="solo_u40" aria-pressed="false">Solo, under 40</button>
-      <button type="button" data-profile="solo_o40" aria-pressed="false">Solo, 40 and over</button>
     </div>
-    <div class="insurance-price-chart" id="insurance-price-chart" data-draw="insurance_price_chart" data-source="insurance_prices_by_profile"></div>
-    <div class="insurance-price-chart-legend"><span><i class="insurance-legend-swatch-base-price"></i>Base price</span><span><i class="insurance-legend-swatch-usa-canada"></i>+ USA and Canada</span></div>
+    <div class="insurance-price-chart" id="insurance-price-chart" data-draw="insurance_price_chart" data-source="insurance_prices_by_profile" data-chart="grid"></div>
+    <div class="insurance-price-chart-legend"><span><i class="insurance-legend-swatch-confirmed"></i>Every must-have confirmed</span><span><i class="insurance-legend-swatch-open"></i>Uncertain, partial or not checked</span><span><i class="insurance-legend-swatch-fails"></i>Fails</span><span><i class="insurance-legend-swatch-open is-light"></i>Lighter: + USA and Canada</span></div>
   </div>
 
   <h2 class="section-heading" id="insurance-desk-research">Earlier desk research</h2>
@@ -227,8 +258,7 @@
     </div>
   </div>
 
-  <h2 class="section-heading" id="insurance-questions-to-ask">What to ask the uncertain ones</h2>
-  <p class="insurance-question-quote">« En cas de décès ou d'hospitalisation grave d'un grand-parent pendant mon séjour, est-ce que mon contrat prend en charge mon billet aller-retour pour rentrer en France ? »</p>
+  <h2 class="section-heading" id="insurance-links">Insurer links</h2>
   <ul class="link-list">
     <li><a href="https://www.ava.fr/assurance-voyage/ava-pass/" target="_blank" rel="noopener">AVA Pass</a></li>
     <li><a href="https://www.chapkadirect.com/" target="_blank" rel="noopener">Chapka</a> · <a href="https://lesglobeblogueurs.com/chapka/" target="_blank" rel="noopener">Globe Blogueurs review</a></li>
@@ -243,6 +273,14 @@
     <li><a href="https://www.allianzcare.com/en/personal-international-health-insurance/who-we-help/nomad-health-insurance.html" target="_blank" rel="noopener">Allianz Care</a></li>
     <li><a href="https://www.assurance-voyage.axa-assistance.fr/nos-assurances-voyage/assurance-court-sejour" target="_blank" rel="noopener">AXA short stay</a></li>
     <li><a href="https://www.worldnomads.com/travel-insurance" target="_blank" rel="noopener">World Nomads</a></li>
+  </ul>
+
+  <h2 class="section-heading" id="insurance-questions-to-ask">Questions to ask</h2>
+  <p class="insurance-section-intro">Ready to send, one per insurer still in the running.</p>
+  <ul class="insurance-open-questions">
+    <li><strong>AVA:</strong> « Lors de notre appel, vous nous avez confirmé qu'AVA Pass prend en charge un billet aller-retour (une fois par an) en cas de décès ou d'hospitalisation grave d'un membre de la famille, grands-parents inclus. Les conditions générales indiquent seulement un « titre de transport retour » et une durée maximale de 180 jours. Pouvez-vous nous le confirmer par écrit ? Pour le Plan Santé AVAnture, la fiche produit indique un « billet aller-retour » mais les conditions générales un seul billet pour regagner le domicile : lequel s'applique ? Enfin, nous partons de Belgique (notre adresse fiscale) avec l'adresse de nos parents comme domicile : pouvez-vous confirmer par écrit que c'est accepté ? »</li>
+    <li><strong>Chapka Cap Aventure:</strong> « Nous partons de Belgique, où nous n'habiterons plus après le départ, et notre famille vit dans un autre pays. En cas de rapatriement ou de retour anticipé (décès ou hospitalisation d'un proche), le billet peut-il être émis vers le pays de notre famille plutôt que vers la Belgique ? Par ailleurs, l'escalade en salle est-elle considérée comme de la « varappe », exclue par le contrat ? »</li>
+    <li><strong>AVI Marco Polo:</strong> « La formule Marco Polo prend en charge 150 € de soins dentaires d'urgence. Existe-t-il un niveau de garantie qui couvre au moins 300 € ? »</li>
   </ul>
 
   <button type="button" class="back-to-trip-button" data-page="trip">← Back to the trip</button>
