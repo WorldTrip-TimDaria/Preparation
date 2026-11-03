@@ -1,0 +1,33 @@
+{
+  "settings": [
+    {
+      "minimum_wage_nzd_per_hour": 23.95,
+      "holiday_pay_rate": 0.08,
+      "weeks_working": 3,
+      "acc_levy_rate": 0.0175,
+      "eur_per_nzd": 0.51
+    }
+  ],
+  "tax_brackets": [
+    {"up_to_nzd": 15600, "rate": 0.105},
+    {"up_to_nzd": 53500, "rate": 0.175},
+    {"up_to_nzd": 78100, "rate": 0.30},
+    {"up_to_nzd": 180000, "rate": 0.33},
+    {"up_to_nzd": null, "rate": 0.39}
+  ],
+  "visa_steps": [
+    {"step": "1. Check we qualify", "what": "French citizens aged 18 to 30 when applying, with a valid passport, who have never had a New Zealand working holiday visa.", "when": "Before applying"},
+    {"step": "2. Apply online with Immigration New Zealand", "what": "Fee from NZ$770 (check before paying). Up to 12 months in New Zealand: holidays, temporary work, and up to 6 months of study or training.", "when": "Any time now: we must arrive within 12 months of approval, so any approval from now on covers landing on 1 August 2027"},
+    {"step": "3. Show money and a way out", "what": "At least NZ$4,200 each for living costs, plus an onward ticket or the money to buy one.", "when": "With the application; carry proof on arrival"},
+    {"step": "4. Medical insurance for the whole stay", "what": "Full medical insurance including hospital stays; INZ may ask for a certificate or letter from the insurer. Our notes say Chapka covers tourist travel only; AVA Pass has a PVT rate (€40/month, €160 minimum).", "when": "Before applying: see the Insurance tab"},
+    {"step": "5. Possible extra requests", "what": "INZ may ask for a chest X-ray or medical exam, or police certificates less than 6 months old.", "when": "If asked during processing"}
+  ],
+  "job_types": [
+    {"job": "Hospitality: cafés, bars, restaurants, hotels", "where": "Central Auckland (CBD, Britomart, Ponsonby, Mt Eden), Waiheke at weekends", "season": "All year; winter is quieter, so start handing out CVs in the first days", "pay": "At least NZ$23.95/h; front-of-house listings seen at NZ$24–26/h plus 8% holiday pay", "how": "Seek, Trade Me Jobs, Backpacker Job Board, walking in with a CV", "note": "Barista experience helps a lot. Tips are small in New Zealand"},
+    {"job": "Kiwifruit winter pruning", "where": "Pukekohe, Waiuku and Ardmore, about 50 km south of the city", "season": "From June for about 12 weeks, so August is the end of the season", "pay": "Hourly or per vine, never below the minimum wage", "how": "Pick NZ, Work and Income seasonal calendar, Find a Job (MSD)", "note": "Needs our own transport, early starts, cold and wet days"},
+    {"job": "Vineyard work", "where": "Waiheke Island (maintenance and thinning); winter pruning is mostly in Marlborough and Central Otago", "season": "Pruning June to August", "pay": "At least the minimum wage", "how": "Pick NZ, vineyards' own careers pages, Backpacker Board", "note": "Waiheke jobs ask you to live on the island (ferry from Auckland)"},
+    {"job": "Short shifts: events, hospitality, warehouse", "where": "All over Auckland; warehouse and forklift work mostly in South Auckland", "season": "All year", "pay": "Shown for each shift in the app, plus 8% holiday pay; forklift listings seen at NZ$26–28/h", "how": "Sidekicker app (2-minute sign-up), temp and labour-hire agencies (Backpacker Board lists them), Seek", "note": "Good for the first weeks while looking for a steady job"},
+    {"job": "Work for accommodation", "where": "Hostels in Auckland, farms and homestays around it", "season": "All year", "pay": "A bed and often meals instead of wages, for a few hours a day", "how": "WWOOF NZ (NZ$40 for the first 14 months, then NZ$20 to renew), HelpX, hostel notice boards", "note": "Counts as work: it needs the working holiday visa even without wages"},
+    {"job": "Queenstown in September (after the road trip)", "where": "Queenstown, Arrowtown, the ski fields", "season": "Ski season until about early October; most ski-field hiring happens months before", "pay": "At least NZ$23.95/h", "how": "Seek, Backpacker Job Board, walking in", "note": "Late in the season: hospitality in town is more likely than a ski-field job"}
+  ]
+}
