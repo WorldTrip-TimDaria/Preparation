@@ -172,28 +172,119 @@
     {
       "brand": "Shurgard",
       "location": "Antwerp Linkeroever",
-      "box": "6 m² - special price",
+      "box": "6 m² - 2 x 3 x 2.7 m",
       "floor_area_m2": 6,
-      "height_m": 3,
-      "volume_m3": 18,
+      "height_m": 2.7,
+      "volume_m3": 16.2,
       "monthly_eur": 65,
       "total_12_months_eur": 986.9,
-      "notes": "Special price: new customers, selected units, no minimum term, duration NOT stated. Total includes padlock €14.90 and the minimum mandatory insurance (€16/month for €2,000 cover, from the Shurgard insurance page). Admin fee €20 normally, none for online rentals. No deposit. Height 'about 3 m' (Antwerp page, not unit-specific). Price guaranteed 30 days after booking.",
-      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers",
-      "consulted_on": "2026-11-03"
+      "notes": "Special price from your screenshot; crossed-out €129 (at that price 12 months = €1,754.90). Total includes padlock €14.90 and the minimum mandatory insurance (€16/month for €2,000 cover, from the Shurgard insurance page). Admin fee €20 normally, none for online rentals. No deposit. Price guaranteed 30 days after booking. Special price: new customers, selected units, no minimum term, duration not stated; for now we assume it lasts the 12 months and the box is available.",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/anvers-linkeroever",
+      "consulted_on": "2026-11-04"
     },
     {
       "brand": "Shurgard",
       "location": "Antwerp Linkeroever",
-      "box": "6 m² - standard price",
-      "floor_area_m2": 6,
+      "box": "7.5 m² - 2 x 3.75 x 2.7 m",
+      "floor_area_m2": 7.5,
+      "height_m": 2.7,
+      "volume_m3": 20.25,
+      "monthly_eur": 73,
+      "total_12_months_eur": 1082.9,
+      "notes": "Special price from your screenshot; crossed-out €144.99 (at that price 12 months = €1,946.78). PROMO: first month €1 (not deducted from the total). Same conditions as the 6 m² row.",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/anvers-linkeroever",
+      "consulted_on": "2026-11-04"
+    },
+    {
+      "brand": "Shurgard",
+      "location": "Antwerp Linkeroever",
+      "box": "12 m² - 3 x 4 x 3 m",
+      "floor_area_m2": 12,
       "height_m": 3,
-      "volume_m3": 18,
-      "monthly_eur": 129,
-      "total_12_months_eur": 1754.9,
-      "notes": "Standard price shown crossed out next to the €65 special price - use it to budget safely. Same conditions as the row above.",
-      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers",
-      "consulted_on": "2026-11-03"
+      "volume_m3": 36,
+      "monthly_eur": 96,
+      "total_12_months_eur": 1358.9,
+      "notes": "Special price from your screenshot; crossed-out €192 (at that price 12 months = €2,510.90). PROMO: first month €1 (not deducted from the total). Same conditions as the 6 m² row.",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/anvers-linkeroever",
+      "consulted_on": "2026-11-04"
+    },
+    {
+      "brand": "Shurgard",
+      "location": "Antwerp Merksem",
+      "box": "4.5 m² - 1.5 x 3 x 2.7 m",
+      "floor_area_m2": 4.5,
+      "height_m": 2.7,
+      "volume_m3": 12.15,
+      "monthly_eur": 57,
+      "total_12_months_eur": 890.9,
+      "notes": "Price from your message; not stated whether it is a special price; for now we assume it lasts the 12 months and the box is available. Padlock and insurance assumed the same as Shurgard Linkeroever (in the total).",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/merksem",
+      "consulted_on": "2026-11-04"
+    },
+    {
+      "brand": "Shurgard",
+      "location": "Antwerp Merksem",
+      "box": "6 m² - 2 x 3 x 2.7 m",
+      "floor_area_m2": 6,
+      "height_m": 2.7,
+      "volume_m3": 16.2,
+      "monthly_eur": 73,
+      "total_12_months_eur": 1082.9,
+      "notes": "Price from your message; not stated whether it is a special price; for now we assume it lasts the 12 months and the box is available. Padlock and insurance assumed the same as Shurgard Linkeroever (in the total).",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/merksem",
+      "consulted_on": "2026-11-04"
+    },
+    {
+      "brand": "Shurgard",
+      "location": "Antwerp Merksem",
+      "box": "7.5 m² - 2 x 3.75 x 2.7 m",
+      "floor_area_m2": 7.5,
+      "height_m": 2.7,
+      "volume_m3": 20.25,
+      "monthly_eur": 77,
+      "total_12_months_eur": 1130.9,
+      "notes": "Price from your message; not stated whether it is a special price; for now we assume it lasts the 12 months and the box is available. Padlock and insurance assumed the same as Shurgard Linkeroever (in the total).",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/merksem",
+      "consulted_on": "2026-11-04"
+    },
+    {
+      "brand": "Shurgard",
+      "location": "Antwerp Centre",
+      "box": "5 m² - 2 x 2.5 x 2.7 m",
+      "floor_area_m2": 5,
+      "height_m": 2.7,
+      "volume_m3": 13.5,
+      "monthly_eur": 79,
+      "total_12_months_eur": 1154.9,
+      "notes": "Price from your message; not stated whether it is a special price; for now we assume it lasts the 12 months and the box is available. Padlock and insurance assumed the same as Shurgard Linkeroever (in the total).",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/anvers-centre",
+      "consulted_on": "2026-11-04"
+    },
+    {
+      "brand": "Shurgard",
+      "location": "Antwerp Centre",
+      "box": "6 m² - 2 x 3 x 2.7 m",
+      "floor_area_m2": 6,
+      "height_m": 2.7,
+      "volume_m3": 16.2,
+      "monthly_eur": 80.01,
+      "total_12_months_eur": 1167.02,
+      "notes": "Price from your message; not stated whether it is a special price; for now we assume it lasts the 12 months and the box is available. Padlock and insurance assumed the same as Shurgard Linkeroever (in the total).",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/anvers-centre",
+      "consulted_on": "2026-11-04"
+    },
+    {
+      "brand": "Shurgard",
+      "location": "Antwerp Centre",
+      "box": "7.5 m² - 2 x 3.75 x 2.7 m",
+      "floor_area_m2": 7.5,
+      "height_m": 2.7,
+      "volume_m3": 20.25,
+      "monthly_eur": 93,
+      "total_12_months_eur": 1322.9,
+      "notes": "Price from your message; not stated whether it is a special price; for now we assume it lasts the 12 months and the box is available. Padlock and insurance assumed the same as Shurgard Linkeroever (in the total).",
+      "source_url": "https://www.shurgard.com/fr-be/garde-meuble/anvers/anvers-centre",
+      "consulted_on": "2026-11-04"
     },
     {
       "brand": "Cobalt Box",
@@ -460,11 +551,11 @@
       "location": "Frameries (near Mons)",
       "box": "5 m³ - 1 x 1.7 m floor",
       "floor_area_m2": 1.7,
-      "height_m": null,
+      "height_m": 2.9,
       "volume_m3": 5,
-      "monthly_eur": 70,
-      "total_12_months_eur": 885,
-      "notes": "From your notes. File fee €45 (included in the total), deposit of 2 months' rent (not in the total), camera. -€5/month if renting over 1 year. Site: quote form only (9, 13, 20, 23, 37 m³), access 7/7 6:00-21:00. Height not in your notes.",
+      "monthly_eur": 65,
+      "total_12_months_eur": 825,
+      "notes": "From your notes. Phone: 0470 01 33 11. €65/month with a 1-year contract (€70 without); the total uses €65. Height about 2.9 m; volume is the stated 5 m³ (1.7 m² x 2.9 m = 4.9 m³). File fee €45 (included in the total), deposit of 2 months' rent (not in the total), camera. Site: quote form only (9, 13, 20, 23, 37 m³), access 7/7 6:00-21:00.",
       "source_url": "https://boxlocation.be/",
       "consulted_on": "2026-11-03"
     },
@@ -472,12 +563,12 @@
       "brand": "Boxlocation",
       "location": "Frameries (near Mons)",
       "box": "9 m³ - height 2.85 m",
-      "floor_area_m2": null,
+      "floor_area_m2": 3,
       "height_m": 2.85,
       "volume_m3": 9,
-      "monthly_eur": 95,
-      "total_12_months_eur": 1185,
-      "notes": "From your notes. File fee €45 (included in the total), deposit of 2 months' rent (not in the total), camera. -€5/month if renting over 1 year. Site: quote form only (9, 13, 20, 23, 37 m³), access 7/7 6:00-21:00. Your note '2.7 - 2.2 m²' does not match 9 m³ at 2.85 m (that would be ~3.2 m²): please recheck the floor area.",
+      "monthly_eur": 90,
+      "total_12_months_eur": 1125,
+      "notes": "From your notes. Phone: 0470 01 33 11. €90/month with a 1-year contract (€95 without); the total uses €90. Floor area 3 m²; volume is the stated 9 m³ (3 m² x 2.85 m = 8.55 m³). File fee €45 (included in the total), deposit of 2 months' rent (not in the total), camera. Site: quote form only (9, 13, 20, 23, 37 m³), access 7/7 6:00-21:00.",
       "source_url": "https://boxlocation.be/",
       "consulted_on": "2026-11-03"
     },
@@ -497,26 +588,26 @@
     {
       "brand": "Lokarea",
       "location": "Flemish town, spelling unknown ('Grodenboss' as heard)",
-      "box": "5 m²",
+      "box": "5 m² x 3 m high",
       "floor_area_m2": 5,
-      "height_m": null,
-      "volume_m3": null,
+      "height_m": 3,
+      "volume_m3": 15,
       "monthly_eur": 91,
       "total_12_months_eur": 1092,
-      "notes": "From your notes, same source as above. Height not given.",
+      "notes": "From your notes, same source as above: 3 m high, so 15 m³. Contact: Pierre François 0491 90 74 96.",
       "source_url": "https://www.lokarea.com/tarifs/",
       "consulted_on": "2026-11-03"
     },
     {
       "brand": "Lokarea",
       "location": "Flemish town, spelling unknown ('Grodenboss' as heard)",
-      "box": "6 m²",
+      "box": "6 m² x 3 m high",
       "floor_area_m2": 6,
-      "height_m": null,
-      "volume_m3": null,
+      "height_m": 3,
+      "volume_m3": 18,
       "monthly_eur": 109,
       "total_12_months_eur": 1308,
-      "notes": "From your notes, same source as above. Height not given.",
+      "notes": "From your notes, same source as above: 3 m high, so 18 m³. Contact: Pierre François 0491 90 74 96.",
       "source_url": "https://www.lokarea.com/tarifs/",
       "consulted_on": "2026-11-03"
     }
@@ -567,8 +658,8 @@
     {
       "item": "Shurgard",
       "type": "Partial info",
-      "missing": "Only 2 sizes per site were visible. Only Linkeroever 6 m² is in your range. Other sites (Antwerp-Centre, Aartselaar, Merksem) not covered for 6-10 m². The special price duration is not stated.",
-      "next_step": "Use their booking tool, or tell me which site you want."
+      "missing": "Linkeroever (6-12 m²), Merksem (4.5-7.5 m²) and Antwerp-Centre (5-7.5 m²) entered from your screenshot and messages. Special prices and availability are assumed for now, not confirmed. Aartselaar not covered.",
+      "next_step": "Confirm the special prices and availability before booking."
     },
     {
       "item": "Gosselin",
@@ -589,12 +680,6 @@
       "next_step": "Ask for the dimensions."
     },
     {
-      "item": "Boxlocation",
-      "type": "Inconsistent notes",
-      "missing": "Your '2.7 - 2.2 m²' for the 9 m³ box does not match 2.85 m height (~3.2 m²). Height of the 5 m³ box is not given. Quote form on the site only.",
-      "next_step": "Recheck the floor area."
-    },
-    {
       "item": "Insurance",
       "type": "Missing info",
       "missing": "Stated for Shurgard (mandatory, in the total), Cobalt Box (mandatory) and Dockx / MasterBox (included, capped). Not stated for Gosselin, Plaatsgebrek, Huur1box or Boxlocation.",
@@ -604,7 +689,7 @@
   "read_me": [
     {
       "topic": "Total 12 months",
-      "text": "Monthly price x 12, plus one-off costs the operator states as unavoidable (listed in Notes; Plaatsgebrek +€15, Boxlocation +€45, Shurgard padlock +€14.90 and minimum insurance €16 x 12). Promotions, deposits and optional insurance are NOT included - they are in Notes."
+      "text": "Monthly price x 12, plus one-off costs the operator states as unavoidable (listed in Notes; Plaatsgebrek +€15, Boxlocation +€45, Shurgard padlock +€14.90 and minimum insurance €16 x 12). Promotions, deposits and optional insurance are NOT included - they are in Notes. Exception: Boxlocation's -€5/month for a 1-year contract is included, in the monthly price and the total. Shurgard special prices are assumed to last the 12 months, with the box available."
     },
     {
       "topic": "VAT",
@@ -612,7 +697,7 @@
     },
     {
       "topic": "Date",
-      "text": "All sites consulted on 2026-11-03. Prices and promotions change; confirm before booking."
+      "text": "All sites consulted on 2026-11-03; Shurgard Linkeroever, Merksem and Antwerp-Centre updated on 2026-11-04. Prices and promotions change; confirm before booking."
     }
   ]
 }

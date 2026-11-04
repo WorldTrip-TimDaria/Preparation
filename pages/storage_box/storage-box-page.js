@@ -8,7 +8,7 @@
   dashboard.registerDataSource('storage_box_open_points', STORAGE_BOX_DATA_FILE, 'open_points');
   dashboard.registerDataSource('storage_box_read_me', STORAGE_BOX_DATA_FILE, 'read_me');
 
-  // ===== Size ranges: edit here. A range [low, high] holds sizes above low and up to high. =====
+  // ===== Size ranges: edit here. A range [low, high] holds sizes from low up to, but not including, high. =====
   const SIZE_MEASURES = {
     volume: {sizeField: 'volume_m3', unitPriceField: 'price_per_m3_per_month', unit: 'm³', name: 'volume',
       ranges: [[0, 10], [10, 15], [15, 20], [20, 30], [30, Infinity]], defaultRangeIndex: 1},
@@ -36,11 +36,11 @@
   // ===== Page state: chosen measure, size range and table sort =====
   const storageBoxState = {measure: 'volume', rangeIndex: SIZE_MEASURES.volume.defaultRangeIndex, sortField: 'total_12_months_eur', sortAscending: true};
   const currentMeasure = () => SIZE_MEASURES[storageBoxState.measure];
-  const isInRange = (size, [low, high]) => size != null && size > low && size <= high;
+  const isInRange = (size, [low, high]) => size != null && size >= low && size < high;
   const formatSize = (value) => d3.format(',.1~f')(value);
   const formatEuros = (value) => '€' + d3.format(Number.isInteger(value) ? ',' : ',.2f')(value);
   const formatUnitPrice = (value) => '€' + d3.format(',.2f')(value);
-  const rangeLabel = ([low, high], unit) => low === 0 ? '≤ ' + high + ' ' + unit : high === Infinity ? '> ' + low + ' ' + unit : low + '–' + high + ' ' + unit;
+  const rangeLabel = ([low, high], unit) => low === 0 ? '< ' + high + ' ' + unit : high === Infinity ? '≥ ' + low + ' ' + unit : low + '–' + high + ' ' + unit;
   const selectedRangeLabel = () => storageBoxState.rangeIndex === ALL_SIZES
     ? 'all sizes' : rangeLabel(currentMeasure().ranges[storageBoxState.rangeIndex], currentMeasure().unit);
   // The boxes shown in the tiles and table: in the chosen range, or every box for "All".
@@ -211,10 +211,15 @@
   ];
   dashboard.draw('storage_box_comparison_table', (el) => {
     const d = dashboard.data('storage_box_options_with_unit_prices');
+    if (d.status !== 'ok') { el.replaceChildren(); delete el.dataset.drawnFor; return; }
+    // Opening a note makes the table taller, and the runtime redraws any element whose size changes.
+    // Rebuild only when what the table shows has changed; otherwise the note would close straight away.
+    const drawnFor = JSON.stringify([storageBoxState.measure, storageBoxState.rangeIndex, storageBoxState.sortField, storageBoxState.sortAscending, dashboard.colors]);
+    if (el.dataset.drawnFor === drawnFor) return;
+    el.dataset.drawnFor = drawnFor;
     el.replaceChildren();
-    if (d.status !== 'ok') return;
     const measure = currentMeasure();
-    const valueOf = (box, field) => field === 'unit_price' ? box[measure.unitPriceField] : box[field];
+    const valueOf =(box, field) => field === 'unit_price' ? box[measure.unitPriceField] : box[field];
     const rows = selectedBoxes(d.data).slice().sort((a, b) => {
       const first = valueOf(a, storageBoxState.sortField), second = valueOf(b, storageBoxState.sortField);
       if (first == null || second == null) return (first == null) - (second == null);  // unknown values last
