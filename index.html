@@ -51,7 +51,22 @@
       <div class="trip-timeline-vertical" id="trip-timeline-vertical" data-draw="trip_timeline" data-source="trip_stays_with_nights" aria-label="Trip timeline"></div>
     </div>
     <div class="trip-map-container">
-      <div class="trip-map" id="trip-world-map" data-draw="trip_world_map" data-source="world_country_outlines trip_stays_with_nights trip_travel_legs"></div>
+      <div class="trip-map" id="trip-world-map" data-draw="trip_world_map" data-source="world_country_outlines trip_stays_with_nights trip_travel_legs trip_disease_regions trip_climate_places"></div>
+      <div class="toggle-button-group trip-disease-toggles" role="group" aria-label="Disease layers on the map">
+        <button type="button" data-disease="rabies" aria-pressed="false">Rabies</button>
+        <button type="button" data-disease="dengue" aria-pressed="false">Dengue</button>
+        <button type="button" data-disease="chikungunya" aria-pressed="false">Chikungunya</button>
+        <button type="button" data-disease="malaria" aria-pressed="false">Malaria</button>
+      </div>
+      <div class="trip-climate-control">
+        <div class="toggle-button-group"><button type="button" id="trip-climate-toggle" aria-pressed="false">Best season</button></div>
+        <div class="trip-climate-slider">
+          <input type="range" id="trip-climate-month" min="1" max="12" step="1" value="1" disabled aria-label="Month for the best season layer" aria-valuetext="January">
+          <div class="trip-climate-months" aria-hidden="true"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
+        </div>
+        <output class="trip-climate-month-name" id="trip-climate-month-name" for="trip-climate-month">January</output>
+      </div>
+      <div class="trip-climate-legend" data-draw="trip_climate_legend" data-source="trip_climate_places"></div>
       <div class="trip-timeline-horizontal" id="trip-timeline-horizontal" data-draw="trip_timeline" data-source="trip_stays_with_nights" data-orient="h" aria-label="Trip timeline"></div>
       <div class="trip-map-legend">
         <span><svg width="22" height="8" aria-hidden="true"><line class="trip-legend-swatch-flight" x1="0" y1="4" x2="22" y2="4" stroke-dasharray="6 5"></line></svg>Flight</span>
@@ -59,6 +74,7 @@
         <span><svg width="22" height="8" aria-hidden="true"><line class="trip-legend-swatch-optional-detour" x1="1" y1="4" x2="21" y2="4" stroke-dasharray="1 5" stroke-linecap="round"></line></svg>Optional detour</span>
         <span>Shaded: countries on the route</span>
       </div>
+      <div class="trip-disease-legend" data-draw="trip_disease_legend" data-source="trip_disease_regions"></div>
     </div>
 
     <div class="trip-chapters">

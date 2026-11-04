@@ -240,7 +240,6 @@
       });
       th.append(button); headerRow.append(th);
     });
-    const notesHeader = document.createElement('th'); notesHeader.scope = 'col'; notesHeader.textContent = 'Notes and source'; headerRow.append(notesHeader);
     const body = el.createTBody();
     rows.forEach((box) => {
       const tr = body.insertRow();
@@ -251,17 +250,27 @@
         td.append(value == null ? '–' : column.format ? column.format(value) : value);
         if (column.format) td.classList.add('is-num');
       });
-      const notesCell = tr.insertCell(); notesCell.className = 'storage-box-notes-cell';
-      const details = document.createElement('details');
-      const summary = document.createElement('summary'); summary.textContent = 'Notes';
+      // The table can scroll sideways, so the toggle sits in the first column (always on screen)
+      // and the note opens as its own row, kept within the visible width by the CSS.
+      const noteRow = body.insertRow(); noteRow.className = 'storage-box-note-row'; noteRow.hidden = true;
+      const noteCell = noteRow.insertCell(); noteCell.colSpan = TABLE_COLUMNS.length;
+      const noteContent = document.createElement('div'); noteContent.className = 'storage-box-note-content';
       const notes = document.createElement('p'); notes.textContent = box.notes || '';
-      details.append(summary, notes);
+      noteContent.append(notes);
       if (box.source_url) {
         const source = document.createElement('a'); source.href = box.source_url; source.target = '_blank'; source.rel = 'noopener';
         source.textContent = 'Source' + (box.consulted_on ? ' (consulted ' + box.consulted_on + ')' : '');
-        details.append(source);
+        noteContent.append(source);
       }
-      notesCell.append(details);
+      noteCell.append(noteContent);
+      const noteToggle = document.createElement('button'); noteToggle.type = 'button'; noteToggle.className = 'storage-box-note-toggle';
+      noteToggle.textContent = '▸ Notes'; noteToggle.setAttribute('aria-expanded', 'false');
+      noteToggle.addEventListener('click', () => {
+        noteRow.hidden = !noteRow.hidden;
+        noteToggle.textContent = (noteRow.hidden ? '▸' : '▾') + ' Notes';
+        noteToggle.setAttribute('aria-expanded', String(!noteRow.hidden));
+      });
+      tr.cells[0].append(noteToggle);
     });
   });
 

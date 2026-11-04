@@ -1,0 +1,169 @@
+place,country,region,lat,lon,month,level,temp_min,temp_max,on_best_list,weather,plus,minus,hazard_source
+South Korea,South Korea,,,,1,3,-12,9,no,"Feels up to 0°, 59% humidity, 30 mm of rain over 4 days",Dry,Freezing in parts; Cold in parts,
+South Korea,South Korea,,,,2,2,-9,10,no,"Feels up to 2°, 61% humidity, 40 mm of rain over 5 days",Dry,Cold,
+South Korea,South Korea,,,,3,1,-3,13,no,"Feels up to 9°, 67% humidity, 68 mm of rain over 7 days",Dry in parts,,
+South Korea,South Korea,,,,4,1,2,18,no,"Feels up to 16°, 68% humidity, 97 mm of rain over 8 days",Comfortable in parts,,
+South Korea,South Korea,,,,5,0,7,24,yes,"Feels up to 22°, 70% humidity, 110 mm of rain over 8 days",Comfortable,,
+South Korea,South Korea,,,,6,1,11,28,yes,"Feels up to 28°, 76% humidity, 160 mm of rain over 10 days",Comfortable,Rainy in parts,
+South Korea,South Korea,,,,7,4,16,30,no,"Feels up to 32°, 84% humidity, 298 mm of rain over 18 days",,Very rainy in parts; Typhoons; Muggy in parts; Rainy in parts,KMA
+South Korea,South Korea,,,,8,4,16,31,no,"Feels up to 34°, 82% humidity, 236 mm of rain over 16 days",,Rainy; Typhoons; Muggy in parts,KMA
+South Korea,South Korea,,,,9,2,11,27,yes,"Feels up to 27°, 79% humidity, 194 mm of rain over 11 days",Comfortable in parts,Typhoons; Rainy in parts,KMA
+South Korea,South Korea,,,,10,0,5,22,yes,"Feels up to 18°, 74% humidity, 83 mm of rain over 6 days",Comfortable,,
+South Korea,South Korea,,,,11,1,0,17,no,"Feels up to 10°, 70% humidity, 56 mm of rain over 6 days",Dry,,
+South Korea,South Korea,,,,12,3,-9,11,no,"Feels up to 2°, 62% humidity, 31 mm of rain over 4 days",Dry,Freezing in parts; Cold in parts,
+Japan,Japan,,,,1,2,-13,21,no,"Feels up to 6°, 72% humidity, 76 mm of rain over 10 days",Dry in parts; Comfortable in parts,Freezing in parts; Cold in parts,
+Japan,Japan,,,,2,2,-13,22,no,"Feels up to 7°, 72% humidity, 85 mm of rain over 10 days",Dry in parts; Comfortable in parts,Freezing in parts; Cold in parts,
+Japan,Japan,,,,3,1,-8,23,no,"Feels up to 12°, 74% humidity, 130 mm of rain over 12 days",Comfortable in parts,Cold in parts; Rainy in parts,
+Japan,Japan,,,,4,1,-1,24,yes,"Feels up to 18°, 74% humidity, 151 mm of rain over 12 days",Comfortable in parts,Rainy in parts,
+Japan,Japan,,,,5,1,4,27,yes,"Feels up to 24°, 77% humidity, 184 mm of rain over 13 days",Comfortable in parts,Rainy in parts,
+Japan,Japan,,,,6,1,10,29,yes,"Feels up to 28°, 82% humidity, 274 mm of rain over 17 days",Comfortable in parts,Rainy in parts; Very rainy in parts; Muggy in parts,
+Japan,Japan,,,,7,4,14,31,no,"Feels up to 34°, 83% humidity, 248 mm of rain over 18 days",Comfortable in parts,Muggy in parts; Rainy in parts; Typhoons in parts; Very rainy in parts; Hot in parts,JMA
+Japan,Japan,,,,8,4,14,34,yes,"Feels up to 34°, 80% humidity, 201 mm of rain over 16 days",,Rainy in parts; Hot in parts; Muggy in parts; Typhoons (peak) in parts,JMA
+Japan,Japan,,,,9,3,9,30,yes,"Feels up to 30°, 81% humidity, 203 mm of rain over 16 days",Comfortable in parts,Rainy in parts; Typhoons (peak) in parts; Muggy in parts,JMA
+Japan,Japan,,,,10,1,3,28,yes,"Feels up to 22°, 77% humidity, 145 mm of rain over 12 days",Comfortable in parts,Rainy in parts; Typhoons in parts,JMA
+Japan,Japan,,,,11,0,-2,25,yes,"Feels up to 16°, 75% humidity, 104 mm of rain over 10 days",Comfortable in parts,Cold in parts,
+Japan,Japan,,,,12,2,-9,23,no,"Feels up to 8°, 73% humidity, 84 mm of rain over 10 days",Comfortable in parts,Freezing in parts; Cold in parts,
+Taiwan,Taiwan,,,,1,0,6,24,yes,"Feels up to 21°, 79% humidity, 108 mm of rain over 13 days",Comfortable; Dry in parts,Rainy in parts,
+Taiwan,Taiwan,,,,2,0,9,25,yes,"Feels up to 22°, 78% humidity, 88 mm of rain over 12 days",Comfortable; Dry in parts,Rainy in parts,
+Taiwan,Taiwan,,,,3,0,12,26,yes,"Feels up to 25°, 79% humidity, 108 mm of rain over 13 days",Comfortable; Dry in parts,Rainy in parts,
+Taiwan,Taiwan,,,,4,0,16,28,yes,"Feels up to 30°, 80% humidity, 119 mm of rain over 14 days",,Rainy in parts,
+Taiwan,Taiwan,,,,5,2,16,30,yes,"Feels up to 34°, 83% humidity, 254 mm of rain over 20 days",,Rainy in parts; Muggy in parts; Very rainy in parts; Hot in parts,
+Taiwan,Taiwan,,,,6,4,16,32,no,"Feels up to 37°, 84% humidity, 286 mm of rain over 21 days",,Hot; Muggy; Rainy in parts; Typhoons; Very rainy in parts,CWA via Taipei Times; Trip.com
+Taiwan,Taiwan,,,,7,4,16,34,no,"Feels up to 39°, 81% humidity, 255 mm of rain over 21 days",,Hot; Muggy; Rainy in parts; Typhoons (peak); Very rainy in parts,CWA via Taipei Times; Trip.com
+Taiwan,Taiwan,,,,8,4,16,34,no,"Feels up to 38°, 83% humidity, 330 mm of rain over 22 days",,Hot; Muggy; Rainy in parts; Typhoons (peak); Very rainy in parts,CWA via Taipei Times; Trip.com
+Taiwan,Taiwan,,,,9,4,16,32,no,"Feels up to 36°, 83% humidity, 295 mm of rain over 20 days",,Hot; Muggy; Rainy in parts; Typhoons (peak); Very rainy in parts,CWA via Taipei Times; Trip.com
+Taiwan,Taiwan,,,,10,2,15,30,yes,"Feels up to 32°, 82% humidity, 289 mm of rain over 17 days",,Rainy in parts; Very rainy in parts; Muggy in parts,
+Taiwan,Taiwan,,,,11,0,12,28,yes,"Feels up to 28°, 82% humidity, 120 mm of rain over 13 days",Dry in parts,Rainy in parts,
+Taiwan,Taiwan,,,,12,0,9,25,yes,"Feels up to 23°, 79% humidity, 88 mm of rain over 12 days",Comfortable; Dry in parts,Rainy in parts,
+Laos,Laos,,,,1,1,8,32,yes,"Feels up to 29°, 71% humidity, 30 mm of rain over 4 days",Comfortable; Dry,Burning-season smoke,Bangkok Post
+Laos,Laos,,,,2,1,9,36,yes,"Feels up to 32°, 66% humidity, 16 mm of rain over 2 days",Dry,Burning-season smoke,Bangkok Post
+Laos,Laos,,,,3,3,14,38,yes,"Feels up to 36°, 66% humidity, 40 mm of rain over 6 days",Dry,Hot; Burning-season smoke (peak),Bangkok Post
+Laos,Laos,,,,4,2,18,38,yes,"Feels up to 38°, 68% humidity, 70 mm of rain over 9 days",,Hot; Burning-season smoke,Bangkok Post
+Laos,Laos,,,,5,4,19,36,no,"Feels up to 39°, 76% humidity, 178 mm of rain over 20 days",,Hot; Muggy; Rainy,
+Laos,Laos,,,,6,4,19,33,no,"Feels up to 38°, 82% humidity, 226 mm of rain over 24 days",,Hot; Muggy; Rainy in parts; Very rainy in parts,
+Laos,Laos,,,,7,4,19,32,no,"Feels up to 38°, 85% humidity, 334 mm of rain over 26 days",,Hot; Muggy; Very rainy,
+Laos,Laos,,,,8,4,19,32,no,"Feels up to 36°, 88% humidity, 414 mm of rain over 28 days",,Hot; Muggy; Very rainy,
+Laos,Laos,,,,9,4,18,33,no,"Feels up to 36°, 87% humidity, 290 mm of rain over 25 days",,Hot; Muggy; Rainy in parts; Very rainy in parts,
+Laos,Laos,,,,10,2,16,32,yes,"Feels up to 34°, 81% humidity, 113 mm of rain over 14 days",,Muggy; Hot in parts,
+Laos,Laos,,,,11,0,12,32,yes,"Feels up to 33°, 74% humidity, 26 mm of rain over 4 days",Dry,,
+Laos,Laos,,,,12,0,9,31,yes,"Feels up to 29°, 70% humidity, 18 mm of rain over 2 days",Comfortable; Dry,,
+Vietnam,Vietnam,,,,1,1,7,33,yes,"Feels up to 28°, 77% humidity, 88 mm of rain over 12 days",Comfortable in parts; Dry in parts,Rainy in parts; Hot in parts,
+Vietnam,Vietnam,,,,2,0,9,35,yes,"Feels up to 29°, 76% humidity, 48 mm of rain over 8 days",Comfortable in parts; Dry in parts,Hot in parts,
+Vietnam,Vietnam,,,,3,1,12,36,yes,"Feels up to 33°, 78% humidity, 49 mm of rain over 8 days",Dry in parts,Muggy in parts; Hot in parts,
+Vietnam,Vietnam,,,,4,1,15,36,yes,"Feels up to 36°, 78% humidity, 84 mm of rain over 10 days",,Hot in parts; Muggy in parts,
+Vietnam,Vietnam,,,,5,4,17,35,no,"Feels up to 39°, 80% humidity, 174 mm of rain over 19 days",,Hot; Muggy; Rainy in parts; Very rainy in parts,
+Vietnam,Vietnam,,,,6,4,19,37,no,"Feels up to 40°, 79% humidity, 189 mm of rain over 19 days",,Very hot in parts; Muggy; Rainy in parts; Typhoons in parts; Hot in parts; Very rainy in parts,Vietnam Guide
+Vietnam,Vietnam,,,,7,4,18,35,no,"Feels up to 39°, 81% humidity, 251 mm of rain over 22 days",,Hot; Muggy; Very rainy in parts; Typhoons (peak) in parts; Rainy in parts,Vietnam Guide
+Vietnam,Vietnam,,,,8,4,18,34,no,"Feels up to 39°, 82% humidity, 280 mm of rain over 24 days",,Hot; Muggy; Very rainy in parts; Typhoons (peak) in parts; Rainy in parts,Vietnam Guide
+Vietnam,Vietnam,,,,9,4,17,33,no,"Feels up to 37°, 85% humidity, 322 mm of rain over 24 days",,Hot; Muggy; Very rainy in parts; Typhoons in parts; Rainy in parts; Typhoons and floods in parts,Vietnam Guide
+Vietnam,Vietnam,,,,10,4,14,32,yes,"Feels up to 34°, 84% humidity, 331 mm of rain over 22 days",,Rainy in parts; Typhoons in parts; Muggy in parts; Very rainy in parts; Typhoons and floods (peak) in parts; Hot in parts,Vietnam Guide
+Vietnam,Vietnam,,,,11,2,11,32,yes,"Feels up to 31°, 82% humidity, 201 mm of rain over 17 days",Comfortable in parts,Muggy in parts; Very rainy in parts; Typhoons and floods in parts; Hot in parts; Rainy in parts,Vietnam Guide
+Vietnam,Vietnam,,,,12,1,8,32,yes,"Feels up to 28°, 77% humidity, 160 mm of rain over 14 days",Comfortable in parts; Dry in parts,Very rainy in parts; Hot in parts,
+Cambodia,Cambodia,,,,1,0,15,33,yes,"Feels up to 34°, 66% humidity, 17 mm of rain over 3 days",Dry,,
+Cambodia,Cambodia,,,,2,1,16,36,yes,"Feels up to 36°, 62% humidity, 20 mm of rain over 3 days",Dry,Hot,
+Cambodia,Cambodia,,,,3,1,19,38,yes,"Feels up to 39°, 64% humidity, 44 mm of rain over 8 days",Dry in parts,Hot,
+Cambodia,Cambodia,,,,4,4,20,38,no,"Feels up to 40°, 70% humidity, 96 mm of rain over 14 days",,Very hot; Muggy,
+Cambodia,Cambodia,,,,5,4,20,36,no,"Feels up to 40°, 77% humidity, 182 mm of rain over 24 days",,Very hot in parts; Muggy; Very rainy in parts; Hot in parts; Rainy in parts,
+Cambodia,Cambodia,,,,6,4,20,34,no,"Feels up to 38°, 78% humidity, 152 mm of rain over 23 days",,Hot; Muggy; Rainy,
+Cambodia,Cambodia,,,,7,4,19,33,no,"Feels up to 37°, 80% humidity, 200 mm of rain over 24 days",,Hot; Muggy; Rainy in parts; Very rainy in parts,
+Cambodia,Cambodia,,,,8,4,19,34,no,"Feels up to 38°, 80% humidity, 206 mm of rain over 26 days",,Hot; Muggy; Very rainy,
+Cambodia,Cambodia,,,,9,4,18,33,no,"Feels up to 37°, 85% humidity, 308 mm of rain over 28 days",,Hot; Muggy; Very rainy,
+Cambodia,Cambodia,,,,10,4,18,32,no,"Feels up to 37°, 84% humidity, 278 mm of rain over 24 days",,Hot; Muggy; Very rainy in parts; Rainy in parts,
+Cambodia,Cambodia,,,,11,3,18,32,yes,"Feels up to 36°, 79% humidity, 127 mm of rain over 14 days",,Hot; Muggy; Rainy in parts,
+Cambodia,Cambodia,,,,12,0,16,32,yes,"Feels up to 34°, 70% humidity, 34 mm of rain over 6 days",Dry,,
+Thailand,Thailand,,,,1,1,10,34,yes,"Feels up to 32°, 72% humidity, 41 mm of rain over 6 days",Dry in parts; Comfortable in parts,Burning-season smoke in parts; Muggy in parts,Bangkok Post
+Thailand,Thailand,,,,2,1,11,37,yes,"Feels up to 34°, 67% humidity, 27 mm of rain over 4 days",Dry,Hot in parts; Burning-season smoke in parts,Bangkok Post
+Thailand,Thailand,,,,3,2,17,39,yes,"Feels up to 37°, 66% humidity, 35 mm of rain over 6 days",Dry in parts,Hot; Muggy in parts; Burning-season smoke (peak) in parts,Bangkok Post
+Thailand,Thailand,,,,4,3,21,39,no,"Feels up to 39°, 68% humidity, 82 mm of rain over 12 days",Dry in parts,Hot; Muggy in parts; Burning-season smoke in parts; Rainy in parts,Bangkok Post
+Thailand,Thailand,,,,5,4,21,38,no,"Feels up to 39°, 76% humidity, 185 mm of rain over 21 days",,Hot; Muggy in parts; Rainy in parts; Very rainy in parts,
+Thailand,Thailand,,,,6,4,20,35,no,"Feels up to 37°, 80% humidity, 186 mm of rain over 23 days",,Hot; Muggy; Rainy,
+Thailand,Thailand,,,,7,4,20,33,no,"Feels up to 36°, 82% humidity, 241 mm of rain over 25 days",,Hot in parts; Muggy; Very rainy in parts; Rainy in parts,
+Thailand,Thailand,,,,8,4,20,34,no,"Feels up to 35°, 84% humidity, 264 mm of rain over 26 days",,Hot in parts; Muggy; Very rainy in parts; Rainy in parts,
+Thailand,Thailand,,,,9,4,20,33,no,"Feels up to 36°, 85% humidity, 291 mm of rain over 25 days",,Hot in parts; Muggy; Very rainy in parts; Rainy in parts,
+Thailand,Thailand,,,,10,4,19,33,no,"Feels up to 35°, 85% humidity, 228 mm of rain over 23 days",,Hot in parts; Muggy; Rainy in parts; Very rainy in parts,
+Thailand,Thailand,,,,11,1,15,33,yes,"Feels up to 35°, 80% humidity, 119 mm of rain over 15 days",,Hot in parts; Muggy in parts; Very rainy in parts,
+Thailand,Thailand,,,,12,0,12,33,yes,"Feels up to 33°, 74% humidity, 60 mm of rain over 8 days",Dry in parts; Comfortable in parts,Muggy in parts,
+Myanmar,Myanmar,,,,1,0,4,34,yes,"Feels up to 31°, 66% humidity, 18 mm of rain over 2 days",Dry; Comfortable in parts,,
+Myanmar,Myanmar,,,,2,1,6,36,yes,"Feels up to 34°, 56% humidity, 2 mm of rain over 1 day",Dry,Hot in parts,
+Myanmar,Myanmar,,,,3,1,9,38,yes,"Feels up to 38°, 52% humidity, 12 mm of rain over 1 day",Dry,Hot,
+Myanmar,Myanmar,,,,4,3,12,41,yes,"Feels up to 40°, 55% humidity, 36 mm of rain over 4 days",Dry,Very hot; Muggy in parts; Cyclones in parts,Myanmar DMH
+Myanmar,Myanmar,,,,5,4,15,40,no,"Feels up to 40°, 68% humidity, 192 mm of rain over 17 days",,Hot in parts; Muggy; Rainy in parts; Cyclones in parts; Very hot in parts,Myanmar DMH
+Myanmar,Myanmar,,,,6,4,18,36,no,"Feels up to 37°, 80% humidity, 290 mm of rain over 24 days",,Hot; Muggy; Very rainy in parts; Rainy in parts,
+Myanmar,Myanmar,,,,7,4,17,34,no,"Feels up to 36°, 81% humidity, 346 mm of rain over 28 days",,Hot; Muggy; Very rainy in parts; Rainy in parts,
+Myanmar,Myanmar,,,,8,4,17,33,no,"Feels up to 36°, 84% humidity, 366 mm of rain over 28 days",,Hot; Muggy; Very rainy,
+Myanmar,Myanmar,,,,9,4,16,34,no,"Feels up to 37°, 84% humidity, 333 mm of rain over 26 days",,Hot; Muggy; Very rainy in parts; Rainy in parts,
+Myanmar,Myanmar,,,,10,4,13,33,no,"Feels up to 37°, 84% humidity, 246 mm of rain over 22 days",,Hot; Muggy; Rainy; Cyclones in parts,Myanmar DMH
+Myanmar,Myanmar,,,,11,2,8,34,yes,"Feels up to 35°, 78% humidity, 60 mm of rain over 7 days",Dry in parts,Hot in parts; Muggy in parts; Cyclones in parts,Myanmar DMH
+Myanmar,Myanmar,,,,12,0,5,34,yes,"Feels up to 32°, 71% humidity, 8 mm of rain over 2 days",Dry,,
+Koh Samui,Thailand,,9.51,100.01,1,1,27,28,no,"Feels up to 28°, 79% humidity, 132 mm of rain over 17 days",,,
+Koh Samui,Thailand,,9.51,100.01,2,0,27,28,yes,"Feels up to 28°, 77% humidity, 47 mm of rain over 12 days",,,
+Koh Samui,Thailand,,9.51,100.01,3,0,28,29,yes,"Feels up to 31°, 77% humidity, 38 mm of rain over 10 days",,,
+Koh Samui,Thailand,,9.51,100.01,4,0,29,30,yes,"Feels up to 32°, 77% humidity, 106 mm of rain over 14 days",,,
+Koh Samui,Thailand,,9.51,100.01,5,1,29,31,yes,"Feels up to 33°, 78% humidity, 107 mm of rain over 19 days",,Rainy,
+Koh Samui,Thailand,,9.51,100.01,6,1,28,30,no,"Feels up to 32°, 76% humidity, 77 mm of rain over 16 days",,,
+Koh Samui,Thailand,,9.51,100.01,7,1,28,30,yes,"Feels up to 31°, 77% humidity, 99 mm of rain over 18 days",,Rainy,
+Koh Samui,Thailand,,9.51,100.01,8,1,28,30,yes,"Feels up to 31°, 77% humidity, 80 mm of rain over 18 days",,Rainy,
+Koh Samui,Thailand,,9.51,100.01,9,2,28,30,no,"Feels up to 30°, 80% humidity, 145 mm of rain over 20 days",,Rainy,
+Koh Samui,Thailand,,9.51,100.01,10,3,28,29,no,"Feels up to 30°, 84% humidity, 220 mm of rain over 27 days",,Very rainy,
+Koh Samui,Thailand,,9.51,100.01,11,3,28,29,no,"Feels up to 28°, 84% humidity, 286 mm of rain over 26 days",,Very rainy,
+Koh Samui,Thailand,,9.51,100.01,12,2,27,29,no,"Feels up to 27°, 81% humidity, 226 mm of rain over 20 days",,Rainy,
+Cebu,Philippines,,10.32,123.89,1,2,25,29,yes,"Feels up to 32°, 84% humidity, 214 mm of rain over 21 days",,Muggy; Rainy,
+Cebu,Philippines,,10.32,123.89,2,1,24,30,yes,"Feels up to 32°, 82% humidity, 122 mm of rain over 16 days",,Muggy,
+Cebu,Philippines,,10.32,123.89,3,1,25,31,yes,"Feels up to 34°, 80% humidity, 102 mm of rain over 14 days",,Muggy,
+Cebu,Philippines,,10.32,123.89,4,2,25,31,yes,"Feels up to 36°, 80% humidity, 109 mm of rain over 17 days",,Hot; Muggy,
+Cebu,Philippines,,10.32,123.89,5,4,26,32,yes,"Feels up to 37°, 83% humidity, 202 mm of rain over 25 days",,Hot; Muggy; Very rainy,
+Cebu,Philippines,,10.32,123.89,6,4,26,32,no,"Feels up to 36°, 86% humidity, 280 mm of rain over 27 days",,Hot; Muggy; Very rainy,
+Cebu,Philippines,,10.32,123.89,7,4,25,31,no,"Feels up to 35°, 85% humidity, 278 mm of rain over 27 days",,Hot; Muggy; Very rainy,
+Cebu,Philippines,,10.32,123.89,8,4,26,31,yes,"Feels up to 36°, 84% humidity, 214 mm of rain over 25 days",,Hot; Muggy; Very rainy,
+Cebu,Philippines,,10.32,123.89,9,4,26,31,no,"Feels up to 36°, 85% humidity, 247 mm of rain over 26 days",,Hot; Muggy; Very rainy,
+Cebu,Philippines,,10.32,123.89,10,4,26,31,no,"Feels up to 36°, 86% humidity, 301 mm of rain over 28 days",,Hot; Muggy; Very rainy,
+Cebu,Philippines,,10.32,123.89,11,4,25,30,yes,"Feels up to 35°, 86% humidity, 224 mm of rain over 26 days",,Muggy; Very rainy; Typhoons,PAGASA via press
+Cebu,Philippines,,10.32,123.89,12,4,25,30,yes,"Feels up to 34°, 86% humidity, 239 mm of rain over 26 days",,Muggy; Very rainy; Typhoons,PAGASA via press
+Papua New Guinea,Papua New Guinea,,,,1,4,12,32,no,"Feels up to 36°, 84% humidity, 292 mm of rain over 22 days",,Hot; Muggy; Rainy in parts; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,2,4,12,32,no,"Feels up to 36°, 84% humidity, 216 mm of rain over 20 days",,Hot; Muggy; Rainy,
+Papua New Guinea,Papua New Guinea,,,,3,4,13,32,no,"Feels up to 36°, 86% humidity, 332 mm of rain over 25 days",,Hot; Muggy; Rainy in parts; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,4,4,13,32,no,"Feels up to 35°, 88% humidity, 396 mm of rain over 24 days",,Hot in parts; Muggy; Rainy in parts; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,5,3,13,31,no,"Feels up to 34°, 86% humidity, 340 mm of rain over 20 days",,Muggy; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,6,3,13,31,no,"Feels up to 32°, 86% humidity, 320 mm of rain over 18 days",,Muggy; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,7,2,13,31,yes,"Feels up to 32°, 84% humidity, 312 mm of rain over 18 days",,Muggy in parts; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,8,2,12,31,yes,"Feels up to 32°, 84% humidity, 342 mm of rain over 18 days",,Muggy in parts; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,9,2,13,31,yes,"Feels up to 33°, 84% humidity, 344 mm of rain over 19 days",,Muggy in parts; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,10,2,12,32,yes,"Feels up to 34°, 84% humidity, 259 mm of rain over 21 days",,Muggy; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,11,3,12,32,yes,"Feels up to 36°, 84% humidity, 256 mm of rain over 19 days",,Hot; Muggy; Very rainy in parts,
+Papua New Guinea,Papua New Guinea,,,,12,4,12,32,no,"Feels up to 36°, 84% humidity, 333 mm of rain over 23 days",,Hot; Muggy; Rainy in parts; Very rainy in parts,
+Australia,Australia,,,,1,2,11,38,yes,"Feels up to 32°, 77% humidity, 241 mm of rain over 18 days",Comfortable in parts,Hot in parts; Muggy in parts; Very rainy in parts; Cyclones (peak) in parts,BoM
+Australia,Australia,,,,2,2,10,37,yes,"Feels up to 31°, 77% humidity, 190 mm of rain over 15 days",Comfortable in parts; Dry in parts,Rainy in parts; Hot in parts; Muggy in parts; Cyclones (peak) in parts; Very rainy in parts,BoM
+Australia,Australia,,,,3,2,9,37,yes,"Feels up to 30°, 78% humidity, 178 mm of rain over 16 days",Comfortable in parts; Dry in parts,Rainy in parts; Muggy in parts; Very rainy in parts; Cyclones (peak) in parts; Hot in parts,BoM
+Australia,Australia,,,,4,1,6,37,yes,"Feels up to 27°, 76% humidity, 99 mm of rain over 11 days",Comfortable in parts,Rainy in parts; Cyclones in parts; Hot in parts; Muggy in parts,BoM
+Australia,Australia,,,,5,0,3,33,yes,"Feels up to 23°, 73% humidity, 59 mm of rain over 8 days",Comfortable in parts; Dry in parts,,
+Australia,Australia,,,,6,0,1,31,yes,"Feels up to 21°, 74% humidity, 47 mm of rain over 7 days",Comfortable in parts; Dry in parts,,
+Australia,Australia,,,,7,0,0,31,yes,"Feels up to 20°, 72% humidity, 45 mm of rain over 7 days",Comfortable in parts; Dry in parts,,
+Australia,Australia,,,,8,0,0,34,yes,"Feels up to 21°, 70% humidity, 36 mm of rain over 6 days",Dry in parts; Comfortable in parts,,
+Australia,Australia,,,,9,0,3,37,yes,"Feels up to 24°, 71% humidity, 47 mm of rain over 8 days",Comfortable in parts; Dry in parts,,
+Australia,Australia,,,,10,0,6,40,yes,"Feels up to 27°, 72% humidity, 76 mm of rain over 11 days",Comfortable in parts,Hot in parts; Muggy in parts,
+Australia,Australia,,,,11,1,8,40,yes,"Feels up to 29°, 72% humidity, 92 mm of rain over 13 days",Comfortable in parts,Cyclones in parts; Hot in parts; Muggy in parts; Rainy in parts,BoM
+Australia,Australia,,,,12,2,10,39,yes,"Feels up to 31°, 74% humidity, 177 mm of rain over 14 days",Comfortable in parts,Hot in parts; Muggy in parts; Rainy in parts; Cyclones in parts; Very rainy in parts,BoM
+Tasmania,Australia,Tasmania,,,1,0,11,24,yes,,,,
+Tasmania,Australia,Tasmania,,,2,0,10,23,yes,,,,
+Tasmania,Australia,Tasmania,,,3,0,9,22,yes,,,,
+Tasmania,Australia,Tasmania,,,4,0,8,19,yes,,,,
+Tasmania,Australia,Tasmania,,,5,1,6,15,no,,,,
+Tasmania,Australia,Tasmania,,,6,1,4,14,no,,,,
+Tasmania,Australia,Tasmania,,,7,1,3,13,no,,,,
+Tasmania,Australia,Tasmania,,,8,1,3,13,no,,,,
+Tasmania,Australia,Tasmania,,,9,1,4,16,no,,,,
+Tasmania,Australia,Tasmania,,,10,1,6,18,no,,,,
+Tasmania,Australia,Tasmania,,,11,0,8,21,yes,,,,
+Tasmania,Australia,Tasmania,,,12,0,10,22,yes,,,,
+New Zealand,New Zealand,,,,1,0,5,24,yes,,,,
+New Zealand,New Zealand,,,,2,0,6,25,yes,,,,
+New Zealand,New Zealand,,,,3,0,5,23,yes,,,,
+New Zealand,New Zealand,,,,4,0,3,20,yes,,,,
+New Zealand,New Zealand,,,,5,0,0,18,yes,,,,
+New Zealand,New Zealand,,,,6,1,-3,16,no,,,,
+New Zealand,New Zealand,,,,7,1,-4,15,no,,,,
+New Zealand,New Zealand,,,,8,1,-5,16,no,,,,
+New Zealand,New Zealand,,,,9,1,-3,16,no,,,,
+New Zealand,New Zealand,,,,10,0,-1,18,yes,,,,
+New Zealand,New Zealand,,,,11,0,2,20,yes,,,,
+New Zealand,New Zealand,,,,12,0,4,22,yes,,,,

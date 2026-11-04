@@ -26,10 +26,14 @@
 /* ===== Comparison table ===== */
 .storage-box-sort-button { font: inherit; color: inherit; font-weight: inherit; background: none; border: 0; padding: 0; cursor: pointer; white-space: nowrap; }
 .storage-box-sort-button:hover, .storage-box-sort-button:focus-visible { color: var(--color-text); }
-.storage-box-notes-cell { min-width: 16rem; }
-.storage-box-notes-cell summary { cursor: pointer; color: var(--color-text-muted); }
-.storage-box-notes-cell p { margin: var(--gap-extra-small) 0; }
-.storage-box-notes-cell a { color: var(--color-text); }
+#card-storage-box-comparison .table-scroll-container { container-type: inline-size; }
+.storage-box-note-toggle { display: block; font: inherit; font-weight: normal; color: var(--color-text-muted); background: none; border: 0; padding: 0; margin-top: var(--gap-extra-small); cursor: pointer; white-space: nowrap; }
+.storage-box-note-toggle:hover, .storage-box-note-toggle:focus-visible { color: var(--color-text); }
+.data-table tbody .storage-box-note-row td { font-weight: normal; min-width: 0; }
+/* The note stays in view when the table is scrolled sideways: 100cqw is the width of the scrolling area, which can include its scrollbar (hence the extra 1.25rem). */
+.storage-box-note-content { position: sticky; left: var(--padding-small); width: min(52rem, 100cqw - 2 * var(--padding-small) - 1.25rem); }
+.storage-box-note-content p { margin: 0 0 var(--gap-extra-small); }
+.storage-box-note-content a { color: var(--color-text); }
 
 /* ===== How the prices are counted ===== */
 .storage-box-read-me-list { margin: 0; padding-left: 1.1rem; font-size: var(--font-size-body); line-height: 1.6; max-width: 52rem; }

@@ -6,6 +6,9 @@
   // ===== Data sources =====
   dashboard.registerDataSource('trip_route_stops', 'pages/trip/trip-route-stops.csv');
   dashboard.registerDataSource('world_country_outlines', 'pages/trip/world-country-outlines-do-not-edit.json');
+  dashboard.registerDataSource('trip_disease_risk', 'pages/trip/trip-disease-risk.csv');
+  dashboard.registerDataSource('trip_region_outlines', 'pages/trip/trip-region-outlines-do-not-edit.json');
+  dashboard.registerDataSource('trip_climate_by_month', 'pages/trip/trip-climate-by-month.csv');
 
   // ===== Calculations =====
   dashboard.calc('trip_stays_with_nights', {
@@ -74,7 +77,7 @@
 
   // ===== Shared state and formats =====
   // Which chapter is on screen ('all' = route overview, 'totals' = money chapter), and the map's current view.
-  const tripMapState = {chapter: 'all', view: null, animationFrame: 0};
+  const tripMapState = {chapter: 'all', view: null, animationFrame: 0, diseases: new Set(), climateOn: false, climateMonth: 1, paintClimate: null};
   const formatDayMonth = d3.utcFormat('%-d %b');
   const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -128,6 +131,190 @@
   };
   const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
+  // ===== Disease layers =====
+  // Each disease has its own colour: darker = higher risk. `hatchAngle` keeps the "no data" hatching apart when layers overlap.
+  const TRIP_DISEASES = [
+    {id: 'rabies', label: 'Rabies', levels: {low: '#f2a39b', moderate: '#d64a3a', high: '#7d1a12'}, hatchAngle: 45,
+      rule: 'Dark: human cases reported in the province. Mid: animal cases only (WOAH), or dogs commonly infected (US CDC). Light: dogs sometimes infected, or wildlife only. Human cases are under-reported, so a lighter region is not proof of safety.'},
+    {id: 'dengue', label: 'Dengue', levels: {low: '#f7c27a', moderate: '#e08a1e', high: '#8a4b05'}, hatchAngle: -45,
+      rule: 'Dark: above the HCSP endemic threshold of 100 per 100,000. Taiwan and Queensland are light because their cases are probably mostly imported.'},
+    {id: 'chikungunya', label: 'Chikungunya', levels: {low: '#c9aee8', moderate: '#8a5cd1', high: '#43238a'}, hatchAngle: 0,
+      rule: 'Dark: epidemic. Mid: active circulation in the previous 12 months (HCSP). Light: cases reported, local transmission not shown.'},
+    {id: 'malaria', label: 'Malaria', levels: {low: '#8fd6c8', moderate: '#1f9c89', high: '#0b4f45'}, hatchAngle: 90,
+      rule: 'HCSP high, moderate and low risk zones, US CDC transmission areas, and WHO district case counts.'},
+  ];
+  const RISK_LEVELS = ['low', 'moderate', 'high'];
+  const riskRank = (level) => RISK_LEVELS.indexOf(level);
+  // 90% for this year's data, 10% lighter per year of age, never below 40%.
+  const opacityForDataYear = (year) => Math.max(0.4, 0.9 - 0.1 * Math.max(0, new Date().getFullYear() - year));
+  const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  // What one source says about a region: its row for that region if it has one, otherwise its row for the whole country.
+  const rowsBySourceForRegion = (rows, region) => {
+    const bySource = new Map();
+    rows.forEach((r) => { if (r.region === region || (!r.region && !bySource.has(r.source))) bySource.set(r.source, r); });
+    return [...bySource.values()];
+  };
+  // A region's state for one disease. The highest risk any source gives wins, even if another source disagrees.
+  const diseaseStateForRegion = (rows, region) => {
+    const sources = rowsBySourceForRegion(rows, region);
+    const risky = sources.filter((r) => riskRank(r.level) >= 0).sort((a, b) => riskRank(b.level) - riskRank(a.level) || b.year - a.year);
+    if (risky.length) return {state: 'risk', level: risky[0].level, year: risky[0].year, sources};
+    return {state: sources.some((r) => r.level === 'none') ? 'none' : 'nodata', sources};
+  };
+
+  dashboard.calc('trip_disease_regions', {
+    inputs: ['trip_disease_risk', 'trip_region_outlines', 'world_country_outlines'],
+    title: 'Disease state of each region',
+    description: 'One row per region on the map, with the state of each disease. Countries without province outlines are shown whole, and only for the diseases they have rows for.',
+    fn: (risk, regions, countries) => {
+      const rows = risk.map((r) => ({...r, year: +r.year}));
+      const inRegionFile = new Set(regions.map((r) => r.country));
+      const wholeCountries = countries.filter((c) => !inRegionFile.has(c.country) && rows.some((r) => r.country === c.country)).map((c) => ({country: c.country, region: '', d: c.d}));
+      return [...regions, ...wholeCountries].map((f) => {
+        const byDisease = {};
+        TRIP_DISEASES.forEach(({id}) => {
+          const own = rows.filter((r) => r.disease === id && r.country === f.country);
+          if (own.length || inRegionFile.has(f.country)) byDisease[id] = diseaseStateForRegion(own, f.region);
+        });
+        return {...f, byDisease};
+      });
+    },
+  });
+
+  const tooltipLine = (text, secondary) => {
+    const line = document.createElement('div'); line.textContent = text;
+    if (secondary) line.className = 'chart-tooltip-secondary-line';
+    return line;
+  };
+  const diseaseTooltipLines = (region) => {
+    const lines = [tooltipLine(region.region ? region.region + ', ' + region.country : region.country)];
+    TRIP_DISEASES.filter((d) => tripMapState.diseases.has(d.id) && region.byDisease[d.id]).forEach((d) => {
+      const s = region.byDisease[d.id];
+      lines.push(tooltipLine(d.label + ': ' + (s.state === 'risk' ? s.level + ' (' + s.year + ')' : s.state === 'none' ? 'none reported' : 'no data')));
+      s.sources.filter((r) => r.source || r.note).forEach((r) => {
+        const verdict = r.source ? r.source + (r.level === 'nodata' ? '' : ' [' + r.level + ', ' + r.year + ']') + (r.note ? ': ' : '') : '';
+        lines.push(tooltipLine(verdict + r.note, true));
+      });
+    });
+    return lines;
+  };
+
+  // The layer buttons turn on and off independently.
+  document.querySelectorAll('.trip-disease-toggles button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.disease, on = !tripMapState.diseases.has(id);
+      if (on) tripMapState.diseases.add(id); else tripMapState.diseases.delete(id);
+      button.setAttribute('aria-pressed', String(on));
+      dashboard.draw('trip_world_map');
+      dashboard.draw('trip_disease_legend');
+    });
+  });
+
+  // ===== Best season layer =====
+  const CLIMATE_LEVELS = [
+    {label: 'Ideal', color: '#1a7a3e'}, {label: 'Good', color: '#7cc36b'}, {label: 'Mixed', color: '#f2d64b'},
+    {label: 'Poor', color: '#ee9237'}, {label: 'Avoid', color: '#cf3226'},
+  ];
+  const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  dashboard.calc('trip_climate_places', {
+    inputs: ['trip_climate_by_month', 'trip_region_outlines', 'world_country_outlines'],
+    title: 'Best season of each place',
+    description: 'One row per place with its twelve months. Places with a lat and lon are drawn as a dot; the others use their country or region outline.',
+    fn: (rows, regions, countries) => [...d3.group(rows, (r) => r.place).values()].map((own) => {
+      const {place, country, region, lat, lon} = own[0];
+      const outline = lat ? null : region ? regions.find((f) => f.country === country && f.region === region) : countries.find((f) => f.country === country);
+      return {place, country, region, lat: +lat, lon: +lon, d: outline ? outline.d : null, months: Object.fromEntries(own.map((r) => [+r.month, r]))};
+    }),
+  });
+
+  const climateLinesForPlace = (place) => {
+    if (!tripMapState.climateOn || !place) return [];
+    const r = place.months[tripMapState.climateMonth];
+    const listed = r.on_best_list === 'yes' ? ', a listed best month' : r.on_best_list === 'no' ? ', not a listed best month' : '';
+    return [
+      tooltipLine(`${MONTH_NAMES[tripMapState.climateMonth - 1]} in ${place.place}: ${CLIMATE_LEVELS[+r.level].label}`),
+      tooltipLine(`Où et Quand: ${r.temp_min}° to ${r.temp_max}°${listed}`, true),
+      ...(r.weather ? [tooltipLine(r.weather, true)] : []),
+      ...(r.plus ? [tooltipLine('+ ' + r.plus, true)] : []),
+      ...(r.minus ? [tooltipLine('− ' + r.minus, true)] : []),
+      ...(r.hazard_source ? [tooltipLine('Hazard source: ' + r.hazard_source, true)] : []),
+    ];
+  };
+  // The place shown at a country or region on the map: a region's own place first, then its country's. Dots are found by their own hover.
+  const climatePlaceAt = (country, region) => {
+    const places = dashboard.data('trip_climate_places');
+    if (places.status !== 'ok') return null;
+    const areas = places.data.filter((p) => p.d && p.country === country);
+    return areas.find((p) => p.region && p.region === region) || areas.find((p) => !p.region) || null;
+  };
+
+  const climateToggle = document.getElementById('trip-climate-toggle');
+  const climateSlider = document.getElementById('trip-climate-month');
+  const climateMonthName = document.getElementById('trip-climate-month-name');
+  climateToggle.addEventListener('click', () => {
+    tripMapState.climateOn = !tripMapState.climateOn;
+    climateToggle.setAttribute('aria-pressed', String(tripMapState.climateOn));
+    climateSlider.disabled = !tripMapState.climateOn;
+    dashboard.draw('trip_world_map');
+    dashboard.draw('trip_climate_legend');
+  });
+  // Moving the slider only recolours the layer, so dragging stays smooth.
+  climateSlider.addEventListener('input', () => {
+    tripMapState.climateMonth = +climateSlider.value;
+    const name = MONTH_NAMES[tripMapState.climateMonth - 1];
+    climateSlider.setAttribute('aria-valuetext', name);
+    climateMonthName.textContent = name;
+    if (tripMapState.paintClimate) tripMapState.paintClimate();
+  });
+
+  dashboard.draw('trip_climate_legend', (el) => {
+    el.replaceChildren();
+    if (!tripMapState.climateOn) return;
+    const places = dashboard.data('trip_climate_places');
+    if (places.status === 'error') { el.append(tooltipLine('The best season data failed to load.')); return; }
+    const row = document.createElement('div'); row.className = 'trip-disease-legend-row';
+    CLIMATE_LEVELS.forEach(({label, color}) => {
+      const key = document.createElement('span'); key.className = 'trip-disease-legend-key';
+      const swatch = document.createElement('i'); swatch.style.background = color;
+      key.append(swatch, label); row.append(key);
+    });
+    const note = document.createElement('p');
+    note.textContent = "Starts from Où et Quand's best months, then adjusted for measured heat, humidity and rain (2015–2024) and for typhoon, cyclone and smoke seasons. Figures are country-level averages, so conditions vary within a country. ";
+    const link = document.createElement('a'); link.href = 'pages/trip/trip-climate-by-month.csv'; link.textContent = 'All months and sources';
+    note.append(link, '.');
+    el.append(row, note);
+  });
+
+  dashboard.draw('trip_disease_legend', (el) => {
+    el.replaceChildren();
+    const active = TRIP_DISEASES.filter((d) => tripMapState.diseases.has(d.id));
+    if (!active.length) return;
+    if (dashboard.data('trip_disease_regions').status === 'error') { el.append(tooltipLine('The disease data failed to load.')); return; }
+    active.forEach((d) => {
+      const row = document.createElement('div'); row.className = 'trip-disease-legend-row';
+      const name = document.createElement('b'); name.textContent = d.label; row.append(name);
+      RISK_LEVELS.forEach((level) => {
+        const key = document.createElement('span'); key.className = 'trip-disease-legend-key';
+        const swatch = document.createElement('i'); swatch.style.background = d.levels[level];
+        key.append(swatch, capitalize(level)); row.append(key);
+      });
+      const key = document.createElement('span'); key.className = 'trip-disease-legend-key';
+      const hatch = document.createElement('i');
+      hatch.style.background = `repeating-linear-gradient(${d.hatchAngle + 90}deg, ${d.levels.moderate} 0 1px, transparent 1px 4px)`;
+      key.append(hatch, 'No data'); row.append(key);
+      const rule = document.createElement('p'); rule.textContent = d.rule; row.append(rule);
+      el.append(row);
+    });
+    const note = document.createElement('p');
+    const year = new Date().getFullYear();
+    note.textContent = `Lighter = older data: ${year} at 90%, 10% less per year, 40% at the lightest. No colour: the sources report none. Where sources disagree, the highest risk is shown; hover a region for each source. Check with a travel clinic before relying on this. `;
+    const link = document.createElement('a'); link.href = 'pages/trip/trip-disease-risk.csv'; link.textContent = 'All readings and sources';
+    note.append(link, '.');
+    el.append(note);
+  });
+
   dashboard.draw('trip_world_map', (el) => {
     if (tripMapState.animationFrame) { cancelAnimationFrame(tripMapState.animationFrame); tripMapState.animationFrame = 0; }
     el.replaceChildren();
@@ -162,6 +349,10 @@
         const lo = lo0 + (lo1 - lo0) * i / 8, la = la0 + (la1 - la0) * i / 8;
         fitPts.push(projectWorldPoint(lo, la0), projectWorldPoint(lo, la1), projectWorldPoint(lo0, la), projectWorldPoint(lo1, la));
       }
+    } else if (tripMapState.climateOn) {
+      // At world scale Southeast Asia is lost under the stop dots, so the overview frames Asia-Pacific while this layer is on.
+      fitPts = [];
+      for (let lon = 92; lon <= 180; lon += 4) fitPts.push(projectWorldPoint(lon, 46), projectWorldPoint(lon, -48));
     }
     const x0 = d3.min(fitPts, (p) => p[0]), x1 = d3.max(fitPts, (p) => p[0]);
     const y0 = d3.min(fitPts, (p) => p[1]), y1 = d3.max(fitPts, (p) => p[1]);
@@ -177,6 +368,57 @@
       .attr('class', (d) => 'trip-map-land' + (visited.has(d.country) ? ' is-visited' : '') + (focusCountries.has(d.country) ? ' is-focus' : ''))
       .attr('d', (d) => d.d)
       .style('fill', (d) => visited.has(d.country) ? dashboard.colors[0] : null);
+    const followPointerWithTip = (ev, lines) => {
+      tip.replaceChildren(...lines); tip.hidden = false;
+      const [x, y] = d3.pointer(ev, el);
+      const tw = tip.offsetWidth, th = tip.offsetHeight;
+      tip.style.left = Math.max(4, Math.min(W - tw - 4, x + 12)) + 'px';
+      tip.style.top = Math.max(4, y + th + 16 > H ? y - th - 12 : y + 12) + 'px';
+    };
+    // The best season layer sits directly on the land, so disease layers can still blend over it.
+    const climatePlaces = dashboard.data('trip_climate_places');
+    const shownClimatePlaces = tripMapState.climateOn && climatePlaces.status === 'ok' ? climatePlaces.data : [];
+    const climateFill = (p) => CLIMATE_LEVELS[+p.months[tripMapState.climateMonth].level].color;
+    const climateAreas = world.append('g').selectAll('path').data(shownClimatePlaces.filter((p) => p.d)).join('path')
+      .attr('class', 'trip-map-climate-region').attr('d', (p) => p.d)
+      .on('pointermove', (ev, p) => followPointerWithTip(ev, climateLinesForPlace(p)))
+      .on('pointerleave', () => { tip.hidden = true; });
+    tripMapState.paintClimate = () => {
+      climateAreas.style('fill', climateFill);
+      climateDots.style('fill', climateFill);
+    };
+    // Disease layers sit above the land and below the route. The hatching is redrawn at each zoom so it keeps its screen size.
+    const activeDiseases = TRIP_DISEASES.filter((d) => tripMapState.diseases.has(d.id));
+    const diseaseRegions = dashboard.data('trip_disease_regions');
+    const showDiseases = activeDiseases.length > 0 && diseaseRegions.status === 'ok';
+    const hatchPatterns = svg.append('defs').selectAll('pattern').data(showDiseases ? activeDiseases : []).join('pattern')
+      .attr('id', (d) => 'trip-disease-hatch-' + d.id).attr('patternUnits', 'userSpaceOnUse').attr('width', 6).attr('height', 6);
+    hatchPatterns.append('line').attr('x1', 0).attr('y1', 3).attr('x2', 6).attr('y2', 3).attr('stroke-width', 1.2).style('stroke', (d) => d.levels.moderate);
+    if (showDiseases) {
+      const diseaseLayers = world.append('g').attr('class', 'trip-map-disease-layers');
+      activeDiseases.forEach((disease) => {
+        const shown = diseaseRegions.data.filter((f) => f.byDisease[disease.id] && f.byDisease[disease.id].state !== 'none');
+        diseaseLayers.append('g').attr('class', 'trip-map-disease-layer').selectAll('path').data(shown).join('path').attr('class', 'trip-map-disease-region').attr('d', (f) => f.d)
+          .style('fill', (f) => {
+            const s = f.byDisease[disease.id];
+            return s.state === 'risk' ? disease.levels[s.level] : `url(#trip-disease-hatch-${disease.id})`;
+          })
+          .style('fill-opacity', (f) => {
+            const s = f.byDisease[disease.id];
+            return s.state === 'risk' ? opacityForDataYear(s.year) : 1;
+          });
+      });
+      world.append('g').selectAll('path').data(diseaseRegions.data.filter((f) => activeDiseases.some((d) => f.byDisease[d.id]))).join('path')
+        .attr('class', 'trip-map-disease-hover-area').attr('d', (f) => f.d)
+        .on('pointermove', (ev, f) => followPointerWithTip(ev, [...diseaseTooltipLines(f), ...climateLinesForPlace(climatePlaceAt(f.country, f.region))]))
+        .on('pointerleave', () => { tip.hidden = true; });
+    }
+    // Islands too small to colour on the map (Koh Samui, Cebu) get a dot that keeps its size at every zoom.
+    const climateDots = svg.append('g').selectAll('circle').data(shownClimatePlaces.filter((p) => !p.d)).join('circle')
+      .attr('class', 'trip-map-climate-dot').attr('r', 6)
+      .on('pointermove', (ev, p) => followPointerWithTip(ev, climateLinesForPlace(p)))
+      .on('pointerleave', () => { tip.hidden = true; });
+    tripMapState.paintClimate();
     const legPaths = svg.append('g').selectAll('path').data(legs).join('path')
       .attr('class', (d) => 'trip-map-leg is-' + d.mode + (d.optional ? ' is-optional' : '') + (isOn(d.chapter) ? '' : ' is-off'))
       .style('stroke', (d) => d.optional ? 'var(--color-success)' : isOn(d.chapter) ? modeColor(d.mode) : null);
@@ -198,7 +440,7 @@
         const t2 = document.createElement('div'); t2.className = 'chart-tooltip-secondary-line';
         t2.textContent = (d.arrive ? formatDayMonth(new Date(d.arrive)) : 'Start') + ' – ' + (d.depart ? formatDayMonth(new Date(d.depart)) : 'End') + (d.nights ? ' · ' + d.nights + ' nights' : '') + ' · ' + d.status;
         const t3 = document.createElement('div'); t3.className = 'chart-tooltip-secondary-line'; t3.textContent = d.note || '';
-        tip.replaceChildren(t1, t2, ...(d.note ? [t3] : [])); tip.hidden = false;
+        tip.replaceChildren(t1, t2, ...(d.note ? [t3] : []), ...climateLinesForPlace(climatePlaceAt(d.country))); tip.hidden = false;
         const [x, y] = toScreen(d.lon, d.lat);
         const tw = tip.offsetWidth, th = tip.offsetHeight;
         tip.style.left = Math.max(4, Math.min(W - tw - 4, x - tw / 2)) + 'px';
@@ -209,6 +451,7 @@
     const render = (v) => {
       view = v; tripMapState.view = v;
       world.attr('transform', `translate(${W / 2 - v.k * v.cx},${H / 2 - v.k * v.cy}) scale(${v.k})`);
+      hatchPatterns.attr('patternTransform', (d) => `scale(${1 / v.k}) rotate(${d.hatchAngle})`);
       legPaths.attr('d', (d, i) => {
         let out = '', prev = null;
         legLines[i].forEach(([lo, la]) => {
@@ -218,6 +461,7 @@
         });
         return out;
       });
+      climateDots.attr('cx', (p) => toScreen(p.lon, p.lat)[0]).attr('cy', (p) => toScreen(p.lon, p.lat)[1]);
       dots.attr('cx', (d) => toScreen(d.lon, d.lat)[0]).attr('cy', (d) => toScreen(d.lon, d.lat)[1]);
       hits.attr('cx', (d) => toScreen(d.lon, d.lat)[0]).attr('cy', (d) => toScreen(d.lon, d.lat)[1]);
       labels.attr('x', (d) => toScreen(d.lon, d.lat)[0]).attr('y', (d) => toScreen(d.lon, d.lat)[1]);

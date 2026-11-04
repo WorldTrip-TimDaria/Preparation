@@ -31,7 +31,10 @@ pages/
     trip-page.css
     trip-page.js
     trip-route-stops.csv                      ← edit: the route, one row per stop
+    trip-disease-risk.csv                     ← edit: disease risk by country and region
+    trip-climate-by-month.csv                 ← edit: best season rating by place and month
     world-country-outlines-do-not-edit.json   generated map outlines
+    trip-region-outlines-do-not-edit.json     generated province outlines for the disease layers
   insurance/                  the "Insurance" tab
     insurance-page.css
     insurance-page.js
@@ -153,6 +156,55 @@ Edit the data file (in any text editor, or a spreadsheet for the CSVs), then rel
 | `note` | free text shown under the stop |
 | `paid_expense` | a word found in a Travel expense's name: the leg arriving here shows as bought, with what we paid |
 
+### `pages/trip/trip-climate-by-month.csv`: the best season layer on the map (one row per place and month)
+
+The "Best season" button under the map turns the layer on and enables the month slider. It is off by default. While it is on, the route overview frames Asia-Pacific.
+
+| column | meaning |
+|---|---|
+| `place` | the name shown on hover |
+| `country`, `region` | the outline to colour. `region` must match `trip-region-outlines-do-not-edit.json` exactly. Leave it empty for the whole country. |
+| `lat`, `lon` | fill these in for an island too small to colour: it is drawn as a dot instead |
+| `month` | 1 to 12 |
+| `level` | the colour: `0` Ideal (dark green), `1` Good (green), `2` Mixed (yellow), `3` Poor (orange), `4` Avoid (red). Edit it to override the rating. |
+| `temp_min`, `temp_max`, `on_best_list` | the place's range and best-month list from [Où et Quand](https://www.ou-et-quand.net/partir/quand/). |
+| `weather` | measured monthly averages for the place, from the Open-Meteo archive (2015 to 2024). Empty for New Zealand and Tasmania, which are rated from the best-month list and have no measured figures or hazards. |
+| `plus`, `minus` | advantages and disadvantages shown on hover |
+| `hazard_source` | where that month's typhoon, cyclone or smoke rating comes from |
+
+`level` was worked out once and stored, so editing a figure does not change it. Each sample city starts at 0 if the month is on the place's best list and 1 if not, then adds:
+
+- **Heat:** +1 if it feels 35° or more, +2 at 40° or more (average daily maximum feels-like temperature).
+- **Cold:** +1 if it feels 8° or less, +2 at 0° or less.
+- **Humidity:** +1 if the average dew point is 22° or more.
+- **Rain:** +1 for 150 mm or 18 rainy days (1 mm or more), +2 for 300 mm or 25 days.
+- **Hazard:** +1 in the season, +2 at the peak.
+
+The place's level is the average across its sample cities, rounded, and capped at 4. `weather` averages the same cities, and "in parts" in `minus` means only some of them are affected. A country-level figure can hide big differences (Hanoi and Ho Chi Minh City, Darwin and Melbourne).
+
+Hazard sources: [JMA](https://www.data.jma.go.jp/yoho/typhoon/statistics/average/average.html) (Japan), [KMA](https://www.kma.go.kr/neng/biz/climate/climate-of-korea.do) and published counts (South Korea), [Taipei Times](https://www.taipeitimes.com/News/taiwan/archives/2025/06/27/2003839357) quoting the CWA and [Trip.com](https://fr.trip.com/guide/destination/quand-partir-taiwan.html) (Taiwan), [Vietnam Guide](https://vietnamguide.co.kr/en/blog/typhoons-in-vietnam), a commercial guide (Vietnam), [Bangkok Post](https://www.bangkokpost.com/news/general/1644276/north-air-quality-yet-to-improve) (smoke in northern Thailand, also applied to Laos), [BoM](https://media.bom.gov.au/releases/541/wet-season-fast-approaching-time-to-prepare) (Darwin and Cairns), [Myanmar DMH](https://www.moezala.gov.mm/node/80) (Yangon), and [press reports of PAGASA](https://www.pressreader.com/philippines/the-freeman/20181030/281625306299329) (Cebu). No hazard was collected for Cambodia, Papua New Guinea, Tasmania or New Zealand, so none is counted there.
+
+### `pages/trip/trip-disease-risk.csv`: the disease layers on the map (one row per source and place)
+
+| column | meaning |
+|---|---|
+| `disease` | `rabies`, `dengue`, `chikungunya` or `malaria` |
+| `country`, `region` | `region` must match the name in `trip-region-outlines-do-not-edit.json` exactly, accents included. Leave it empty for the whole country. |
+| `level` | `high`, `moderate`, `low`, `none` (the source says there is none) or `nodata` |
+| `year` | the year of the data, which sets the opacity: 90% for this year, 10% less per year, 40% at the lightest |
+| `source`, `url`, `note` | shown when you hover a region (the note and source) and kept for reference (the url) |
+
+For each source, a region's own row replaces that source's whole-country row. Across sources the highest risk is shown, and ties go to the newest data. A region with no risk and no `none` row is hatched as "no data". Vietnam's dengue layer is shown by province: its national ECDC row is `nodata` on purpose, so the national rate (about 115 per 100,000) appears in the note without colouring provinces that have no figure of their own.
+
+Each disease uses its own definition, and `level` follows it:
+
+- **Chikungunya (HCSP):** `high` is an epidemic, `moderate` is active circulation in the previous 12 months, `low` is cases reported without local transmission being shown.
+- **Dengue (HCSP):** `high` is above 100 cases per 100,000, `moderate` is 10 to 100, `low` is under 10. Taiwan and Queensland are `low` because their cases are probably mostly imported.
+- **Rabies:** human cases reported in the province are `high`. Animal cases only (WOAH "present") and US CDC "commonly found" in dogs are `moderate`. "Sometimes found" or wildlife only is `low`.
+- **Malaria:** the HCSP's own zones. WHO district counts are `low` up to 10 *P. falciparum* or 50 *P. vivax* cases, `moderate` up to 100 or 500, and `high` above that.
+
+`level` is the risk of infection, not the number of cases: Queensland and Taiwan figures mix local and imported cases, so they stay `low` whatever the count, and the note says so. Rows read from a map image are approximate, and the note says that too.
+
 ### `pages/expenses/expenses-notion-export.csv`: our Notion export
 
 It has the same columns as the Notion table: `Category, Expense, Amount, who paid, for whom, Date, pays, Merchant, Notes`. To update it, re-export from Notion and replace the file, keeping its name.
@@ -199,6 +251,7 @@ If a header is renamed, the script stops and says which one is missing. To chang
 ### Map outlines (`*-do-not-edit.json`)
 
 - `pages/trip/world-country-outlines-do-not-edit.json`: Natural Earth via world-atlas, pre-projected and centred on 90°E.
+- `pages/trip/trip-region-outlines-do-not-edit.json`: Natural Earth 10m provinces for the countries on the disease layers, simplified and projected the same way as the world outlines. Three Vietnamese provinces that Natural Earth mislabels were renamed (Đồng Nai, Bắc Kạn, Hưng Yên).
 - `pages/okinawa/okinawa-municipality-outlines-do-not-edit.json`: GSI Global Map Japan via jpn-atlas, projected around 127.95°E, 26.5°N.
 
 ## What's real and what's a placeholder
