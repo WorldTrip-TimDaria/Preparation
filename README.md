@@ -261,7 +261,7 @@ Edit the Excel file, then rebuild the page's data:
 
 ```bash
 python3 pages/storage_box/convert-excel-to-json.py
-# Wrote storage-box-comparison.json: 47 boxes, 12 open points, 3 read-me topics.
+# Wrote storage-box-comparison.json: 52 boxes, 12 open points, 3 read-me topics.
 ```
 
 The script needs only Python 3 and reads three sheets:
