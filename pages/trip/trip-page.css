@@ -28,6 +28,35 @@
 .trip-map-land { fill: var(--color-chart-muted); fill-opacity: .3; stroke: var(--color-panel); stroke-width: .5; vector-effect: non-scaling-stroke; }
 .trip-map-land.is-visited { fill-opacity: .3; }
 .trip-map-land.is-focus { fill-opacity: .55; }
+.trip-map-disease-region { stroke: var(--color-panel); stroke-width: .4; vector-effect: non-scaling-stroke; }
+.trip-map-disease-hover-area { fill: transparent; }
+/* Overlapping layers mix with each other, not with the land under them, so both stay visible. */
+.trip-map-disease-layers { isolation: isolate; }
+.trip-map-disease-layer { mix-blend-mode: multiply; }
+.trip-map-climate-region { fill-opacity: .85; stroke: var(--color-panel); stroke-width: .4; vector-effect: non-scaling-stroke; }
+.trip-map-climate-dot { stroke: var(--color-text); stroke-width: 1; }
+.trip-map .chart-tooltip { width: max-content; max-width: min(340px, 90%); white-space: normal; }
+.trip-disease-toggles { display: flex; margin: var(--gap-small) 0 0; }
+.trip-climate-control { display: flex; align-items: flex-start; gap: var(--gap-small); margin-top: var(--gap-small); }
+.trip-climate-control .toggle-button-group { flex: none; margin: 0; }
+.trip-climate-slider { flex: 1; min-width: 0; }
+.trip-climate-slider input { display: block; width: 100%; margin: 0; }
+.trip-climate-slider input:disabled { opacity: .45; }
+.trip-climate-months { display: flex; justify-content: space-between; padding: 0 3px; font-size: var(--font-size-caption); color: var(--color-text-muted); }
+.trip-climate-month-name { flex: none; width: 5.5em; font-size: var(--font-size-caption); color: var(--color-text); }
+.trip-climate-legend:empty { display: none; }
+.trip-climate-legend { margin-top: var(--gap-extra-small); font-size: var(--font-size-caption); color: var(--color-text-muted); }
+.trip-climate-legend p { margin: 2px 0 var(--gap-small); }
+.trip-climate-legend a { color: var(--color-text); }
+.trip-disease-legend:empty { display: none; }
+.trip-disease-legend { margin-top: var(--gap-small); max-height: 34vh; overflow-y: auto; font-size: var(--font-size-caption); color: var(--color-text-muted); }
+.trip-disease-legend p { margin: 2px 0 var(--gap-small); }
+.trip-disease-legend a { color: var(--color-text); }
+.trip-disease-legend-row { display: flex; flex-wrap: wrap; align-items: center; gap: 2px var(--gap-small); }
+.trip-disease-legend-row b { color: var(--color-text); }
+.trip-disease-legend-row p { flex-basis: 100%; }
+.trip-disease-legend-key { display: inline-flex; align-items: center; gap: var(--gap-extra-small); }
+.trip-disease-legend-key i { display: inline-block; width: 14px; height: 10px; border-radius: 2px; }
 .trip-map-leg { fill: none; stroke: var(--color-chart-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .trip-map-leg.is-flight { stroke-dasharray: 6 5; stroke-linecap: butt; }
 .trip-map-leg.is-off { opacity: .4; }
@@ -59,6 +88,7 @@
   .trip-story-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .trip-map-container { grid-column: 1; grid-row: 1; top: 0; z-index: 2; background: var(--color-background); padding: var(--gap-extra-small) 0 var(--gap-small); }
   .trip-map { height: 42vh; min-height: 240px; }
+  .trip-disease-legend p, .trip-climate-legend p { display: none; }
   .trip-chapters { grid-column: 1; grid-row: 2; }
   .trip-timeline-container { display: none; }
   .trip-timeline-horizontal { display: block; }
